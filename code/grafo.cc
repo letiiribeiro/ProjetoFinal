@@ -11,22 +11,22 @@ grafo* cria_grafo(){
         printf("Erro na alocacao!\n");
         exit(1);
     }
-    G->V=NULL;
+    G->T=NULL;
     return G;
 }
 
-grafo* insere_vertice(grafo* G,char* nomevertice){
-    vertice* novo = (vertice *)malloc(sizeof(vertice));
+grafo* insere_tarefa(grafo* G,char* nometarefa){
+    tarefa* novo = (tarefa *)malloc(sizeof(tarefa));
     if(!novo){
         printf("Erro na alocacao!\n");
         exit(1);
     }
-    strcpy(novo->v, nomevertice);
-    vertice* tmp;
-    if(G->V==NULL)
-        G->V= novo;
+    strcpy(novo->v, nometarefa);
+    tarefa* tmp;
+    if(G->T==NULL)
+        G->T= novo;
     else {
-        for(tmp=G->V;tmp->prox!=NULL;tmp=tmp->prox);
+        for(tmp=G->T;tmp->prox!=NULL;tmp=tmp->prox);
         tmp->prox = novo;
     }
     novo->prox = NULL;
@@ -35,19 +35,19 @@ grafo* insere_vertice(grafo* G,char* nomevertice){
     return G;
 }
 
-grafo* insere_aresta(grafo* G, char* vorig, char* vdest, double peso){
-    aresta* e = (aresta *)malloc(sizeof(aresta));
+grafo* insere_requisitos(grafo* G, char* vorig, char* vdest, double peso){
+    requisitos* e = (requisitos *)malloc(sizeof(requisitos));
     if(!e){
         printf("Erro na alocacao.\n");
         exit(1);
     }
     strcpy(e->v,vdest);
     e->peso=peso;
-    vertice* tmp;
-    for(tmp=G->V;tmp!=NULL;tmp=tmp->prox){
+    tarefa* tmp;
+    for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
         if(strcmp(tmp->v,vorig)==0){
             tmp->vorig = 1;
-            aresta* tmp2;
+            requisitos* tmp2;
             if(tmp->lista==NULL)
                tmp->lista = e;
             else {
@@ -60,29 +60,29 @@ grafo* insere_aresta(grafo* G, char* vorig, char* vdest, double peso){
     return G;
 }
 
-grafo* remove_vertice(grafo* G, char* nomevertice){
-    vertice *tmp;
-    for(tmp=G->V;tmp!=NULL;tmp=tmp->prox){
-        if(tmp->prox && strcmp(tmp->prox->v,nomevertice)==0){
-            vertice* k= tmp->prox;
+grafo* remove_tarefa(grafo* G, char* nometarefa){
+    tarefa *tmp;
+    for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
+        if(tmp->prox && strcmp(tmp->prox->v,nometarefa)==0){
+            tarefa* k= tmp->prox;
             tmp->prox = k->prox;
             free(k);
         }
-        else if(strcmp(tmp->v,nomevertice) == 0){
-            G->V = tmp->prox;
+        else if(strcmp(tmp->v,nometarefa) == 0){
+            G->T = tmp->prox;
             free(tmp);
             break;
         }
     }
-    for(tmp=G->V;tmp!=NULL;tmp=tmp->prox){
-        aresta* e;
+    for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
+        requisitos* e;
         for(e=tmp->lista;e!=NULL;e=e->prox){
-            if(e->prox && strcmp(e->prox->v,nomevertice)==0){
-                aresta* k = e->prox;
+            if(e->prox && strcmp(e->prox->v,nometarefa)==0){
+                requisitos* k = e->prox;
                 e->prox = k->prox;
                 free(k);
             }
-            else if(strcmp(e->v,nomevertice)==0){
+            else if(strcmp(e->v,nometarefa)==0){
                 tmp->vorig = 0;
                 tmp->lista = e->prox;
                 free(e);
@@ -93,14 +93,14 @@ grafo* remove_vertice(grafo* G, char* nomevertice){
     return G;
 }
 
-grafo* remove_aresta(grafo* G, char* vorig, char* vdest){
-    vertice *tmp;
-    for(tmp=G->V;tmp!=NULL;tmp=tmp->prox){
+grafo* remove_requisitos(grafo* G, char* vorig, char* vdest){
+    tarefa *tmp;
+    for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
         if(strcmp(tmp->v,vorig)==0){
-            aresta* e;
+            requisitos* e;
             for(e=tmp->lista;e!=NULL;e=e->prox){
                 if(e->prox && strcmp(e->prox->v,vdest)==0){
-                    aresta* k = e->prox;
+                    requisitos* k = e->prox;
                     e->prox = k->prox;
                     free(k);
                 }
@@ -117,7 +117,7 @@ grafo* remove_aresta(grafo* G, char* vorig, char* vdest){
 }
 
 typedef struct LISTA{
-    vertice* v;
+    tarefa* v;
     struct LISTA* prox;
 }lista;
 
@@ -132,7 +132,7 @@ fila* criaFila(){
     return f;
 }
 
-void insereFila(vertice* v, fila* f){
+void insereFila(tarefa* v, fila* f){
     if(f){
         lista* novo = (lista*)malloc(sizeof(lista));
         novo->v = v;
@@ -145,10 +145,10 @@ void insereFila(vertice* v, fila* f){
     }
 }
 
-vertice* retiraFila(fila* f){
+tarefa* retiraFila(fila* f){
     if(f && f->ini){
         lista* t = f->ini;
-        vertice* v = t->v;
+        tarefa* v = t->v;
         f->ini = t->prox;
         if(!t->prox)
             f->fim = f->ini;
@@ -166,13 +166,13 @@ int filaVazia(fila* f){
 }
 
 void BFS(grafo* G, char* vorig){
-    vertice* u;
-    for(u=G->V;u!=NULL;u=u->prox)
+    tarefa* u;
+    for(u=G->T;u!=NULL;u=u->prox)
         if(strcmp(u->v,vorig) != 0){
             u->c = -1;
             u->d = 0x7FFFFFFF;
         }
-    for(u=G->V;u!=NULL;u=u->prox)
+    for(u=G->T;u!=NULL;u=u->prox)
         if(strcmp(u->v,vorig) == 0)
             break;
     u->c = 0;
@@ -180,11 +180,11 @@ void BFS(grafo* G, char* vorig){
     fila* Q = criaFila();
     insereFila(u,Q);
     while(!filaVazia(Q)){
-        vertice* j = retiraFila(Q);
-        aresta* e;
+        tarefa* j = retiraFila(Q);
+        requisitos* e;
         for(e=j->lista;e!=NULL;e=e->prox){
-            vertice* tmp;
-            for(tmp=G->V;tmp!=NULL;tmp=tmp->prox)
+            tarefa* tmp;
+            for(tmp=G->T;tmp!=NULL;tmp=tmp->prox)
                 if(strcmp(tmp->v,e->v) == 0)
                     break;
             if(tmp && tmp->c == -1){
@@ -199,20 +199,20 @@ void BFS(grafo* G, char* vorig){
 
 double peso_caminho(grafo* G, char* vorig, char* vdest){
     BFS(G,vorig);
-    vertice* tmp;
-    for(tmp=G->V;tmp!=NULL;tmp=tmp->prox)
+    tarefa* tmp;
+    for(tmp=G->T;tmp!=NULL;tmp=tmp->prox)
         if(strcmp(vdest,tmp->v)==0)
             return tmp->d;
     return -1;
 }
 
 int grafo_conexo(grafo* G){
-    vertice* tmp;
-    for(tmp=G->V;tmp!=NULL;tmp=tmp->prox){
+    tarefa* tmp;
+    for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
         if(tmp->vorig == 1){
             BFS(G,tmp->v);
-            vertice* tmp2;
-            for(tmp2=G->V;tmp2!=NULL;tmp2=tmp2->prox)
+            tarefa* tmp2;
+            for(tmp2=G->T;tmp2!=NULL;tmp2=tmp2->prox)
                 if(tmp2->d == 0x7FFFFFFF)
                     return 0;
         }
@@ -234,10 +234,10 @@ grafo* le_grafo(char *nomeArq){
     while(linha[i] != '\0'){
     	int j = i;
         for(;linha[i]!=',' && linha[i]!=' ' && linha[i]!='\0';i++);
-        char nomevertice[TAM_STRING]; 
-        strncpy(nomevertice,&linha[j],i-j);
-        nomevertice[i-j]='\0';
-        insere_vertice(G,nomevertice);
+        char nometarefa[TAM_STRING]; 
+        strncpy(nometarefa,&linha[j],i-j);
+        nometarefa[i-j]='\0';
+        insere_tarefa(G,nometarefa);
         while(linha[i] == ',' || linha[i] == ' ')
             i++;
     }
@@ -264,7 +264,7 @@ grafo* le_grafo(char *nomeArq){
         strncpy(p,&linha[j],i-j);
         p[i-j]='\0';
         peso = atof(p);
-        insere_aresta(G,vorig,vdest,peso);
+        insere_requisitos(G,vorig,vdest,peso);
     }
     fclose(fp);
     return G;
@@ -272,15 +272,15 @@ grafo* le_grafo(char *nomeArq){
 
 void imprime_grafo(grafo* G, char* nome_arq){
     FILE* fp = fopen(nome_arq,"w");
-    vertice* tmp;
-    for(tmp=G->V;tmp!=NULL;tmp=tmp->prox)
+    tarefa* tmp;
+    for(tmp=G->T;tmp!=NULL;tmp=tmp->prox)
         if(tmp->prox == NULL)
             fprintf(fp,"%s\n",tmp->v);
         else     
             fprintf(fp,"%s, ",tmp->v);
 
-    for(tmp=G->V;tmp!=NULL;tmp=tmp->prox){
-        vertice* k = tmp->prox;
+    for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
+        tarefa* k = tmp->prox;
         while(k && (!k->vorig))
             k=k->prox;
         if(!k && tmp->vorig)
@@ -289,8 +289,8 @@ void imprime_grafo(grafo* G, char* nome_arq){
             fprintf(fp,"%s, ",tmp->v);
     }
 
-    for(tmp=G->V;tmp!=NULL;tmp=tmp->prox){
-        aresta *e;
+    for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
+        requisitos *e;
         for(e=tmp->lista;e!=NULL;e=e->prox)
             fprintf(fp,"%s, %s, %.2f\n", tmp->v, e->v, e->peso);
     }
@@ -301,15 +301,15 @@ void imprime_grafo(grafo* G, char* nome_arq){
 
 void libera_grafo(grafo* G){
     if(G){
-        vertice* v = G->V;
+        tarefa* v = G->T;
         while(v){
-            aresta* e = v->lista;
+            requisitos* e = v->lista;
             while (e){
-                aresta* etmp = e->prox;
+                requisitos* etmp = e->prox;
                 free(e);
                 e = etmp;
             }
-            vertice* vtmp = v->prox;
+            tarefa* vtmp = v->prox;
             free(v);
             v = vtmp;
         }
@@ -317,16 +317,16 @@ void libera_grafo(grafo* G){
 }
 
 int verifica_consistencia(grafo* G){
-    vertice *tmp;
-    for(tmp=G->V;tmp!=NULL;tmp=tmp->prox){
-        vertice* tmp2;
+    tarefa *tmp;
+    for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
+        tarefa* tmp2;
         for(tmp2=tmp->prox;tmp2!=NULL;tmp2=tmp2->prox){
             if(strcmp(tmp->v,tmp2->v) == 0)
                 return 0;
         }
-        aresta* e;
+        requisitos* e;
         for(e=tmp->lista;e!=NULL;e=e->prox){
-            aresta* e2;
+            requisitos* e2;
             for(e2=e->prox;e2!=NULL;e2=e2->prox){
                 if(strcmp(e->v,e2->v) == 0)
                     return 0;
@@ -336,20 +336,20 @@ int verifica_consistencia(grafo* G){
     return 1;
 }
 
-int pesquisa_vertice(grafo* G, char* nomevertice){
-    vertice *tmp;
-    for(tmp=G->V;tmp!=NULL;tmp=tmp->prox){
-        if(strcmp(tmp->v,nomevertice)== 0)
+int pesquisa_tarefa(grafo* G, char* nometarefa){
+    tarefa *tmp;
+    for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
+        if(strcmp(tmp->v,nometarefa)== 0)
             return 1; 
     }
     return 0;
 }
          
 
-int pesquisa_aresta(grafo* G, char* vorig, char* vdest, double peso){
-    vertice *tmp;
-    for(tmp=G->V;tmp!=NULL;tmp=tmp->prox){
-        aresta* e;
+int pesquisa_requisitos(grafo* G, char* vorig, char* vdest, double peso){
+    tarefa *tmp;
+    for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
+        requisitos* e;
         for(e=tmp->lista;e!=NULL;e=e->prox){
             if(strcmp(tmp->v,vorig)==0 && strcmp(e->v,vdest)==0 &&
                 e->peso==peso)
