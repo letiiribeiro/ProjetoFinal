@@ -1,5 +1,5 @@
 #include<stdio.h>
-#include<stdlib.h> 
+#include<stdlib.h>
 #include<string.h>
 #include "grafo.h"
 
@@ -216,9 +216,55 @@ int grafo_conexo(grafo* G){
                 if(tmp2->d == 0x7FFFFFFF)
                     return 0;
         }
-   } 
+   }
    return 1;
 }
+
+/*
+grafo * le_grafo(char * nomeArq) {
+
+	FILE * fp = fopen(nomeArq, "r");
+
+	if(!fp) {
+		printf("error: impossivel abrir arquivo\n");
+		exit(1);
+	}
+
+	int id_tarefa, tarefa_executada, duracao_tarefa, inicio_min_tarefa, nro_pre_requisitos, i, pre_requisito;
+	char lixo;
+	char * nome_tarefa;
+	grafo * G = cria_grafo();
+
+	while(!feof) {
+
+		fscanf(nomeArq, "%d", &id_tarefa);		// le id_tarefa
+		fscanf(nomeArq, "%c", &lixo);			// descarta espaço ao lado de id_tarefa
+		fscanf(nomeArq, "%c", &lixo);			// descarta ' antes do nome tarefa
+		fscanf(nomeArq, "%[^']s",nome_tarefa);	// le nome tarefa até proximo '
+		fscanf(nomeArq, "%c", &lixo);			// descarta '
+		fscanf(nomeArq, "%d", &tarefa_executada);
+		fscanf(nomeArq, "%c", &lixo);			// descarta próximo espaço
+		fscanf(nomeArq, "%d", &duracao_tarefa);
+		fscanf(nomeArq, "%c", &lixo);			// descarta próximo espaço
+		fscanf(nomeArq, "%d", &inicio_min_tarefa);
+		fscanf(nomeArq, "%c", &lixo);			// descarta próximo espaço
+		fscanf(nomeArq, "%d", &nro_pre_requisitos);
+
+		insere_tarefa(G, id_tarefa, nome_tarefa, tarefa_executada, duracao_tarefa, inicio_min_tarefa); // TODO: acrescentar na estrutura esses itens?
+
+		for(i = 0; i < nro_pre_requisitos; i++) {
+			fscanf(nomeArq, "%d", &pre_requisito);
+
+			if(pesquisa_tarefa(G, pre_requisito)) {						// verifica se pre-requisito existe, se sim, insere na lista
+				insere_requisitos(G, id_tarefa, pre_requisito);			// TODO: inserir peso
+			}
+		}
+
+	}
+
+	return G;
+}*/
+
 
 grafo* le_grafo(char *nomeArq){
     char linha[MAX_LINHA];
@@ -234,7 +280,7 @@ grafo* le_grafo(char *nomeArq){
     while(linha[i] != '\0'){
     	int j = i;
         for(;linha[i]!=',' && linha[i]!=' ' && linha[i]!='\0';i++);
-        char nometarefa[TAM_STRING]; 
+        char nometarefa[TAM_STRING];
         strncpy(nometarefa,&linha[j],i-j);
         nometarefa[i-j]='\0';
         insere_tarefa(G,nometarefa);
@@ -276,7 +322,7 @@ void imprime_grafo(grafo* G, char* nome_arq){
     for(tmp=G->T;tmp!=NULL;tmp=tmp->prox)
         if(tmp->prox == NULL)
             fprintf(fp,"%s\n",tmp->v);
-        else     
+        else
             fprintf(fp,"%s, ",tmp->v);
 
     for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
@@ -340,11 +386,11 @@ int pesquisa_tarefa(grafo* G, char* nometarefa){
     tarefa *tmp;
     for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
         if(strcmp(tmp->v,nometarefa)== 0)
-            return 1; 
+            return 1;
     }
     return 0;
 }
-         
+
 
 int pesquisa_requisitos(grafo* G, char* vorig, char* vdest, double peso){
     tarefa *tmp;
