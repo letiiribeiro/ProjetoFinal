@@ -15,76 +15,80 @@ grafo* cria_grafo(){
     return G;
 }
 
-grafo* insere_tarefa(grafo* G,char* nometarefa){
-    tarefa* novo = (tarefa *)malloc(sizeof(tarefa));
-    if(!novo){
+grafo* insere_tarefa(grafo* G, int id_tarefa, char* nome_tarefa, int
+tarefa_executada, int duracao_tarefa, int inicio_min_tarefa, int n_prerequisitos){
+    tarefa* t = (tarefa *)malloc(sizeof(tarefa));
+    if(!t){
         printf("Erro na alocacao!\n");
         exit(1);
     }
-    strcpy(novo->v, nometarefa);
+    t->id_tarefa = id_tarefa;
+    strcpy(t->nome_tarefa, nome_tarefa);
+    t->tarefa_executada = tarefa_executada;
+    t->duracao_tarefa = duracao_tarefa;
+    t->inicio_min_tarefa = inicio_min_tarefa;
+    t-> n_prerequisitos = n_prerequisitos;
+        
     tarefa* tmp;
     if(G->T==NULL)
-        G->T= novo;
+        G->T= t;
     else {
         for(tmp=G->T;tmp->prox!=NULL;tmp=tmp->prox);
-        tmp->prox = novo;
+        tmp->prox = t;
     }
-    novo->prox = NULL;
-    novo->vorig = 0;
-    novo->lista = NULL;
+    t->prox = NULL;
+    t->prerequisitos_tarefa = NULL;
     return G;
 }
 
-grafo* insere_requisitos(grafo* G, char* vorig, char* vdest, double peso){
-    requisitos* e = (requisitos *)malloc(sizeof(requisitos));
+grafo* insere_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito, int 
+duracao_tarefa, int inicio_min_tarefa){
+    prerequisitos* e = (prerequisitos *)malloc(sizeof(prerequisitos));
     if(!e){
         printf("Erro na alocacao.\n");
         exit(1);
     }
-    strcpy(e->v,vdest);
-    e->peso=peso;
+    e->id_prerequisito = id_prerequisito;
+    e->duracao_tarefa = duracao_tarefa;
+    e->inicio_min_tarefa = inicio_min_tarefa;
     tarefa* tmp;
     for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
-        if(strcmp(tmp->v,vorig)==0){
-            tmp->vorig = 1;
-            requisitos* tmp2;
-            if(tmp->lista==NULL)
-               tmp->lista = e;
+            prerequisitos* tmp2;
+            if(tmp->prerequisitos_tarefa==NULL)
+               tmp->prerequisitos_tarefa = e;
             else {
-               for(tmp2=tmp->lista;tmp2->prox!=NULL;tmp2=tmp2->prox);
+               for(tmp2=tmp->prerequisitos_tarefa;tmp2->prox!=NULL;tmp2=tmp2->prox);
                tmp2->prox = e;
            }
         }
-    }
     e->prox=NULL;
     return G;
 }
 
-grafo* remove_tarefa(grafo* G, char* nometarefa){
+grafo* remove_tarefa(grafo* G, int id_tarefa){
     tarefa *tmp;
     for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
-        if(tmp->prox && strcmp(tmp->prox->v,nometarefa)==0){
-            tarefa* k= tmp->prox;
+        if(tmp->prox && tmp->id_tarefa == id_tarefa){
+            tarefa* k = tmp->prox;
             tmp->prox = k->prox;
             free(k);
         }
-        else if(strcmp(tmp->v,nometarefa) == 0){
+        else if(tmp->id_tarefa == id_tarefa){
             G->T = tmp->prox;
             free(tmp);
             break;
         }
     }
     for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
-        requisitos* e;
-        for(e=tmp->lista;e!=NULL;e=e->prox){
-            if(e->prox && strcmp(e->prox->v,nometarefa)==0){
-                requisitos* k = e->prox;
+        prerequisitos* e;
+        for(e=tmp->prerequisitos_tarefa;e!=NULL;e=e->prox){
+            if(e->prox && e->prox->id_prerequisito == id_tarefa){
+                prerequisitos* k = e->prox;
                 e->prox = k->prox;
                 free(k);
             }
-            else if(strcmp(e->v,nometarefa)==0){
-                tmp->vorig = 0;
-                tmp->lista = e->prox;
+            else if(e->id_prerequisito==id_tarefa){
+                tmp->prerequisitos_tarefa = e->prox;
                 free(e);
                 break;
             }
@@ -93,37 +97,34 @@ grafo* remove_tarefa(grafo* G, char* nometarefa){
     return G;
 }
 
-grafo* remove_requisitos(grafo* G, char* vorig, char* vdest){
+grafo* remove_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito){
     tarefa *tmp;
     for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
-        if(strcmp(tmp->v,vorig)==0){
-            requisitos* e;
-            for(e=tmp->lista;e!=NULL;e=e->prox){
-                if(e->prox && strcmp(e->prox->v,vdest)==0){
-                    requisitos* k = e->prox;
+            prerequisitos* e;
+            for(e=tmp->prerequisitos_tarefa;e!=NULL;e=e->prox){
+                if(e->prox && e->prox->id_prerequisito == id_tarefa){
+                    prerequisitos* k = e->prox;
                     e->prox = k->prox;
                     free(k);
                 }
-                else if(strcmp(e->v,vdest)==0){
-                    tmp->vorig = 0;
-                    tmp->lista = e->prox;
+                else if(e->id_prerequisito == id_tarefa){
+                    tmp->prerequisitos_tarefa = e->prox;
                     free(e);
                     break;
                 }
             }
         }
-    }
     return G;
 }
-
+/*
 typedef struct LISTA{
     tarefa* v;
     struct LISTA* prox;
-}lista;
+}prerequisitos_tarefa;
 
 typedef struct FILA{
-    lista* ini;
-    lista* fim;
+    prerequisitos_tarefa* ini;
+    prerequisitos_tarefa* fim;
 }fila;
 
 fila* criaFila(){
@@ -134,20 +135,20 @@ fila* criaFila(){
 
 void insereFila(tarefa* v, fila* f){
     if(f){
-        lista* novo = (lista*)malloc(sizeof(lista));
-        novo->v = v;
-        novo->prox = NULL;
+        prerequisitos_tarefa* t = (prerequisitos_tarefa*)malloc(sizeof(prerequisitos_tarefa));
+        t->v = v;
+        t->prox = NULL;
         if(!f->ini)
-            f->ini = novo;
+            f->ini = t;
         if(f->fim)
-            f->fim->prox = novo;
-        f->fim = novo;
+            f->fim->prox = t;
+        f->fim = t;
     }
 }
 
 tarefa* retiraFila(fila* f){
     if(f && f->ini){
-        lista* t = f->ini;
+        prerequisitos_tarefa* t = f->ini;
         tarefa* v = t->v;
         f->ini = t->prox;
         if(!t->prox)
@@ -181,8 +182,8 @@ void BFS(grafo* G, char* vorig){
     insereFila(u,Q);
     while(!filaVazia(Q)){
         tarefa* j = retiraFila(Q);
-        requisitos* e;
-        for(e=j->lista;e!=NULL;e=e->prox){
+        prerequisitos* e;
+        for(e=j->prerequisitos_tarefa;e!=NULL;e=e->prox){
             tarefa* tmp;
             for(tmp=G->T;tmp!=NULL;tmp=tmp->prox)
                 if(strcmp(tmp->v,e->v) == 0)
@@ -219,9 +220,7 @@ int grafo_conexo(grafo* G){
    }
    return 1;
 }
-
-/*
-grafo * le_grafo(char * nomeArq) {
+ grafo * le_grafo(char * nomeArq) {
 
 	FILE * fp = fopen(nomeArq, "r");
 
@@ -230,7 +229,7 @@ grafo * le_grafo(char * nomeArq) {
 		exit(1);
 	}
 
-	int id_tarefa, tarefa_executada, duracao_tarefa, inicio_min_tarefa, nro_pre_requisitos, i, pre_requisito;
+	int id_tarefa, tarefa_executada, duracao_tarefa, inicio_min_tarefa, nro_pre_prerequisitos, i, pre_requisito;
 	char lixo;
 	char * nome_tarefa;
 	grafo * G = cria_grafo();
@@ -248,25 +247,25 @@ grafo * le_grafo(char * nomeArq) {
 		fscanf(nomeArq, "%c", &lixo);			// descarta próximo espaço
 		fscanf(nomeArq, "%d", &inicio_min_tarefa);
 		fscanf(nomeArq, "%c", &lixo);			// descarta próximo espaço
-		fscanf(nomeArq, "%d", &nro_pre_requisitos);
+		fscanf(nomeArq, "%d", &nro_pre_prerequisitos);
 
 		insere_tarefa(G, id_tarefa, nome_tarefa, tarefa_executada, duracao_tarefa, inicio_min_tarefa); // TODO: acrescentar na estrutura esses itens?
 
-		for(i = 0; i < nro_pre_requisitos; i++) {
+		for(i = 0; i < nro_pre_prerequisitos; i++) {
 			fscanf(nomeArq, "%d", &pre_requisito);
 
-			if(pesquisa_tarefa(G, pre_requisito)) {						// verifica se pre-requisito existe, se sim, insere na lista
-				insere_requisitos(G, id_tarefa, pre_requisito);			// TODO: inserir peso
+			if(pesquisa_tarefa(G, pre_requisito)) {						// verifica se pre-requisito existe, se sim, insere na prerequisitos_tarefa
+				insere_prerequisitos(G, id_tarefa, pre_requisito);			// TODO: inserir peso
 			}
 		}
 
 	}
 
 	return G;
-}*/
+}
 
 
-grafo* le_grafo(char *nomeArq){
+ grafo* le_grafo(char *nomeArq){
     char linha[MAX_LINHA];
     FILE* fp = fopen(nomeArq,"r");
     if(!fp){
@@ -310,7 +309,7 @@ grafo* le_grafo(char *nomeArq){
         strncpy(p,&linha[j],i-j);
         p[i-j]='\0';
         peso = atof(p);
-        insere_requisitos(G,vorig,vdest,peso);
+        insere_prerequisitos(G,vorig,vdest,peso);
     }
     fclose(fp);
     return G;
@@ -336,28 +335,28 @@ void imprime_grafo(grafo* G, char* nome_arq){
     }
 
     for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
-        requisitos *e;
-        for(e=tmp->lista;e!=NULL;e=e->prox)
+        prerequisitos *e;
+        for(e=tmp->prerequisitos_tarefa;e!=NULL;e=e->prox)
             fprintf(fp,"%s, %s, %.2f\n", tmp->v, e->v, e->peso);
     }
     fclose(fp);
 }
 
-
+*/
 
 void libera_grafo(grafo* G){
     if(G){
-        tarefa* v = G->T;
-        while(v){
-            requisitos* e = v->lista;
-            while (e){
-                requisitos* etmp = e->prox;
-                free(e);
-                e = etmp;
+        tarefa* t = G->T;
+        while(t){
+            prerequisitos* p = t->prerequisitos_tarefa;
+            while (p){
+                prerequisitos* tmp = p->prox;
+                free(p);
+                p = tmp;
             }
-            tarefa* vtmp = v->prox;
-            free(v);
-            v = vtmp;
+            tarefa* tmp1 = t->prox;
+            free(t);
+            t = tmp1;
         }
     }
 }
@@ -367,14 +366,14 @@ int verifica_consistencia(grafo* G){
     for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
         tarefa* tmp2;
         for(tmp2=tmp->prox;tmp2!=NULL;tmp2=tmp2->prox){
-            if(strcmp(tmp->v,tmp2->v) == 0)
+            if(tmp->id_tarefa == tmp2-> id_tarefa)
                 return 0;
         }
-        requisitos* e;
-        for(e=tmp->lista;e!=NULL;e=e->prox){
-            requisitos* e2;
+        prerequisitos* e;
+        for(e=tmp->prerequisitos_tarefa;e!=NULL;e=e->prox){
+            prerequisitos* e2;
             for(e2=e->prox;e2!=NULL;e2=e2->prox){
-                if(strcmp(e->v,e2->v) == 0)
+                if(e2->id_prerequisito == e2->id_prerequisito)
                     return 0;
             }
         }
@@ -382,23 +381,22 @@ int verifica_consistencia(grafo* G){
     return 1;
 }
 
-int pesquisa_tarefa(grafo* G, char* nometarefa){
+int pesquisa_tarefa(grafo* G, int id_tarefa){
     tarefa *tmp;
     for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
-        if(strcmp(tmp->v,nometarefa)== 0)
+        if(tmp->id_tarefa == id_tarefa)
             return 1;
     }
     return 0;
 }
 
 
-int pesquisa_requisitos(grafo* G, char* vorig, char* vdest, double peso){
+int pesquisa_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito){
     tarefa *tmp;
     for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
-        requisitos* e;
-        for(e=tmp->lista;e!=NULL;e=e->prox){
-            if(strcmp(tmp->v,vorig)==0 && strcmp(e->v,vdest)==0 &&
-                e->peso==peso)
+        prerequisitos* e;
+        for(e=tmp->prerequisitos_tarefa;e!=NULL;e=e->prox){
+            if(e->id_prerequisito == id_prerequisito)
                 return 1;
         }
     }
