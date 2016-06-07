@@ -41,6 +41,22 @@ tarefa_executada, int duracao_tarefa, int inicio_min_tarefa, int n_prerequisitos
     return G;
 }
 
+grafo* edita_tarefa(grafo* G, int id_tarefa, char* nome_tarefa, int
+tarefa_executada, int duracao_tarefa, int inicio_min_tarefa, int n_prerequisitos){
+    tarefa *tmp;
+    for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
+        if(tmp->id_tarefa == id_tarefa){
+            strcpy(tmp->nome_tarefa, nome_tarefa);
+            tmp->tarefa_executada = tarefa_executada;
+            tmp->duracao_tarefa = duracao_tarefa;
+            tmp->inicio_min_tarefa = inicio_min_tarefa;
+            tmp-> n_prerequisitos = n_prerequisitos;
+        }
+   }
+  
+    return G;
+}
+
 grafo* insere_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito, int 
 duracao_tarefa, int inicio_min_tarefa){
     prerequisitos* e = (prerequisitos *)malloc(sizeof(prerequisitos));
