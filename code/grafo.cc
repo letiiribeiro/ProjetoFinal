@@ -15,8 +15,7 @@ grafo* cria_grafo(){
     return G;
 }
 
-grafo* insere_tarefa(grafo* G, int id_tarefa, char* nome_tarefa, int
-tarefa_executada, int duracao_tarefa, int inicio_min_tarefa, int n_prerequisitos){
+grafo* insere_tarefa(grafo* G, int id_tarefa, char* nome_tarefa, int tarefa_executada, int duracao_tarefa, int inicio_min_tarefa, int n_prerequisitos) {
     tarefa* t = (tarefa *)malloc(sizeof(tarefa));
     if(!t){
         printf("Erro na alocacao!\n");
@@ -28,7 +27,7 @@ tarefa_executada, int duracao_tarefa, int inicio_min_tarefa, int n_prerequisitos
     t->duracao_tarefa = duracao_tarefa;
     t->inicio_min_tarefa = inicio_min_tarefa;
     t-> n_prerequisitos = n_prerequisitos;
-        
+
     tarefa* tmp;
     if(G->T==NULL)
         G->T= t;
@@ -40,6 +39,7 @@ tarefa_executada, int duracao_tarefa, int inicio_min_tarefa, int n_prerequisitos
     t->prerequisitos_tarefa = NULL;
     return G;
 }
+
 
 grafo* edita_tarefa(grafo* G, int id_tarefa, char* nome_tarefa, int
 tarefa_executada, int duracao_tarefa, int inicio_min_tarefa, int n_prerequisitos){
@@ -57,7 +57,8 @@ tarefa_executada, int duracao_tarefa, int inicio_min_tarefa, int n_prerequisitos
     return G;
 }
 
-grafo* insere_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito, int 
+
+grafo* insere_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito, int
 duracao_tarefa, int inicio_min_tarefa){
     prerequisitos* e = (prerequisitos *)malloc(sizeof(prerequisitos));
     if(!e){
@@ -132,6 +133,7 @@ grafo* remove_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito){
         }
     return G;
 }
+
 /*
 typedef struct LISTA{
     tarefa* v;
@@ -235,52 +237,10 @@ int grafo_conexo(grafo* G){
         }
    }
    return 1;
-}
- grafo * le_grafo(char * nomeArq) {
-
-	FILE * fp = fopen(nomeArq, "r");
-
-	if(!fp) {
-		printf("error: impossivel abrir arquivo\n");
-		exit(1);
-	}
-
-	int id_tarefa, tarefa_executada, duracao_tarefa, inicio_min_tarefa, nro_pre_prerequisitos, i, pre_requisito;
-	char lixo;
-	char * nome_tarefa;
-	grafo * G = cria_grafo();
-
-	while(!feof) {
-
-		fscanf(nomeArq, "%d", &id_tarefa);		// le id_tarefa
-		fscanf(nomeArq, "%c", &lixo);			// descarta espaço ao lado de id_tarefa
-		fscanf(nomeArq, "%c", &lixo);			// descarta ' antes do nome tarefa
-		fscanf(nomeArq, "%[^']s",nome_tarefa);	// le nome tarefa até proximo '
-		fscanf(nomeArq, "%c", &lixo);			// descarta '
-		fscanf(nomeArq, "%d", &tarefa_executada);
-		fscanf(nomeArq, "%c", &lixo);			// descarta próximo espaço
-		fscanf(nomeArq, "%d", &duracao_tarefa);
-		fscanf(nomeArq, "%c", &lixo);			// descarta próximo espaço
-		fscanf(nomeArq, "%d", &inicio_min_tarefa);
-		fscanf(nomeArq, "%c", &lixo);			// descarta próximo espaço
-		fscanf(nomeArq, "%d", &nro_pre_prerequisitos);
-
-		insere_tarefa(G, id_tarefa, nome_tarefa, tarefa_executada, duracao_tarefa, inicio_min_tarefa); // TODO: acrescentar na estrutura esses itens?
-
-		for(i = 0; i < nro_pre_prerequisitos; i++) {
-			fscanf(nomeArq, "%d", &pre_requisito);
-
-			if(pesquisa_tarefa(G, pre_requisito)) {						// verifica se pre-requisito existe, se sim, insere na prerequisitos_tarefa
-				insere_prerequisitos(G, id_tarefa, pre_requisito);			// TODO: inserir peso
-			}
-		}
-
-	}
-
-	return G;
-}
+}*/
 
 
+/*
  grafo* le_grafo(char *nomeArq){
     char linha[MAX_LINHA];
     FILE* fp = fopen(nomeArq,"r");
