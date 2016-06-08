@@ -62,7 +62,7 @@ n_prerequisitos,int* id_prerequisitos, int flag){
                 for(i=0;i<n_prerequisitos;i++)
                     G = insere_prerequisitos(G,id_prerequisitos[i],duracao_tarefa,inicio_min_tarefa);
             }
-            break;    
+            break;
         }
 <<<<<<< HEAD
     }
@@ -195,6 +195,7 @@ grafo* remove_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito){
 	}
 
 	fclose(fp);
+	return G;
 
  }
 
