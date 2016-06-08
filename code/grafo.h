@@ -29,7 +29,8 @@ grafo* cria_grafo();
 grafo* insere_tarefa(grafo* G, int id_tarefa, char* nome_tarefa, int tarefa_executada, int
 duracao_tarefa, int inicio_min_tarefa, int n_prerequisitos);
 grafo* edita_tarefa(grafo* G, int id_tarefa, char* nome_tarefa, int tarefa_executada, int
-duracao_tarefa, int inicio_min_tarefa, int n_prerequisitos);
+duracao_tarefa, int inicio_min_tarefa, int n_prerequisitos, int
+id_prerequisito, int duracao_prerequisito, int inicio_prerequisito);
 grafo* insere_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito, int
 duracao_tarefa, int inicio_min_tarefa);
 grafo* remove_tarefa(grafo* G, int id_tarefa);

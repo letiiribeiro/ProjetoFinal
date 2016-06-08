@@ -113,7 +113,7 @@ int main(){
             achou = pesquisa_prerequisitos(G,2,1);
             printf("%d",achou);
         }
-       /* else if(m_operacao == 5){
+        else if(m_operacao == 5){
             int id_tarefa;
             int achou;
             int n_prerequisitos;

@@ -41,23 +41,33 @@ grafo* insere_tarefa(grafo* G, int id_tarefa, char* nome_tarefa, int tarefa_exec
 }
 
 
-grafo* edita_tarefa(grafo* G, int id_tarefa, char* nome_tarefa, int
-tarefa_executada, int duracao_tarefa, int inicio_min_tarefa, int n_prerequisitos){
+/*grafo* edita_tarefa(grafo* G, int id_tarefa, char* nome_tarefa, int
+tarefa_executada, int duracao_tarefa, int inicio_min_tarefa, int
+n_prerequisitos,int* id_prerequisitos, int flag){
     tarefa *tmp;
     for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
         if(tmp->id_tarefa == id_tarefa){
-            strcpy(tmp->nome_tarefa, nome_tarefa);
-            tmp->tarefa_executada = tarefa_executada;
-            tmp->duracao_tarefa = duracao_tarefa;
-            tmp->inicio_min_tarefa = inicio_min_tarefa;
-            tmp-> n_prerequisitos = n_prerequisitos;
+            if((flag&1)==1)
+                strcpy(tmp->nome_tarefa, nome_tarefa);
+            if((flag&2)==2)
+                tmp->tarefa_executada = tarefa_executada;
+            if((flag&4)==4)
+                tmp->duracao_tarefa = duracao_tarefa;
+            if((flag&8)==8)
+                tmp->inicio_min_tarefa = inicio_min_tarefa;
+            if((flag&16)==16)
+                tmp->n_prerequisitos = n_prerequisitos;
+            if((flag&32)==32){
+                int i;
+                for(i=0;i<n_prerequisitos;i++)
+                    G = insere_prerequisitos(G,id_prerequisitos[i],duracao_tarefa,inicio_min_tarefa);
+            }
+            break;    
         }
-   }
-  
+    }
     return G;
 }
-
-
+*/
 grafo* insere_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito, int
 duracao_tarefa, int inicio_min_tarefa){
     prerequisitos* e = (prerequisitos *)malloc(sizeof(prerequisitos));
