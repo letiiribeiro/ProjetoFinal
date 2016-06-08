@@ -329,86 +329,39 @@ int grafo_conexo(grafo* G){
    return 1;
 }*/
 
+void imprime_grafo(grafo* G, char* nome_arq) {
 
-/*
- grafo* le_grafo(char *nomeArq){
-    char linha[MAX_LINHA];
-    FILE* fp = fopen(nomeArq,"r");
-    if(!fp){
-       printf("Arquivo nao encontrado.\n");
-       exit(1);
-    }
-    grafo* G = cria_grafo();
-    fgets(linha,MAX_LINHA,fp);
-    linha[strlen(linha)-1]='\0';
-    int i=0;
-    while(linha[i] != '\0'){
-    	int j = i;
-        for(;linha[i]!=',' && linha[i]!=' ' && linha[i]!='\0';i++);
-        char nometarefa[TAM_STRING];
-        strncpy(nometarefa,&linha[j],i-j);
-        nometarefa[i-j]='\0';
-        insere_tarefa(G,nometarefa);
-        while(linha[i] == ',' || linha[i] == ' ')
-            i++;
-    }
-    fgets(linha,MAX_LINHA,fp);
-    while(fgets(linha,MAX_LINHA,fp)){
-        linha[strlen(linha)-1]='\0';
-        for(i=0;linha[i]!=',' && linha[i]!=' ' && linha[i]!='\0';i++);
-        char vorig[TAM_STRING];
-        char vdest[TAM_STRING];
-        char p[TAM_STRING];
-        double peso;
-        strncpy(vorig,linha,i);
-        vorig[i]='\0';
-        while(linha[i] == ',' || linha[i] == ' ')
-            i++;
-        int j = i;
-        for(;linha[i]!=',' && linha[i]!=' ' && linha[i]!='\0';i++);
-        strncpy(vdest,&linha[j],i-j);
-        vdest[i-j]='\0';
-        while(linha[i] == ',' || linha[i] == ' ')
-            i++;
-     	j = i;
-        for(;linha[i]!=',' && linha[i]!=' ' && linha[i]!='\0';i++);
-        strncpy(p,&linha[j],i-j);
-        p[i-j]='\0';
-        peso = atof(p);
-        insere_prerequisitos(G,vorig,vdest,peso);
-    }
-    fclose(fp);
-    return G;
-}
-
-void imprime_grafo(grafo* G, char* nome_arq){
     FILE* fp = fopen(nome_arq,"w");
     tarefa* tmp;
-    for(tmp=G->T;tmp!=NULL;tmp=tmp->prox)
-        if(tmp->prox == NULL)
-            fprintf(fp,"%s\n",tmp->v);
-        else
-            fprintf(fp,"%s, ",tmp->v);
 
-    for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
-        tarefa* k = tmp->prox;
-        while(k && (!k->vorig))
-            k=k->prox;
-        if(!k && tmp->vorig)
-            fprintf(fp,"%s\n",tmp->v);
-        else if(tmp->vorig)
-            fprintf(fp,"%s, ",tmp->v);
+    for(tmp = G->T; tmp != NULL; tmp = tmp->prox) {
+
+		fprintf(fp, "%d ",tmp->id_tarefa);
+		fprintf(fp, "'%s' ", tmp->nome_tarefa);
+		fprintf(fp, "%d ", tmp->tarefa_executada);
+		fprintf(fp, "%d ", tmp->duracao_tarefa);
+		fprintf(fp, "%d ", tmp->inicio_min_tarefa);
+		fprintf(fp, "%d ", tmp->n_prerequisitos);
+
+		prerequisitos * tmp2 = tmp->prerequisitos_tarefa;
+
+		if(!tmp2)
+			fprintf(fp, "\n");
+		else {
+
+			for(tmp2 = tmp->prerequisitos_tarefa; tmp2 != NULL; tmp2 = tmp2->prox) {
+				if (tmp2->prox == NULL)
+					fprintf(fp, "%d\n", tmp2->id_prerequisito);
+				else
+					fprintf(fp, "%d ", tmp2->id_prerequisito);
+			}
+
+		}
+
     }
 
-    for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
-        prerequisitos *e;
-        for(e=tmp->prerequisitos_tarefa;e!=NULL;e=e->prox)
-            fprintf(fp,"%s, %s, %.2f\n", tmp->v, e->v, e->peso);
-    }
     fclose(fp);
 }
-
-*/
 
 void libera_grafo(grafo* G){
     if(G){

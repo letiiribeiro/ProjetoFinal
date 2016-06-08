@@ -160,14 +160,14 @@ int main(){
                 printf("O grafo e consistente.\n");
             else
                 printf("O grafo nao e consistente.\n");
-        }/*
+        }
         else if(m_operacao == 8){
             printf("Digite o nome do arquivo de saida: ");
             char nome_arq[100];
             fgets(nome_arq,100,stdin);
             nome_arq[strlen(nome_arq)-1]='\0';
             imprime_grafo(G,nome_arq);
-        } */
+        }
         else
             break;
     }
