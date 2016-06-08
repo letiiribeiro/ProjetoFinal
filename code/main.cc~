@@ -115,8 +115,8 @@ int main(){
             G = remove_prerequisitos(G,2,1);
             achou = pesquisa_prerequisitos(G,2,1);
             printf("%d",achou);
-        }
-       /* else if(m_operacao == 5){
+        } /*
+        else if(m_operacao == 5){
             int id_tarefa;
             int achou;
             int n_prerequisitos;
@@ -128,7 +128,6 @@ int main(){
             achou = pesquisa_tarefa(G,id_tarefa);
             if(!achou){
                 printf("Error: insira a tarefa primeiro para editar.\n");
-<<<<<<< HEAD
             } else {
             printf("Digite o tarefa a ser inserido: ");
             char nometarefa[100];
@@ -145,13 +144,17 @@ int main(){
             }
              G = edita_tarefa(G,id_tarefa,nometarefa,1,2,3,n_prerequisitos,id_prerequisito,duracao_prerequisito,inicio_prerequisito);
             }
-=======
             } else
              G = edita_tarefa(G,id_tarefa,"hello",2,3,4,2);
 
+<<<<<<< HEAD
+        }         else if(m_operacao == 6){
+=======
 
 >>>>>>> 1ee975b57659d4a09b8b39d627a96d3169d9b375
-        }         else if(m_operacao == 6){
+        }
+        else if(m_operacao == 6){
+>>>>>>> 8782c271d03a850f8fb879f49ecb70e8322e2e62
             if(grafo_conexo(G))
                 printf("O grafo e conexo.\n");
             else

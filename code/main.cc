@@ -147,7 +147,10 @@ int main(){
             } else
              G = edita_tarefa(G,id_tarefa,"hello",2,3,4,2);
 
-        }         else if(m_operacao == 6){
+
+        }
+        else if(m_operacao == 6){
+
             if(grafo_conexo(G))
                 printf("O grafo e conexo.\n");
             else

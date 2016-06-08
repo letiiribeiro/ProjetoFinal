@@ -14,9 +14,9 @@ typedef struct Tarefa {
     int id_tarefa;
     char nome_tarefa[TAM_STRING];
     int tarefa_executada;
-    int duracao_tarefa; 
+    int duracao_tarefa;
     int inicio_min_tarefa;
-    int n_prerequisitos;   
+    int n_prerequisitos;
     struct Tarefa *prox;
     prerequisitos *prerequisitos_tarefa;
 } tarefa;
@@ -43,6 +43,7 @@ void imprime_grafo(grafo* G, char* nome_arq);
 int verifica_consistencia(grafo* G);
 int pesquisa_tarefa(grafo* G, int id_tarefa);
 int pesquisa_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito);
+tarefa * procura_tarefa(grafo*, int);
 
 #endif
 /* GRAFO_INCLUDED */

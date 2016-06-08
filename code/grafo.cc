@@ -16,11 +16,14 @@ grafo* cria_grafo(){
 }
 
 grafo* insere_tarefa(grafo* G, int id_tarefa, char* nome_tarefa, int tarefa_executada, int duracao_tarefa, int inicio_min_tarefa, int n_prerequisitos) {
+
     tarefa* t = (tarefa *)malloc(sizeof(tarefa));
+
     if(!t){
         printf("Erro na alocacao!\n");
         exit(1);
     }
+
     t->id_tarefa = id_tarefa;
     strcpy(t->nome_tarefa, nome_tarefa);
     t->tarefa_executada = tarefa_executada;
@@ -29,14 +32,17 @@ grafo* insere_tarefa(grafo* G, int id_tarefa, char* nome_tarefa, int tarefa_exec
     t-> n_prerequisitos = n_prerequisitos;
 
     tarefa* tmp;
-    if(G->T==NULL)
-        G->T= t;
+
+    if(G->T == NULL)
+        G->T = t;
     else {
-        for(tmp=G->T;tmp->prox!=NULL;tmp=tmp->prox);
+        for(tmp = G->T; tmp->prox != NULL;tmp = tmp->prox);
         tmp->prox = t;
     }
+
     t->prox = NULL;
     t->prerequisitos_tarefa = NULL;
+
     return G;
 }
 
@@ -63,7 +69,7 @@ n_prerequisitos,int* id_prerequisitos, int flag){
                     G = remove_prerequisitos(G, id_tarefa,id_prerequisitos[i]);
                     G = insere_prerequisitos(G,id_tarefa,id_prerequisitos[i],duracao_tarefa,inicio_min_tarefa);
             }
-            break;    
+            break;   
         } else 
               printf("Error: insira a tarefa primeiro para editar.\n");
     }
@@ -71,27 +77,46 @@ n_prerequisitos,int* id_prerequisitos, int flag){
 }
 
 grafo* insere_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito, int
-duracao_tarefa, int inicio_min_tarefa){
+duracao_tarefa, int inicio_min_tarefa) {
+
     prerequisitos* e = (prerequisitos *)malloc(sizeof(prerequisitos));
-    if(!e){
+    tarefa* tmp;
+
+    if(!e) {
         printf("Erro na alocacao.\n");
         exit(1);
     }
+
     e->id_prerequisito = id_prerequisito;
     e->duracao_tarefa = duracao_tarefa;
     e->inicio_min_tarefa = inicio_min_tarefa;
-    tarefa* tmp;
-    for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
-            prerequisitos* tmp2;
-            if(tmp->prerequisitos_tarefa==NULL)
-               tmp->prerequisitos_tarefa = e;
-            else {
-               for(tmp2=tmp->prerequisitos_tarefa;tmp2->prox!=NULL;tmp2=tmp2->prox);
-               tmp2->prox = e;
-           }
-        }
-    e->prox=NULL;
+
+    tmp = procura_tarefa(G, id_tarefa);
+
+    prerequisitos* tmp2;
+
+    if(tmp->prerequisitos_tarefa == NULL)
+	   tmp->prerequisitos_tarefa = e;
+	else {
+	   for(tmp2 = tmp->prerequisitos_tarefa; tmp2->prox != NULL; tmp2 = tmp2->prox);
+	   tmp2->prox = e;
+	}
+
+    e->prox = NULL;
+
     return G;
+}
+
+tarefa * procura_tarefa(grafo* G, int id_tarefa) {
+
+    tarefa *tmp;
+
+    for(tmp = G->T; tmp != NULL; tmp = tmp->prox) {
+        if(tmp->id_tarefa == id_tarefa)
+            return tmp;
+    }
+
+    return NULL;
 }
 
 grafo* remove_tarefa(grafo* G, int id_tarefa){
@@ -176,14 +201,14 @@ grafo* remove_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito){
 		fscanf(fp, "%c", &lixo);			// descarta próximo espaço
 		fscanf(fp, "%d", &nro_pre_requisitos);
 
-		insere_tarefa(G, id_tarefa, nome_tarefa, tarefa_executada, duracao_tarefa, inicio_min_tarefa, nro_pre_requisitos); // TODO: acrescentar na estrutura esses itens?
+		G = insere_tarefa(G, id_tarefa, nome_tarefa, tarefa_executada, duracao_tarefa, inicio_min_tarefa, nro_pre_requisitos); // TODO: acrescentar na estrutura esses itens?
 
 		for(i = 0; i < nro_pre_requisitos; i++) {
 			fscanf(fp, "%d", &pre_requisito);
 			fscanf(fp, "%c", &lixo);
 
 			if(pesquisa_tarefa(G, pre_requisito)) {						// verifica se pre-requisito existe, se sim, insere na prerequisitos_tarefa
-				insere_prerequisitos(G, id_tarefa, pre_requisito, duracao_tarefa, inicio_min_tarefa);
+				G = insere_prerequisitos(G, id_tarefa, pre_requisito, duracao_tarefa, inicio_min_tarefa);
 			}
 		}
 
