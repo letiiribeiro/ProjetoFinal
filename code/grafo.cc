@@ -64,7 +64,12 @@ n_prerequisitos,int* id_prerequisitos, int flag){
             }
             break;    
         }
+<<<<<<< HEAD
     }
+=======
+   }
+
+>>>>>>> 1ee975b57659d4a09b8b39d627a96d3169d9b375
     return G;
 }
 */
@@ -143,6 +148,55 @@ grafo* remove_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito){
         }
     return G;
 }
+
+ grafo* le_grafo(char *nomeArq) {
+
+	FILE * fp = fopen(nomeArq, "r");
+
+	if(!fp) {
+		printf("error: impossivel abrir arquivo\n");
+		exit(1);
+	}
+
+	grafo* G = cria_grafo();
+	int id_tarefa, tarefa_executada, duracao_tarefa, inicio_min_tarefa, nro_pre_requisitos, i, pre_requisito;
+	char lixo;
+	char nome_tarefa[500];
+
+	while(!feof(fp)) {
+
+		fscanf(fp, "%d", &id_tarefa);		// le id_tarefa
+		fscanf(fp, "%c", &lixo);			// descarta espaço ao lado de id_tarefa
+		fscanf(fp, "%c", &lixo);			// descarta ' antes do nome tarefa
+		fscanf(fp, "%[^']s", nome_tarefa);
+		fscanf(fp, "%c", &lixo);			// descarta '
+		fscanf(fp, "%c", &lixo);			// descarta próximo espaço
+		fscanf(fp, "%d", &tarefa_executada);
+		fscanf(fp, "%c", &lixo);			// descarta próximo espaço
+		fscanf(fp, "%d", &duracao_tarefa);
+		fscanf(fp, "%c", &lixo);			// descarta próximo espaço
+		fscanf(fp, "%d", &inicio_min_tarefa);
+		fscanf(fp, "%c", &lixo);			// descarta próximo espaço
+		fscanf(fp, "%d", &nro_pre_requisitos);
+
+		insere_tarefa(G, id_tarefa, nome_tarefa, tarefa_executada, duracao_tarefa, inicio_min_tarefa, nro_pre_requisitos); // TODO: acrescentar na estrutura esses itens?
+
+		for(i = 0; i < nro_pre_requisitos; i++) {
+			fscanf(fp, "%d", &pre_requisito);
+			fscanf(fp, "%c", &lixo);
+
+			if(pesquisa_tarefa(G, pre_requisito)) {						// verifica se pre-requisito existe, se sim, insere na prerequisitos_tarefa
+				insere_prerequisitos(G, id_tarefa, pre_requisito, duracao_tarefa, inicio_min_tarefa);
+			}
+		}
+
+		fscanf(fp, "%c", &lixo);
+
+	}
+
+	fclose(fp);
+
+ }
 
 /*
 typedef struct LISTA{

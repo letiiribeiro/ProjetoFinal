@@ -18,7 +18,7 @@ $(ODIR)/%.o: %.cc $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS) -g -Wall
 
 main: $(OBJ)
-	gcc -o $@ $^ $(CFLAGS) $(LIBS) -g -Wall -ftest-coverage -fprofile-arcs
+	g++ -o $@ $^ $(CFLAGS) $(LIBS) -g -Wall -ftest-coverage -fprofile-arcs
 
 .PHONY: clean
 
