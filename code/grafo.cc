@@ -41,7 +41,7 @@ grafo* insere_tarefa(grafo* G, int id_tarefa, char* nome_tarefa, int tarefa_exec
 }
 
 
-/*grafo* edita_tarefa(grafo* G, int id_tarefa, char* nome_tarefa, int
+grafo* edita_tarefa(grafo* G, int id_tarefa, char* nome_tarefa, int
 tarefa_executada, int duracao_tarefa, int inicio_min_tarefa, int
 n_prerequisitos,int* id_prerequisitos, int flag){
     tarefa *tmp;
@@ -60,19 +60,16 @@ n_prerequisitos,int* id_prerequisitos, int flag){
             if((flag&32)==32){
                 int i;
                 for(i=0;i<n_prerequisitos;i++)
-                    G = insere_prerequisitos(G,id_prerequisitos[i],duracao_tarefa,inicio_min_tarefa);
+                    G = remove_prerequisitos(G, id_tarefa,id_prerequisitos[i]);
+                    G = insere_prerequisitos(G,id_tarefa,id_prerequisitos[i],duracao_tarefa,inicio_min_tarefa);
             }
             break;    
-        }
-<<<<<<< HEAD
+        } else 
+              printf("Error: insira a tarefa primeiro para editar.\n");
     }
-=======
-   }
-
->>>>>>> 1ee975b57659d4a09b8b39d627a96d3169d9b375
     return G;
 }
-*/
+
 grafo* insere_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito, int
 duracao_tarefa, int inicio_min_tarefa){
     prerequisitos* e = (prerequisitos *)malloc(sizeof(prerequisitos));
@@ -407,18 +404,23 @@ int verifica_consistencia(grafo* G){
     for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
         tarefa* tmp2;
         for(tmp2=tmp->prox;tmp2!=NULL;tmp2=tmp2->prox){
-            if(tmp->id_tarefa == tmp2-> id_tarefa)
+            if(tmp->id_tarefa == tmp2-> id_tarefa){
+                printf("Inconsistencia encontrada. Possui duas tarefas com o mesmo id: %d.\n", tmp->id_tarefa);
                 return 0;
+            }
         }
         prerequisitos* e;
         for(e=tmp->prerequisitos_tarefa;e!=NULL;e=e->prox){
             prerequisitos* e2;
             for(e2=e->prox;e2!=NULL;e2=e2->prox){
-                if(e2->id_prerequisito == e2->id_prerequisito)
+                if(e->id_prerequisito == e2->id_prerequisito){
+                    printf("Inconsistencia encontrada. A tarefa de id %d possui dois pre requisitos com o mesmo id: %d.\n", tmp->id_tarefa, e->id_prerequisito);
                     return 0;
+                }
             }
         }
     }
+    printf("Os Pre requisitos e tarefas sao consistentes.\n");
     return 1;
 }
 

@@ -74,11 +74,14 @@ int main(){
         int m_operacao = menu_operacao();
         if(m_operacao == 1){
             int achou;
-            printf("Digite o tarefa a ser inserido: ");
+            int id_tarefa;            
+            printf("Digite o nome da tarefa a ser inserida: ");
             char nometarefa[100];
             fgets(nometarefa,100,stdin);
             nometarefa[strlen(nometarefa)-1]='\0';
-            G = insere_tarefa(G,1,nometarefa,0,5,2,0);
+            printf("Digite o id da tarefa.\n");
+            scanf("%d", &id_tarefa);
+            G = insere_tarefa(G,id_tarefa,nometarefa,0,5,2,0);
             achou = pesquisa_tarefa(G,1);
             printf("%d", achou);
         }
@@ -112,8 +115,8 @@ int main(){
             G = remove_prerequisitos(G,2,1);
             achou = pesquisa_prerequisitos(G,2,1);
             printf("%d",achou);
-        }
-       /* else if(m_operacao == 5){
+        } /*
+        else if(m_operacao == 5){
             int id_tarefa;
             int achou;
             int n_prerequisitos;
@@ -125,7 +128,6 @@ int main(){
             achou = pesquisa_tarefa(G,id_tarefa);
             if(!achou){
                 printf("Error: insira a tarefa primeiro para editar.\n");
-<<<<<<< HEAD
             } else {
             printf("Digite o tarefa a ser inserido: ");
             char nometarefa[100];
@@ -142,12 +144,9 @@ int main(){
             }
              G = edita_tarefa(G,id_tarefa,nometarefa,1,2,3,n_prerequisitos,id_prerequisito,duracao_prerequisito,inicio_prerequisito);
             }
-=======
             } else
              G = edita_tarefa(G,id_tarefa,"hello",2,3,4,2);
 
-
->>>>>>> 1ee975b57659d4a09b8b39d627a96d3169d9b375
         }         else if(m_operacao == 6){
             if(grafo_conexo(G))
                 printf("O grafo e conexo.\n");
