@@ -195,6 +195,7 @@ grafo* remove_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito){
 	}
 
 	fclose(fp);
+	return G;
 
  }
 

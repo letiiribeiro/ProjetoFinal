@@ -148,8 +148,7 @@ int main(){
 
 
 >>>>>>> 1ee975b57659d4a09b8b39d627a96d3169d9b375
-        }/*
-        else if(m_operacao == 6){
+        }         else if(m_operacao == 6){
             if(grafo_conexo(G))
                 printf("O grafo e conexo.\n");
             else
