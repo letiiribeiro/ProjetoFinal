@@ -16,11 +16,14 @@ grafo* cria_grafo(){
 }
 
 grafo* insere_tarefa(grafo* G, int id_tarefa, char* nome_tarefa, int tarefa_executada, int duracao_tarefa, int inicio_min_tarefa, int n_prerequisitos) {
+
     tarefa* t = (tarefa *)malloc(sizeof(tarefa));
+
     if(!t){
         printf("Erro na alocacao!\n");
         exit(1);
     }
+
     t->id_tarefa = id_tarefa;
     strcpy(t->nome_tarefa, nome_tarefa);
     t->tarefa_executada = tarefa_executada;
@@ -29,14 +32,17 @@ grafo* insere_tarefa(grafo* G, int id_tarefa, char* nome_tarefa, int tarefa_exec
     t-> n_prerequisitos = n_prerequisitos;
 
     tarefa* tmp;
-    if(G->T==NULL)
-        G->T= t;
+
+    if(G->T == NULL)
+        G->T = t;
     else {
-        for(tmp=G->T;tmp->prox!=NULL;tmp=tmp->prox);
+        for(tmp = G->T; tmp->prox != NULL;tmp = tmp->prox);
         tmp->prox = t;
     }
+
     t->prox = NULL;
     t->prerequisitos_tarefa = NULL;
+
     return G;
 }
 
@@ -60,36 +66,57 @@ n_prerequisitos,int* id_prerequisitos, int flag){
             if((flag&32)==32){
                 int i;
                 for(i=0;i<n_prerequisitos;i++)
-                    G = insere_prerequisitos(G,id_prerequisitos[i],duracao_tarefa,inicio_min_tarefa);
+                    G = remove_prerequisitos(G, id_tarefa,id_prerequisitos[i]);
+                    G = insere_prerequisitos(G,id_tarefa,id_prerequisitos[i],duracao_tarefa,inicio_min_tarefa);
             }
-            break;    
-        }
+            break;   
+        } else 
+              printf("Error: insira a tarefa primeiro para editar.\n");
     }
     return G;
 }
 
 grafo* insere_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito, int
-duracao_tarefa, int inicio_min_tarefa){
+duracao_tarefa, int inicio_min_tarefa) {
+
     prerequisitos* e = (prerequisitos *)malloc(sizeof(prerequisitos));
-    if(!e){
+    tarefa* tmp;
+
+    if(!e) {
         printf("Erro na alocacao.\n");
         exit(1);
     }
+
     e->id_prerequisito = id_prerequisito;
     e->duracao_tarefa = duracao_tarefa;
     e->inicio_min_tarefa = inicio_min_tarefa;
-    tarefa* tmp;
-    for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
-            prerequisitos* tmp2;
-            if(tmp->prerequisitos_tarefa==NULL)
-               tmp->prerequisitos_tarefa = e;
-            else {
-               for(tmp2=tmp->prerequisitos_tarefa;tmp2->prox!=NULL;tmp2=tmp2->prox);
-               tmp2->prox = e;
-           }
-        }
-    e->prox=NULL;
+
+    tmp = procura_tarefa(G, id_tarefa);
+
+    prerequisitos* tmp2;
+
+    if(tmp->prerequisitos_tarefa == NULL)
+	   tmp->prerequisitos_tarefa = e;
+	else {
+	   for(tmp2 = tmp->prerequisitos_tarefa; tmp2->prox != NULL; tmp2 = tmp2->prox);
+	   tmp2->prox = e;
+	}
+
+    e->prox = NULL;
+
     return G;
+}
+
+tarefa * procura_tarefa(grafo* G, int id_tarefa) {
+
+    tarefa *tmp;
+
+    for(tmp = G->T; tmp != NULL; tmp = tmp->prox) {
+        if(tmp->id_tarefa == id_tarefa)
+            return tmp;
+    }
+
+    return NULL;
 }
 
 grafo* remove_tarefa(grafo* G, int id_tarefa){
@@ -143,6 +170,56 @@ grafo* remove_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito){
         }
     return G;
 }
+
+ grafo* le_grafo(char *nomeArq) {
+
+	FILE * fp = fopen(nomeArq, "r");
+
+	if(!fp) {
+		printf("error: impossivel abrir arquivo\n");
+		exit(1);
+	}
+
+	grafo* G = cria_grafo();
+	int id_tarefa, tarefa_executada, duracao_tarefa, inicio_min_tarefa, nro_pre_requisitos, i, pre_requisito;
+	char lixo;
+	char nome_tarefa[500];
+
+	while(!feof(fp)) {
+
+		fscanf(fp, "%d", &id_tarefa);		// le id_tarefa
+		fscanf(fp, "%c", &lixo);			// descarta espaço ao lado de id_tarefa
+		fscanf(fp, "%c", &lixo);			// descarta ' antes do nome tarefa
+		fscanf(fp, "%[^']s", nome_tarefa);
+		fscanf(fp, "%c", &lixo);			// descarta '
+		fscanf(fp, "%c", &lixo);			// descarta próximo espaço
+		fscanf(fp, "%d", &tarefa_executada);
+		fscanf(fp, "%c", &lixo);			// descarta próximo espaço
+		fscanf(fp, "%d", &duracao_tarefa);
+		fscanf(fp, "%c", &lixo);			// descarta próximo espaço
+		fscanf(fp, "%d", &inicio_min_tarefa);
+		fscanf(fp, "%c", &lixo);			// descarta próximo espaço
+		fscanf(fp, "%d", &nro_pre_requisitos);
+
+		G = insere_tarefa(G, id_tarefa, nome_tarefa, tarefa_executada, duracao_tarefa, inicio_min_tarefa, nro_pre_requisitos); // TODO: acrescentar na estrutura esses itens?
+
+		for(i = 0; i < nro_pre_requisitos; i++) {
+			fscanf(fp, "%d", &pre_requisito);
+			fscanf(fp, "%c", &lixo);
+
+			if(pesquisa_tarefa(G, pre_requisito)) {						// verifica se pre-requisito existe, se sim, insere na prerequisitos_tarefa
+				G = insere_prerequisitos(G, id_tarefa, pre_requisito, duracao_tarefa, inicio_min_tarefa);
+			}
+		}
+
+		fscanf(fp, "%c", &lixo);
+
+	}
+
+	fclose(fp);
+	return G;
+
+ }
 
 /*
 typedef struct LISTA{
@@ -352,18 +429,23 @@ int verifica_consistencia(grafo* G){
     for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
         tarefa* tmp2;
         for(tmp2=tmp->prox;tmp2!=NULL;tmp2=tmp2->prox){
-            if(tmp->id_tarefa == tmp2-> id_tarefa)
+            if(tmp->id_tarefa == tmp2-> id_tarefa){
+                printf("Inconsistencia encontrada. Possui duas tarefas com o mesmo id: %d.\n", tmp->id_tarefa);
                 return 0;
+            }
         }
         prerequisitos* e;
         for(e=tmp->prerequisitos_tarefa;e!=NULL;e=e->prox){
             prerequisitos* e2;
             for(e2=e->prox;e2!=NULL;e2=e2->prox){
-                if(e2->id_prerequisito == e2->id_prerequisito)
+                if(e->id_prerequisito == e2->id_prerequisito){
+                    printf("Inconsistencia encontrada. A tarefa de id %d possui dois pre requisitos com o mesmo id: %d.\n", tmp->id_tarefa, e->id_prerequisito);
                     return 0;
+                }
             }
         }
     }
+    printf("Os Pre requisitos e tarefas sao consistentes.\n");
     return 1;
 }
 
