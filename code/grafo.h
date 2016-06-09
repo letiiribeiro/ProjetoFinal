@@ -22,8 +22,6 @@ if(quis_nome)
 
 typedef struct PreRequisitos {
     int id_prerequisito;
-    int duracao_tarefa;
-    int inicio_min_tarefa;
     struct PreRequisitos *prox;
 } prerequisitos;
 
@@ -36,6 +34,7 @@ typedef struct Tarefa {
     int n_prerequisitos;
     struct Tarefa *prox;
     prerequisitos *prerequisitos_tarefa;
+    int tempo_min;
 } tarefa;
 
 typedef struct Grafo {
@@ -48,8 +47,7 @@ duracao_tarefa, int inicio_min_tarefa, int n_prerequisitos);
 grafo* edita_tarefa(grafo* G, int id_tarefa, char* nome_tarefa, int tarefa_executada, int
 duracao_tarefa, int inicio_min_tarefa, int n_prerequisitos, int
 id_prerequisito, int duracao_prerequisito, int inicio_prerequisito);
-grafo* insere_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito, int
-duracao_tarefa, int inicio_min_tarefa);
+grafo* insere_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito);
 grafo* remove_tarefa(grafo* G, int id_tarefa);
 grafo* remove_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito);
 int peso_caminho(grafo* G, char* vorig, char* vdest);
@@ -60,7 +58,9 @@ void imprime_grafo(grafo* G, char* nome_arq);
 int verifica_consistencia(grafo* G);
 int pesquisa_tarefa(grafo* G, int id_tarefa);
 int pesquisa_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito);
-tarefa * procura_tarefa(grafo*, int);
+tarefa* procura_tarefa(grafo* G, int id_tarefa);
+void tempo_minimo(grafo* G, int id_tarefa);
+int tempo_minimo_total(grafo* G);
 
 #endif
 /* GRAFO_INCLUDED */
