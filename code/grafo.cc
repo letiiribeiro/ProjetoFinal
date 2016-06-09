@@ -74,8 +74,7 @@ n_prerequisitos,int* id_prerequisitos, int flag){
                 for(i=0;i<n_prerequisitos;i++){
                     tarefa* t;
                     for(t=G->T;t&&t->id_tarefa!=id_prerequisitos[i];t=t->prox); 
-                    G =
-                    insere_prerequisitos(G,id_tarefa,id_prerequisitos[i],t->duracao_tarefa,t->inicio_min_tarefa);
+                    G = insere_prerequisitos(G,id_tarefa,id_prerequisitos[i]);
                 }
             }
             if(flag&32){
@@ -99,8 +98,7 @@ n_prerequisitos,int* id_prerequisitos, int flag){
     return G;
 }
 
-grafo* insere_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito, int
-duracao_tarefa, int inicio_min_tarefa) {
+grafo* insere_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito){
 
     prerequisitos* e = (prerequisitos *)malloc(sizeof(prerequisitos));
     tarefa* tmp;
@@ -111,8 +109,6 @@ duracao_tarefa, int inicio_min_tarefa) {
     }
 
     e->id_prerequisito = id_prerequisito;
-    e->duracao_tarefa = duracao_tarefa;
-    e->inicio_min_tarefa = inicio_min_tarefa;
 
     tmp = procura_tarefa(G, id_tarefa);
 
@@ -231,7 +227,7 @@ grafo* remove_prerequisitos(grafo* G, int id_tarefa){
 			fscanf(fp, "%c", &lixo);
 
 			if(pesquisa_tarefa(G, pre_requisito)) {						// verifica se pre-requisito existe, se sim, insere na prerequisitos_tarefa
-				G = insere_prerequisitos(G, id_tarefa, pre_requisito, duracao_tarefa, inicio_min_tarefa);
+				G = insere_prerequisitos(G, id_tarefa, pre_requisito);
 			}
 		}
 

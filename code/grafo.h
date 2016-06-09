@@ -44,12 +44,12 @@ typedef struct Grafo {
 grafo* cria_grafo();
 grafo* insere_tarefa(grafo* G, int id_tarefa, char* nome_tarefa, int tarefa_executada, int
 duracao_tarefa, int inicio_min_tarefa, int n_prerequisitos);
-grafo* edita_tarefa(grafo* G, int id_tarefa, char* nome_tarefa, int tarefa_executada, int
-duracao_tarefa, int inicio_min_tarefa, int n_prerequisitos, int
-id_prerequisito, int duracao_prerequisito, int inicio_prerequisito);
+grafo* edita_tarefa(grafo* G, int id_tarefa, int novo_id_tarefa, char* nome_tarefa, int
+tarefa_executada, int duracao_tarefa, int inicio_min_tarefa, int
+n_prerequisitos,int* id_prerequisitos, int flag);
 grafo* insere_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito);
 grafo* remove_tarefa(grafo* G, int id_tarefa);
-grafo* remove_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito);
+grafo* remove_prerequisitos(grafo* G, int id_tarefa);
 int peso_caminho(grafo* G, char* vorig, char* vdest);
 int grafo_conexo(grafo* G);
 grafo* le_grafo(char *nomeArq);

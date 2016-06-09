@@ -97,7 +97,7 @@ int main(){
             printf("Digite a duracao minima: ");
             scanf("%d", &duracao_tarefa);
             scanf("%d",&inicio_min_tarefa);
-            G = insere_prerequisitos(G,id_tarefa,id_prerequisito,duracao_tarefa,inicio_min_tarefa);
+            G = insere_prerequisitos(G,id_tarefa,id_prerequisito);
         }
         else if(m_operacao == 3){
             int achou;
@@ -112,7 +112,7 @@ int main(){
         }
         else if(m_operacao == 4){
             int achou;
-            G = remove_prerequisitos(G,2,1);
+            G = remove_prerequisitos(G,2);
             achou = pesquisa_prerequisitos(G,2,1);
             printf("%d",achou);
         } /*
