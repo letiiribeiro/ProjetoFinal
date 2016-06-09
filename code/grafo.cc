@@ -434,12 +434,108 @@ int pesquisa_tarefa(grafo* G, int id_tarefa){
 int pesquisa_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito){
     tarefa *tmp;
     for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
-        prerequisitos* e;
-        for(e=tmp->prerequisitos_tarefa;e!=NULL;e=e->prox){
-            if(e->id_prerequisito == id_prerequisito)
-                return 1;
+        if(tmp->id_tarefa == id_tarefa){
+            prerequisitos* e;
+            for(e=tmp->prerequisitos_tarefa;e!=NULL;e=e->prox){
+                if(e->id_prerequisito == id_prerequisito)
+                    return 1;
+            }
         }
     }
     return 0;
 }
 
+int tempo_minimo(grafo* G, int id_tarefa){
+    tarefa* tmp;
+    for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
+        if(tmp->id_tarefa == id_tarefa){
+            if(tmp->tempo_min != -1)
+                return tmp->tempo_min;
+            if(tmp->prerequisitos_tarefa == NULL){
+                tmp->tempo_min = tmp->inicio_min_tarefa + tmp->duracao_tarefa;
+                return tmp->tempo_min;
+            }
+            prerequisitos* p = tmp->prerequisitos_tarefa;
+            int acc = 0;
+            while(p){
+                acc += tempo_minimo(G,p->id_prerequisito);                                 
+                p = p->prox;
+            }
+            tmp->tempo_min = acc;
+            return tmp->tempo_min;
+        }
+    }
+    return 0;
+}
+
+typedef struct LISTA{
+    int t;
+    struct LISTA *prox, *ant;
+} lista;
+
+lista* insere_lista(lista* a, int id){
+    lista* l = (lista*) malloc(sizeof(lista));  
+    l->t = id;
+    l->ant = NULL;
+    l->prox = a;
+    if(a)
+        a->ant = l;
+    return l;
+}
+
+lista* remove_lista(lista* a, int id, int* removeu){
+    lista* l;
+    int flg_ult = 0;
+    int flg_prim = 0;
+    lista* seg;
+    for(l=a;l!=NULL;l=l->prox){
+        if(l->t == id){
+            lista* tmp = l->ant;
+            if(tmp)
+                tmp->prox = l->prox;
+            if(l->prox)
+                l->prox->ant = tmp;
+            if(l->prox == NULL && l->ant == NULL)
+                flg_ult = 1;
+            if(l == a){
+                flg_prim = 1;
+                seg = l->prox;
+            }
+            free(l);
+            *removeu = 1;
+            break;
+        }
+    }
+    *removeu = 0;
+    if(flg_ult)
+        return NULL;
+    if(flg_prim)
+        return seg;
+    return a;
+}
+
+int tempo_minimo_total(grafo* G){
+    tarefa* tmp;
+    lista* l = NULL;
+    for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
+         l = insere_lista(l,tmp->id_tarefa);
+         tmp->tempo_min = -1;
+    }
+    int total = 0;
+    while(l){
+        int x = l->t;
+        int removeu;
+        tempo_minimo(G,x);
+        for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
+            if(tmp->tempo_min != -1)
+                l = remove_lista(l,tmp->id_tarefa,&removeu);
+            if(removeu)
+                total += tmp->tempo_min;
+        }
+    }
+    return total;
+}
+
+void caminhos(grafo* G){
+    tarefa* tmp;
+} 

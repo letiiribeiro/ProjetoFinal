@@ -35,6 +35,7 @@ typedef struct Tarefa {
     struct Tarefa *prox;
     prerequisitos *prerequisitos_tarefa;
     int tempo_min;
+    int tempo_inic;
 } tarefa;
 
 typedef struct Grafo {
@@ -59,8 +60,9 @@ int verifica_consistencia(grafo* G);
 int pesquisa_tarefa(grafo* G, int id_tarefa);
 int pesquisa_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito);
 tarefa* procura_tarefa(grafo* G, int id_tarefa);
-void tempo_minimo(grafo* G, int id_tarefa);
+int tempo_minimo(grafo* G, int id_tarefa);
 int tempo_minimo_total(grafo* G);
+void caminhos(grafo* G);
 
 #endif
 /* GRAFO_INCLUDED */
