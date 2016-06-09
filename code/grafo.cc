@@ -47,31 +47,54 @@ grafo* insere_tarefa(grafo* G, int id_tarefa, char* nome_tarefa, int tarefa_exec
 }
 
 
-grafo* edita_tarefa(grafo* G, int id_tarefa, char* nome_tarefa, int
+grafo* edita_tarefa(grafo* G, int id_tarefa, int novo_id_tarefa, char* nome_tarefa, int
 tarefa_executada, int duracao_tarefa, int inicio_min_tarefa, int
 n_prerequisitos,int* id_prerequisitos, int flag){
     tarefa *tmp;
     for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
         if(tmp->id_tarefa == id_tarefa){
-            if((flag&1)==1)
+            if(flag&1)
                 strcpy(tmp->nome_tarefa, nome_tarefa);
-            if((flag&2)==2)
+            if(flag&2)
                 tmp->tarefa_executada = tarefa_executada;
-            if((flag&4)==4)
+            if(flag&4)
                 tmp->duracao_tarefa = duracao_tarefa;
-            if((flag&8)==8)
+            if(flag&8)
                 tmp->inicio_min_tarefa = inicio_min_tarefa;
-            if((flag&16)==16)
+            if(flag&16){
                 tmp->n_prerequisitos = n_prerequisitos;
-            if((flag&32)==32){
                 int i;
-                for(i=0;i<n_prerequisitos;i++)
-                    G = remove_prerequisitos(G, id_tarefa,id_prerequisitos[i]);
-                    G = insere_prerequisitos(G,id_tarefa,id_prerequisitos[i],duracao_tarefa,inicio_min_tarefa);
+                prerequisitos* p;
+                for(p=tmp->prerequisitos_tarefa;p;){
+                    prerequisitos* l = p->prox;
+                    free(p);
+                    p = l;
+                }
+                tmp->prerequisitos_tarefa = NULL;
+                for(i=0;i<n_prerequisitos;i++){
+                    tarefa* t;
+                    for(t=G->T;t&&t->id_tarefa!=id_prerequisitos[i];t=t->prox); 
+                    G =
+                    insere_prerequisitos(G,id_tarefa,id_prerequisitos[i],t->duracao_tarefa,t->inicio_min_tarefa);
+                }
+            }
+            if(flag&32){
+                if(!pesquisa_tarefa(G,novo_id_tarefa)){
+                    tarefa *t;
+                    for(t=G->T;t!=NULL;t=t->prox){
+                        prerequisitos* e;
+                        for(e=t->prerequisitos_tarefa;e!=NULL;e=e->prox){
+                            if(e->id_prerequisito == id_tarefa)
+                                e->id_prerequisito = novo_id_tarefa;
+                        }
+                    }
+                    tmp->id_tarefa = novo_id_tarefa;
+                }
             }
             break;   
-        } else 
-              printf("Error: insira a tarefa primeiro para editar.\n");
+        } 
+        else 
+            printf("Error: insira a tarefa primeiro para editar.\n");
     }
     return G;
 }
@@ -151,7 +174,7 @@ grafo* remove_tarefa(grafo* G, int id_tarefa){
     return G;
 }
 
-grafo* remove_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito){
+grafo* remove_prerequisitos(grafo* G, int id_tarefa){
     tarefa *tmp;
     for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
             prerequisitos* e;
@@ -167,7 +190,7 @@ grafo* remove_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito){
                     break;
                 }
             }
-        }
+    }
     return G;
 }
 

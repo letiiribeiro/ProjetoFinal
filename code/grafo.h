@@ -2,6 +2,23 @@
 #define GRAFO_INCLUDED
 
 #define TAM_STRING 100
+#define FLG_NOME 0x1
+#define FLG_EXEC 0x2
+#define FLG_DURA 0x4
+#define FLG_INIC 0x8
+#define FLG_PRER 0x10
+#define FLG_IDTR 0x20
+
+/*********************
+* Exemplo de uso de edita_tarefa caso o usuario deseje alterar o nome e inicio
+* e prerequisitos
+* edita_tarefa(G,id_tarefa,novo_id_tarefa,nome_tarefa,tarefa_executada,duracao_tarefa,inicio_min_tarefa,n_prerequisitos,id_prerequisitos,FLG_NOME|FLG_INIC|FLG_PRER)
+* 
+flag = 0;
+
+if(quis_nome)
+    flag |= FLG_NOME;
+*/
 
 typedef struct PreRequisitos {
     int id_prerequisito;
