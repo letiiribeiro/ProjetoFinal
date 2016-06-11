@@ -8,6 +8,7 @@
 #define FLG_INIC 0x8
 #define FLG_PRER 0x10
 #define FLG_IDTR 0x20
+#define INT_MAX 2147483647
 
 /*********************
 * Exemplo de uso de edita_tarefa caso o usuario deseje alterar o nome e inicio
@@ -62,7 +63,7 @@ int pesquisa_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito);
 tarefa* procura_tarefa(grafo* G, int id_tarefa);
 int tempo_minimo(grafo* G, int id_tarefa);
 int tempo_minimo_total(grafo* G);
-void caminhos(grafo* G);
+int* caminhos(grafo* G);
 
 #endif
 /* GRAFO_INCLUDED */

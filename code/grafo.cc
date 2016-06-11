@@ -479,7 +479,7 @@ lista* insere_lista(lista* a, int id){
     l->ant = NULL;
     l->prox = a;
     if(a)
-        a->ant = l;
+            a->ant = l;
     return l;
 }
 
@@ -536,6 +536,53 @@ int tempo_minimo_total(grafo* G){
     return total;
 }
 
-void caminhos(grafo* G){
+struct vetor{
+    int id_tarefa;
+    int tempo_min;
+};
+
+int compara(const void* a, const void* b){
+    struct vetor x = *((struct vetor*)a);
+    struct vetor y = *((struct vetor*)b);
+    if(x.tempo_min == y.tempo_min)
+        return 0;
+    if(x.tempo_min < y.tempo_min)
+        return -1;
+    if(x.tempo_min > y.tempo_min)
+        return 1; 
+    return 0;
+}
+
+int* caminhos(grafo* G){
     tarefa* tmp;
+    int i = 0;
+    struct vetor V[100]; //assumindo que o numero maximo de tarefas no grafo e < 100
+    lista* l = NULL;
+    for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
+         l = insere_lista(l,tmp->id_tarefa);
+         tmp->tempo_min = -1;
+    }
+    int total = 0;
+    while(l){
+        int x = l->t;
+        int removeu;
+        tempo_minimo(G,x);
+        for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
+            if(tmp->tempo_min != -1)
+                l = remove_lista(l,tmp->id_tarefa,&removeu);
+            if(removeu){
+                total += tmp->tempo_min;
+                V[i].id_tarefa = tmp->id_tarefa;
+                V[i++].tempo_min = tmp->tempo_min;
+            }
+        }
+    }
+    qsort(V,i,sizeof(struct vetor),compara);
+    int *VetorOrdenado = (int*) malloc(100*sizeof(int));
+    int j;
+    for(j=0;j<i;j++)
+        VetorOrdenado[j] = V[j].id_tarefa;
+    for(;j<100;j++)
+        VetorOrdenado[j] = INT_MAX; 
+    return VetorOrdenado;
 } 
