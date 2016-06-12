@@ -1,178 +1,867 @@
-#include <stdio.h>
+#include <ncurses.h>
 #include <stdlib.h>
 #include <string.h>
 #include "grafo.h"
 
-int menu_entrada(){
-    int entrada;
-    while(1){
-        printf("\n\n\n********************************************************************\n");
-        printf("*                           PROGRAMA DE GRAFO                      *\n");
-        printf("*                                                                  *\n");
-        printf("*       Digite o numero correspondente a entrada desejada:         *\n");
-        printf("*                                                                  *\n");
-        printf("*       1 - Entrar com nome do arquivo texto contendo o grafo.     *\n");
-        printf("*       2 - Criar novo grafo.                                      *\n");
-        printf("*       3 - Sair.                                                  *\n");
-        printf("*                                                                  *\n");
-        printf("********************************************************************\n\n\n\n");
-        char buf[100];
-        fgets(buf,100,stdin);
-        buf[strlen(buf)-1]='\0';
-        entrada = atoi(buf);
-        if(entrada >= 1 && entrada <= 3)
-            break;
-    }
-    return entrada;
+#define LARGURA 50
+#define ALTURA 10
 
-}
+int startx = 0;
+int starty = 0;
 
-int menu_operacao(){
-    int operacao;
-    while(1){
-        printf("\n\n\n********************************************************************\n");
-        printf("*                           PROGRAMA DE GRAFO                      *\n");
-        printf("*                                                                  *\n");
-        printf("*       Digite o numero correspondente a operacao desejada:        *\n");
-        printf("*                                                                  *\n");
-        printf("*       1 - Inserir novo tarefa.                                  *\n");
-        printf("*       2 - Inserir nova requisitos.                                   *\n");
-        printf("*       3 - Remover tarefa.                                       *\n");
-        printf("*       4 - Remover requisitos.                                        *\n");
-        printf("*       5 - Editar tarefa.                             *\n");
-        printf("*       6 - Verificar se o grafo e conexo.                         *\n");
-        printf("*       7 - Verificar se o grafo e consistente.                    *\n");
-        printf("*       8 - Gravar grafo no arquivo.                               *\n");
-        printf("*       9 - Sair.                                                  *\n");
-        printf("*                                                                  *\n");
-        printf("********************************************************************\n\n\n\n");
-        char buf[100];
-        fgets(buf,100,stdin);
-        buf[strlen(buf)-1]='\0';
-        operacao = atoi(buf);
-        if(operacao >= 1 && operacao <=9)
-            break;
-    }
-    return operacao;
-}
+char *vOpcoes[] = {
+    "(1) Importar arquivo com tarefas",
+    "(2) Criar novas tarefas",
+    "(3) Sair",
+};
 
-int main(){
-    grafo* G;
-    int m_entrada = menu_entrada();
-    if(m_entrada == 1){
-        printf("Digite o nome do arquivo de entrada: ");
-        char nome_arq[100];
-        fgets(nome_arq,100,stdin);
-        nome_arq[strlen(nome_arq)-1]='\0';
-        G = le_grafo(nome_arq);
-    }
-    else if(m_entrada == 2)
-        G = cria_grafo();
-    else
-        return 0;
-    while(1){
-        int m_operacao = menu_operacao();
-        if(m_operacao == 1){
-            int achou;
-            int id_tarefa;            
-            printf("Digite o nome da tarefa a ser inserida: ");
-            char nometarefa[100];
-            fgets(nometarefa,100,stdin);
-            nometarefa[strlen(nometarefa)-1]='\0';
-            printf("Digite o id da tarefa.\n");
-            scanf("%d", &id_tarefa);
-            G = insere_tarefa(G,id_tarefa,nometarefa,0,5,2,0);
-            achou = pesquisa_tarefa(G,1);
-            printf("%d", achou);
-        }
-        else if(m_operacao == 2){
-            int id_tarefa;
-            int id_prerequisito;
-            int duracao_tarefa;
-            int inicio_min_tarefa;
-            printf("Digite o id da tarefa: ");
-            scanf("%d", &id_tarefa);
-            printf("Digite o id do pre-requisito: ");
-            scanf("%d", &id_prerequisito);
-            printf("Digite a duracao minima: ");
-            scanf("%d", &duracao_tarefa);
-            scanf("%d",&inicio_min_tarefa);
-            G = insere_prerequisitos(G,id_tarefa,id_prerequisito);
-        }
-        else if(m_operacao == 3){
-            int achou;
-            printf("Digite o tarefa a ser removido: ");
-            char nometarefa[100];
-            fgets(nometarefa,100,stdin);
-            nometarefa[strlen(nometarefa)-1]='\0';
-            G = remove_tarefa(G,1);
-            achou = pesquisa_tarefa(G,1);
-            printf("%d", achou);
+char *vOperacoes[] = {
+    "(1) Inserir tarefa",
+    "(2) Inserir novo pré-requisito",
+    "(3) Remover tarefa",
+    "(4) Remover pré-requisito",
+    "(5) Editar tarefa",
+    "(6) Verificar consistencia de tarefa",
+    "(7) Gerar arquivo com tarefas",
+    "(8) Sair",
+};
 
-        }
-        else if(m_operacao == 4){
-            int achou;
-            G = remove_prerequisitos(G,2);
-            achou = pesquisa_prerequisitos(G,2,1);
-            printf("%d",achou);
-        } /*
-        else if(m_operacao == 5){
-            int id_tarefa;
-            int achou;
-            int n_prerequisitos;
-            int duracao_prerequisito;
-            int inicio_prerequisito;
-            int id_prerequisito;
-            printf("Digite o id da tarefa a ser editada: ");
-            scanf("%d", &id_tarefa);
-            achou = pesquisa_tarefa(G,id_tarefa);
-            if(!achou){
-                printf("Error: insira a tarefa primeiro para editar.\n");
-            } else {
-            printf("Digite o tarefa a ser inserido: ");
-            char nometarefa[100];
-            fgets(nometarefa,100,stdin);
-            nometarefa[strlen(nometarefa)-1]='\0';
-            scanf("%d", &n_prerequisitos);
-            if(n_prerequisitos>0){
-                printf("Digite o novo id do pre requisito.");
-                scanf("%d", &id_prerequisito);
-                printf("Digite a duracao do pre");
-                scanf("%d", &duracao_prerequisito);
-                printf("Digite o inicio minimo do pre requisito");
-                scanf("%d", &inicio_prerequisito);
-            }
-             G = edita_tarefa(G,id_tarefa,nometarefa,1,2,3,n_prerequisitos,id_prerequisito,duracao_prerequisito,inicio_prerequisito);
-            }
-            } else
-             G = edita_tarefa(G,id_tarefa,"hello",2,3,4,2);
+int n_opcoes = sizeof(vOpcoes) / sizeof(char *);
+int n_operacoes = sizeof(vOperacoes) / sizeof(char*);
 
+void print_menu(WINDOW *menu_win, int highlight) {
 
-        }
-        else if(m_operacao == 6){
+    int x,y,i;
+    x = 1; 
+    y = 1;
 
-            if(grafo_conexo(G))
-                printf("O grafo e conexo.\n");
-            else
-                printf("O grafo nao e conexo.\n");
-        }*/
-        else if(m_operacao == 7){
-            if(verifica_consistencia(G))
-                printf("O grafo e consistente.\n");
-            else
-                printf("O grafo nao e consistente.\n");
-        }
-        else if(m_operacao == 8){
-            printf("Digite o nome do arquivo de saida: ");
-            char nome_arq[100];
-            fgets(nome_arq,100,stdin);
-            nome_arq[strlen(nome_arq)-1]='\0';
-            imprime_grafo(G,nome_arq);
+    box(menu_win,0,0);
+    for(i=0; i< n_opcoes; i++){
+        if(highlight == i+1) 
+        {
+            wattron(menu_win,A_REVERSE);
+            mvwprintw(menu_win,y,x,"\t%s",vOpcoes[i]);
+            wattroff(menu_win,A_REVERSE);
         }
         else
-            break;
+            mvwprintw(menu_win,y,x,"\t%s",vOpcoes[i]);
+            ++y;
     }
-    libera_grafo(G);
-    return 0;
+
+    wrefresh(menu_win);
 }
 
+void print_operacoes(WINDOW *menu_win, int highlight) {
+
+    int x,y,i;
+    x = 1; 
+    y = 1;
+
+    box(menu_win,0,0);
+    for(i=0; i< n_operacoes; i++){
+        if(highlight == i+1) 
+        {
+            wattron(menu_win,A_REVERSE);
+            mvwprintw(menu_win,y,x,"\t%s",vOperacoes[i]);
+            wattroff(menu_win,A_REVERSE);
+        }
+        else
+            mvwprintw(menu_win,y,x,"\t%s",vOperacoes[i]);
+            ++y;
+    }
+
+    wrefresh(menu_win);
+}
+
+void imprimirRotulo(WINDOW *tmpJanela,int y, int x, char *sRotulo){
+
+    wattron(tmpJanela,COLOR_PAIR(1));
+    mvwprintw(tmpJanela,y,x,sRotulo);
+    wattroff(tmpJanela,COLOR_PAIR(1));
+
+}
+
+void destruir_menu(WINDOW *menu_win){
+    wclear(menu_win);
+    wborder(menu_win, ' ', ' ', ' ',' ',' ',' ',' ',' ');  
+    wrefresh(menu_win);
+    delwin(menu_win); 
+}
+
+char * importar_de_arquivo(char * nomeArquivo) {
+	WINDOW * janela;
+	int telaAltura, telaLargura;
+    int startx, starty;
+    char msg1[] = "Nome arquivo:_______________________________";
+    char msg2[] = "[ENTER]";
+
+	init_pair(1,COLOR_GREEN,COLOR_BLACK);
+
+    getmaxyx(stdscr,telaAltura,telaLargura);
+    starty = (LINES - telaAltura)/2;   
+    startx = (COLS - telaLargura)/2; 
+    refresh();
+
+    janela = newwin(ALTURA, LARGURA, startx, starty);
+
+    wborder(janela, ACS_VLINE, ACS_VLINE,ACS_HLINE,ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
+
+    imprimirRotulo(janela,starty+2,startx+1,msg1);
+    imprimirRotulo(janela,starty+5,startx+20,msg2);
+
+    echo();
+    wmove(janela,starty+2,startx+15);
+    wgetstr(janela,nomeArquivo);
+
+    wclear(janela);
+    wborder(janela, ' ', ' ', ' ',' ',' ',' ',' ',' ');  
+    wrefresh(janela);
+
+    delwin(janela);
+
+    return nomeArquivo;
+
+}
+
+void erro_insere_pre_requisito() {
+
+    WINDOW * janela;
+    int telaAltura, telaLargura;
+    int startx, starty;
+    char c;
+    char msg1[] = "ATENCAO!";
+    char msg2[] = "Inconsistencia na insercao de pre-requisito";
+    char msg3[] = "Verifique se o(s) ID(s) informado(s) existe(m)";
+    char msg4[] = "Pressione qualquer tecla para retornar";
+    grafo * G;
+
+    init_pair(1,COLOR_RED,COLOR_BLACK);
+
+    getmaxyx(stdscr,telaAltura,telaLargura);
+    starty = (LINES - telaAltura)/2;   
+    startx = (COLS - telaLargura)/2; 
+    refresh();    
+
+    janela = newwin(ALTURA, LARGURA, startx, starty);
+
+    wborder(janela, ACS_VLINE, ACS_VLINE,ACS_HLINE,ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
+
+    
+        imprimirRotulo(janela,starty+2,startx+20,msg1);
+        imprimirRotulo(janela, starty+3,startx+2,msg2);
+        imprimirRotulo(janela,starty+4,startx+2,msg3);
+        imprimirRotulo(janela,starty+6,startx+6,msg4);
+
+        c = wgetch(janela);
+
+        if(c) {
+            destruir_menu(janela);
+        }
+
+}
+
+void erro_id_existente() {
+
+    WINDOW * janela;
+    int telaAltura, telaLargura;
+    int startx, starty;
+    char c;
+    char msg1[] = "ATENCAO!";
+    char msg2[] = "ID informado ja existe, insira novo ID";
+    char msg3[] = "Pressione qualquer tecla para retornar";
+    grafo * G;
+
+    init_pair(1,COLOR_RED,COLOR_BLACK);
+
+    getmaxyx(stdscr,telaAltura,telaLargura);
+    starty = (LINES - telaAltura)/2;   
+    startx = (COLS - telaLargura)/2; 
+    refresh();    
+
+    janela = newwin(ALTURA, LARGURA, startx, starty);
+
+    wborder(janela, ACS_VLINE, ACS_VLINE,ACS_HLINE,ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
+
+    
+        imprimirRotulo(janela,starty+2,startx+20,msg1);
+        imprimirRotulo(janela, starty+3,startx+8,msg2);
+        imprimirRotulo(janela,starty+6,startx+6,msg3);
+
+        c = wgetch(janela);
+
+        if(c) {
+            destruir_menu(janela);
+        }
+
+}
+
+void erro_id_inexistente() {
+
+    WINDOW * janela;
+    int telaAltura, telaLargura;
+    int startx, starty;
+    char c;
+    char msg1[] = "ATENCAO!";
+    char msg2[] = "ID informado não existe";
+    char msg3[] = "Pressione qualquer tecla para retornar";
+    grafo * G;
+
+    init_pair(1,COLOR_RED,COLOR_BLACK);
+
+    getmaxyx(stdscr,telaAltura,telaLargura);
+    starty = (LINES - telaAltura)/2;   
+    startx = (COLS - telaLargura)/2; 
+    refresh();    
+
+    janela = newwin(ALTURA, LARGURA, startx, starty);
+
+    wborder(janela, ACS_VLINE, ACS_VLINE,ACS_HLINE,ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
+
+    
+        imprimirRotulo(janela,starty+2,startx+20,msg1);
+        imprimirRotulo(janela, starty+3,startx+15,msg2);
+        imprimirRotulo(janela,starty+6,startx+6,msg3);
+
+        c = wgetch(janela);
+
+        if(c) {
+            destruir_menu(janela);
+        }
+
+}
+
+grafo * inserir_novo_pre_requisito(grafo* G) {
+
+    WINDOW * janela;
+    int telaAltura, telaLargura;
+    int startx, starty, i = 0, id_pre_requisito, id_tarefa;
+    char msg1[] = "ID da tarefa:        _____";
+    char msg2[] = "ID do pré-requisito: _____";
+
+    init_pair(1,COLOR_GREEN,COLOR_BLACK);
+
+    getmaxyx(stdscr,telaAltura,telaLargura);
+    starty = (LINES - telaAltura)/2;   
+    startx = (COLS - telaLargura)/2; 
+    refresh();
+
+    janela = newwin(ALTURA, LARGURA, startx, starty);
+
+    wborder(janela, ACS_VLINE, ACS_VLINE,ACS_HLINE,ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER); 
+        
+    imprimirRotulo(janela,starty+2,startx+1,msg1);
+    imprimirRotulo(janela,starty+3,startx+1,msg2);
+
+    echo();
+    wmove(janela,starty+2,startx+23);
+    wscanw(janela,"%d",&id_tarefa);
+
+    wmove(janela,starty+3,startx+23);
+    wscanw(janela,"%d",&id_pre_requisito);
+
+    if(!pesquisa_tarefa(G,id_pre_requisito) || !(pesquisa_tarefa(G,id_pre_requisito))) {
+        destruir_menu(janela);
+        erro_insere_pre_requisito();
+        return G;
+    } 
+
+    G = insere_prerequisitos(G,id_tarefa,id_pre_requisito);   
+
+    destruir_menu(janela);
+    return G;
+
+}
+
+grafo * tela_inserir_pre_requisito(grafo* G, int n_prerequisitos, int id_tarefa) {
+
+    WINDOW * janela;
+    int telaAltura, telaLargura;
+    int startx, starty, i, id_pre_requisito;
+    tarefa * tarefa;
+
+    char msg1[] = "ID do pré-requisito: _____";
+    char msg2[] = "[ENTER]";
+
+    init_pair(1,COLOR_GREEN,COLOR_BLACK);
+
+    getmaxyx(stdscr,telaAltura,telaLargura);
+    starty = (LINES - telaAltura)/2;   
+    startx = (COLS - telaLargura)/2; 
+    refresh();
+
+    janela = newwin(ALTURA, LARGURA, startx, starty);
+
+    wborder(janela, ACS_VLINE, ACS_VLINE,ACS_HLINE,ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
+
+    for(i = 0; i < n_prerequisitos; i++) {
+        
+        imprimirRotulo(janela,starty+2,startx+1,msg1);
+        imprimirRotulo(janela,starty+5,startx+20,msg2);
+
+        echo();
+        wmove(janela,starty+2,startx+23);
+        wscanw(janela,"%d",&id_pre_requisito);
+
+        if(pesquisa_tarefa(G,id_pre_requisito)) {
+            G = insere_prerequisitos(G,id_tarefa,id_pre_requisito);
+        } else {
+            destruir_menu(janela);
+            erro_insere_pre_requisito();
+            tarefa = procura_tarefa(G, id_tarefa);
+            tarefa->n_prerequisitos = i;
+            return G;
+        }
+
+        i++;
+
+    } 
+
+    destruir_menu(janela);
+    return G;
+
+}
+
+grafo * inserir_tarefa(grafo* G) {
+
+    WINDOW * janela;
+    int telaAltura, telaLargura;
+    int startx, starty;
+    int id_tarefa, tarefa_executada, duracao_tarefa, ini_min_tarefa, n_prerequisitos, i;
+    char nome_tarefa[100];
+    char msg1[] = "ID tarefa: _______";
+    char msg2[] = "Nome:      _______________________________";
+    char msg3[] = "Tarefa executada?  _____";
+    char msg4[] = "Duração tarefa:    _____";
+    char msg5[] = "Início mínimo:     _____";
+    char msg6[] = "No pré-requisitos: _____";
+
+
+    init_pair(1,COLOR_GREEN,COLOR_BLACK);
+
+    getmaxyx(stdscr,telaAltura,telaLargura);
+    starty = (LINES - telaAltura)/2;   
+    startx = (COLS - telaLargura)/2; 
+    refresh();
+
+    janela = newwin(ALTURA, LARGURA, startx, starty);
+
+    wborder(janela, ACS_VLINE, ACS_VLINE,ACS_HLINE,ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
+
+    imprimirRotulo(janela,starty+1,startx+1,msg1);
+    imprimirRotulo(janela,starty+2,startx+1,msg2);
+    imprimirRotulo(janela,starty+3,startx+1,msg3);
+    imprimirRotulo(janela,starty+4,startx+1,msg4);
+    imprimirRotulo(janela,starty+5,startx+1,msg5);
+    imprimirRotulo(janela,starty+6,startx+1,msg6);
+    
+
+    echo();
+    wmove(janela,starty+1,startx+13);
+    wscanw(janela,"%d",&id_tarefa);
+
+    wmove(janela,starty+2,startx+13);
+    wgetstr(janela,nome_tarefa);    
+
+    wmove(janela,starty+3,startx+21);
+    wscanw(janela,"%d",&tarefa_executada);
+
+    wmove(janela,starty+4,startx+21);
+    wscanw(janela,"%d",&duracao_tarefa);
+
+    wmove(janela,starty+5,startx+21);
+    wscanw(janela,"%d",&ini_min_tarefa);
+
+    wmove(janela,starty+6,startx+21);
+    wscanw(janela,"%d",&n_prerequisitos);
+
+    if(pesquisa_tarefa(G, id_tarefa)) {
+        destruir_menu(janela);
+        erro_id_existente();
+        return G;
+    }
+
+    G = insere_tarefa(G,id_tarefa,nome_tarefa,tarefa_executada,duracao_tarefa,ini_min_tarefa,n_prerequisitos);
+
+    if (n_prerequisitos != 0) {
+        destruir_menu(janela);
+        G = tela_inserir_pre_requisito(G, n_prerequisitos, id_tarefa);
+        return G;
+    }
+
+    destruir_menu(janela);
+    
+    return G;
+
+}
+
+void imprimir_em_arquivo(grafo * G) {
+
+    WINDOW * janela;
+    int telaAltura, telaLargura;
+    int startx, starty;
+    char nomeArquivo[100];
+    char msg1[] = "Arquivo de saída: ______________________";
+    char msg2[] = "[ENTER]";
+
+    init_pair(1,COLOR_GREEN,COLOR_BLACK);
+
+    getmaxyx(stdscr,telaAltura,telaLargura);
+    starty = (LINES - telaAltura)/2;   
+    startx = (COLS - telaLargura)/2; 
+    refresh();
+
+    janela = newwin(ALTURA, LARGURA, startx, starty);
+
+    wborder(janela, ACS_VLINE, ACS_VLINE,ACS_HLINE,ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
+
+    imprimirRotulo(janela,starty+2,startx+1,msg1);
+    imprimirRotulo(janela,starty+5,startx+20,msg2);
+    
+
+    echo();
+    wmove(janela,starty+2,startx+19);
+    wgetstr(janela, nomeArquivo);
+
+    imprime_grafo(G,nomeArquivo);
+
+    destruir_menu(janela);
+}
+
+grafo * edicao_tarefa(grafo * G, int id) {
+
+    WINDOW * janela;
+    int telaAltura, telaLargura;
+    int startx, starty;
+    int id_tarefa, tarefa_executada, duracao_tarefa, ini_min_tarefa, n_prerequisitos, i;
+    char nome_tarefa[100];
+    char msg1[] = "Novo ID: _______";
+    char msg2[] = "Novo nome:         ___________________________";
+    char msg3[] = "Tarefa executada?  _____";
+    char msg4[] = "Duração tarefa:    _____";
+    char msg5[] = "Início mínimo:     _____";
+    char msg6[] = "No pré-requisitos: _____";
+
+
+    init_pair(1,COLOR_GREEN,COLOR_BLACK);
+
+    getmaxyx(stdscr,telaAltura,telaLargura);
+    starty = (LINES - telaAltura)/2;   
+    startx = (COLS - telaLargura)/2; 
+    refresh();
+
+    janela = newwin(ALTURA, LARGURA, startx, starty);
+
+    wborder(janela, ACS_VLINE, ACS_VLINE,ACS_HLINE,ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
+
+    imprimirRotulo(janela,starty+1,startx+1,msg1);
+    imprimirRotulo(janela,starty+2,startx+1,msg2);
+    imprimirRotulo(janela,starty+3,startx+1,msg3);
+    imprimirRotulo(janela,starty+4,startx+1,msg4);
+    imprimirRotulo(janela,starty+5,startx+1,msg5);
+    imprimirRotulo(janela,starty+6,startx+1,msg6);
+    
+
+    echo();
+    wmove(janela,starty+1,startx+11);
+    wscanw(janela,"%d",&id_tarefa);
+
+    wmove(janela,starty+2,startx+21);
+    wgetstr(janela,nome_tarefa);    
+
+    wmove(janela,starty+3,startx+21);
+    wscanw(janela,"%d",&tarefa_executada);
+
+    wmove(janela,starty+4,startx+21);
+    wscanw(janela,"%d",&duracao_tarefa);
+
+    wmove(janela,starty+5,startx+21);
+    wscanw(janela,"%d",&ini_min_tarefa);
+
+    wmove(janela,starty+6,startx+21);
+    wscanw(janela,"%d",&n_prerequisitos);
+
+    if(pesquisa_tarefa(G, id_tarefa)) {
+        destruir_menu(janela);
+        erro_id_existente();
+        return G;
+    }
+
+    //G = editar_tarefa(G,id,id_tarefa,nome_tarefa,tarefa_executada,duracao_tarefa,ini_min_tarefa,n_prerequisitos,id_prerequisitos,FLG_NOME|FLG_INIC|FLG_PRER);
+
+    if (n_prerequisitos != 0) {
+        destruir_menu(janela);
+        G = tela_inserir_pre_requisito(G, n_prerequisitos, id_tarefa);
+        return G;
+    }
+
+    destruir_menu(janela);
+
+    return G;
+
+
+}
+
+grafo * editar_tarefa(grafo* G) {
+
+    WINDOW * janela;
+    int telaAltura, telaLargura;
+    int startx, starty;
+    int id_tarefa;
+    char msg1[] = "ID tarefa a ser editada: ______";
+    char msg2[] = "[ENTER]";
+
+    init_pair(1,COLOR_GREEN,COLOR_BLACK);
+
+    getmaxyx(stdscr,telaAltura,telaLargura);
+    starty = (LINES - telaAltura)/2;   
+    startx = (COLS - telaLargura)/2; 
+    refresh();
+
+    janela = newwin(ALTURA, LARGURA, startx, starty);
+
+    wborder(janela, ACS_VLINE, ACS_VLINE,ACS_HLINE,ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
+
+    imprimirRotulo(janela,starty+2,startx+1,msg1);
+    imprimirRotulo(janela,starty+5,startx+20,msg2);
+    
+
+    echo();
+    wmove(janela,starty+2,startx+27);
+    wscanw(janela, "%d", &id_tarefa);
+
+    if(!pesquisa_tarefa(G, id_tarefa)) {
+        destruir_menu(janela);
+        erro_id_inexistente();
+        return G;
+    }
+
+    destruir_menu(janela);
+    G = edicao_tarefa(G, id_tarefa);        
+
+    return G;
+
+}
+
+grafo * remover_tarefa(grafo* G) {
+
+    WINDOW * janela;
+    int telaAltura, telaLargura;
+    int startx, starty;
+    int id_tarefa;
+    char msg1[] = "ID tarefa a ser removida: _______";
+    char msg2[] = "[ENTER]";
+
+    init_pair(1,COLOR_GREEN,COLOR_BLACK);
+
+    getmaxyx(stdscr,telaAltura,telaLargura);
+    starty = (LINES - telaAltura)/2;   
+    startx = (COLS - telaLargura)/2; 
+    refresh();
+
+    janela = newwin(ALTURA, LARGURA, startx, starty);
+
+    wborder(janela, ACS_VLINE, ACS_VLINE,ACS_HLINE,ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
+
+    imprimirRotulo(janela,starty+2,startx+1,msg1);
+    imprimirRotulo(janela,starty+5,startx+20,msg2);
+    
+
+    echo();
+    wmove(janela,starty+2,startx+28);
+    wscanw(janela,"%d",&id_tarefa);
+
+    if(!pesquisa_tarefa(G, id_tarefa)) {
+        destruir_menu(janela);
+        erro_id_inexistente();
+        return G;
+    }
+
+    G = remove_tarefa(G, id_tarefa);
+
+    destruir_menu(janela);
+
+    return G;
+
+}
+
+grafo * remover_pre_requisitos(grafo* G) {
+
+    WINDOW * janela;
+    int telaAltura, telaLargura;
+    int startx, starty;
+    int id_tarefa;
+    char msg1[] = "Remover pre-requisitos da tarefa de ID: _______";
+    char msg2[] = "[ENTER]";
+
+    init_pair(1,COLOR_GREEN,COLOR_BLACK);
+
+    getmaxyx(stdscr,telaAltura,telaLargura);
+    starty = (LINES - telaAltura)/2;   
+    startx = (COLS - telaLargura)/2; 
+    refresh();
+
+    janela = newwin(ALTURA, LARGURA, startx, starty);
+
+    wborder(janela, ACS_VLINE, ACS_VLINE,ACS_HLINE,ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
+
+    imprimirRotulo(janela,starty+2,startx+1,msg1);
+    imprimirRotulo(janela,starty+5,startx+20,msg2);
+    
+
+    echo();
+    wmove(janela,starty+2,startx+42);
+    wscanw(janela,"%d",&id_tarefa);
+
+    if(!pesquisa_tarefa(G, id_tarefa)) {
+        destruir_menu(janela);
+        erro_id_inexistente();
+        return G;
+    }
+
+    G = remove_prerequisitos(G, id_tarefa);
+
+    destruir_menu(janela);
+
+    return G;
+
+}
+
+grafo * operacoes_grafo(grafo * G) {
+
+    WINDOW * menu_win;
+    int c;
+    int highlight = 1;
+    int opcao = 1;
+    char nomeArquivo[100];
+
+    menu_win = newwin(ALTURA+2, LARGURA, startx, starty);
+    keypad(menu_win,TRUE);
+    refresh();
+
+    do {
+  
+    print_operacoes(menu_win,highlight);
+    c = wgetch(menu_win);
+
+        switch(c) {
+            case KEY_UP:
+                if(highlight == 1)
+                    highlight = n_operacoes;
+                else
+                    --highlight;
+            break;
+
+            case KEY_DOWN:
+                if(highlight == n_operacoes)
+                    highlight = 1;
+                else
+                    ++highlight;
+            break;
+
+            case 10:
+                opcao = highlight;
+
+                if(opcao == 1) {
+                    destruir_menu(menu_win);
+                    G = inserir_tarefa(G);
+                    menu_win = newwin(ALTURA, LARGURA, startx, starty);
+                    keypad(menu_win,TRUE);
+                    refresh(); 
+
+                } else if (opcao == 2) {
+                    destruir_menu(menu_win);
+                    G = inserir_novo_pre_requisito(G);
+                    menu_win = newwin(ALTURA, LARGURA, startx, starty);
+                    keypad(menu_win,TRUE);
+                    refresh(); 
+
+                } else if (opcao == 3) {
+                    destruir_menu(menu_win);
+                    G = remover_tarefa(G);
+                    menu_win = newwin(ALTURA, LARGURA, startx, starty);
+                    keypad(menu_win,TRUE);
+                    refresh();
+
+                } else if(opcao == 4) {
+                    destruir_menu(menu_win);
+                    G = remover_pre_requisitos(G);
+                    menu_win = newwin(ALTURA, LARGURA, startx, starty);
+                    keypad(menu_win,TRUE);
+                    refresh();
+
+                } else if(opcao == 5) {
+                    destruir_menu(menu_win);
+                    G = editar_tarefa(G);
+                    menu_win = newwin(ALTURA, LARGURA, startx, starty);
+                    keypad(menu_win,TRUE);
+                    refresh();
+
+                } else if(opcao == 7) {
+                    destruir_menu(menu_win);
+                    imprimir_em_arquivo(G);
+                    menu_win = newwin(ALTURA, LARGURA, startx, starty);
+                    keypad(menu_win,TRUE);
+                    refresh();
+
+                } else if(opcao == 8) {
+                    destruir_menu(menu_win);
+                    return G;
+                }
+
+            break;
+
+            default:
+                refresh();
+            break;
+        }
+        
+    } while(1);   
+
+}
+
+grafo * abrir_arquivo(char * nomeArquivo) {
+
+	WINDOW * janela;
+	int telaAltura, telaLargura;
+    int startx, starty;
+    char c;
+    grafo * G;
+    char msg1[] = "ATENCAO! Erro ao abir aquivo.";
+    char msg2[] = "Escolha uma das opções abaixo:";
+    char msg3[] = "1 - voltar ao menu principal";
+    char msg4[] = "2 - sair ";
+    char msg5[] = "Tarefas importadas com sucesso!";
+    char msg6[] = "[ENTER]";
+
+ 	FILE * fp = fopen(nomeArquivo, "r");
+
+	init_pair(1,COLOR_RED,COLOR_BLACK);
+
+    getmaxyx(stdscr,telaAltura,telaLargura);
+    starty = (LINES - telaAltura)/2;   
+    startx = (COLS - telaLargura)/2; 
+    refresh();    
+
+    janela = newwin(ALTURA, LARGURA, startx, starty);
+
+    wborder(janela, ACS_VLINE, ACS_VLINE,ACS_HLINE,ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
+
+	if(!fp) {
+		imprimirRotulo(janela,starty+2,startx+10,msg1);
+		imprimirRotulo(janela,starty+3,startx+10,msg2);
+		imprimirRotulo(janela,starty+5,startx+10,msg3);
+		imprimirRotulo(janela,starty+6,startx+10,msg4);
+
+		c = wgetch(janela);
+
+		if(c == '1') {
+			destruir_menu(janela);
+            return G;
+		} else {
+			destruir_menu(janela);
+			endwin();
+			exit(1);
+		}
+
+		
+	} else {
+        G = le_grafo(fp);
+
+		imprimirRotulo(janela,starty+2,startx+10,msg5);
+        imprimirRotulo(janela,starty+4,startx+20,msg6);
+
+        c = wgetch(janela);
+
+		destruir_menu(janela);
+
+        G = operacoes_grafo(G);
+	}
+
+    return G;
+
+}
+
+int main () {
+	
+	WINDOW * menu_win;
+	int c;
+	int highlight = 1;
+	int opcao = 1;
+	char nomeArquivo[100];
+    grafo * G;
+
+	initscr();
+
+ 	if(has_colors() == FALSE)
+    {   
+       endwin();
+       printf("Seu terminal nao suporta cores\n");
+       exit(1);
+    }
+
+    start_color(); 
+
+    clear();
+    noecho();
+    cbreak();
+
+    menu_win = newwin(ALTURA, LARGURA, startx, starty);
+    keypad(menu_win,TRUE);
+    refresh();
+
+    do {
+  
+    print_menu(menu_win,highlight);
+    c = wgetch(menu_win);
+
+	    switch(c) {
+	        case KEY_UP:
+		        if(highlight == 1)
+		            highlight = n_opcoes;
+		        else
+		    	    --highlight;
+	        break;
+
+	        case KEY_DOWN:
+	            if(highlight == n_opcoes)
+	            	highlight = 1;
+	            else
+	            	++highlight;
+	        break;
+
+	        case 10:
+	        	opcao = highlight;
+
+	        	if (opcao == 1) {
+	        		destruir_menu(menu_win);
+	        		strcpy(nomeArquivo, importar_de_arquivo(nomeArquivo));	
+	        		G = abrir_arquivo(nomeArquivo);
+	        		menu_win = newwin(ALTURA, LARGURA, startx, starty);
+	        		keypad(menu_win,TRUE);
+    				refresh();
+
+	        	} else if (opcao == 2) {
+                    destruir_menu(menu_win);
+                    G = cria_grafo();
+                    G = operacoes_grafo(G);
+                    menu_win = newwin(ALTURA, LARGURA, startx, starty);
+                    keypad(menu_win,TRUE);
+                    refresh();
+
+                } else if(opcao == 3) {
+
+	        		refresh();
+	        		endwin();
+	        		return 0;	
+	        	}
+
+	        break;
+	     
+	        default:
+	            refresh();
+	        break;
+        }
+
+    } while (1);
+
+}
