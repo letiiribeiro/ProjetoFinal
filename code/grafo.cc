@@ -586,3 +586,41 @@ int* caminhos(grafo* G){
         VetorOrdenado[j] = INT_MAX; 
     return VetorOrdenado;
 } 
+
+int* tarefas_concluidas(grafo* G, int periodo){
+    tarefa* tmp;
+    int i = 0;
+    struct vetor V[100]; //assumindo que o numero maximo de tarefas no grafo e < 100
+    lista* l = NULL;
+    for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
+         l = insere_lista(l,tmp->id_tarefa);
+         tmp->tempo_min = -1;
+         tmp->tarefa_executada = 0;
+    }
+    int total = 0;
+    while(l){
+        int x = l->t;
+        int removeu;
+        tempo_minimo(G,x);
+        for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
+            if(tmp->tempo_min != -1)
+                l = remove_lista(l,tmp->id_tarefa,&removeu);
+            if(removeu){
+                if(tmp->tempo_min <= periodo)
+                    tmp->tarefa_executada = 1;
+                total += tmp->tempo_min;
+                V[i].id_tarefa = tmp->id_tarefa;
+                V[i++].tempo_min = tmp->tempo_min;
+            }
+        }
+    }
+    qsort(V,i,sizeof(struct vetor),compara);
+    int *VetorOrdenado = (int*) malloc(100*sizeof(int));
+    int j,k=0;
+    for(j=0;j<i;j++)
+        if(V[j].tempo_min <= periodo)
+            VetorOrdenado[k++] = V[j].id_tarefa;
+    for(;k<100;k++)
+        VetorOrdenado[k] = INT_MAX; 
+    return VetorOrdenado;
+}

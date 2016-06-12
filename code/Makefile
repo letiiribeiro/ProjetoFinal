@@ -1,6 +1,6 @@
 IDIR =../include
-CC=gcc
-CFLAGS=-I$(IDIR)
+CC=g++
+CFLAGS=-I$(IDIR) -g -Wall -ftest-coverage -fprofile-arcs -lncurses
 
 ODIR=obj
 LDIR =../lib
@@ -15,10 +15,10 @@ _OBJ = grafo.o main.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 $(ODIR)/%.o: %.cc $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS) -g -Wall
+	$(CC) -c -o $@ $< $(CFLAGS) 
 
 main: $(OBJ)
-	g++ -o $@ $^ $(CFLAGS) $(LIBS) -g -Wall -ftest-coverage -fprofile-arcs
+	$(CC) -o $@ $^ $(CFLAGS) $(LIBS) 
 
 .PHONY: clean
 

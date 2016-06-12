@@ -64,6 +64,7 @@ tarefa* procura_tarefa(grafo* G, int id_tarefa);
 int tempo_minimo(grafo* G, int id_tarefa);
 int tempo_minimo_total(grafo* G);
 int* caminhos(grafo* G);
+int* tarefas_concluidas(grafo* G, int periodo);
 
 #endif
 /* GRAFO_INCLUDED */
