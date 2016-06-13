@@ -172,19 +172,28 @@ grafo* remove_tarefa(grafo* G, int id_tarefa){
 
 grafo* remove_prerequisitos(grafo* G, int id_tarefa){
     tarefa *tmp;
-    for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
+    int achou;
+    for(tmp=G->T;tmp!=NULL;tmp=tmp->prox) {
             prerequisitos* e;
+            achou = 0;
+
             for(e=tmp->prerequisitos_tarefa;e!=NULL;e=e->prox){
                 if(e->prox && e->prox->id_prerequisito == id_tarefa){
                     prerequisitos* k = e->prox;
                     e->prox = k->prox;
+                    achou = 1;
                     free(k);
                 }
                 else if(e->id_prerequisito == id_tarefa){
                     tmp->prerequisitos_tarefa = e->prox;
+                    achou = 1;
                     free(e);
                     break;
                 }
+            }
+
+            if(achou) {
+                tmp->n_prerequisitos--;
             }
     }
     return G;
