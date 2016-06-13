@@ -190,14 +190,7 @@ grafo* remove_prerequisitos(grafo* G, int id_tarefa){
     return G;
 }
 
- grafo* le_grafo(char *nomeArq) {
-
-	FILE * fp = fopen(nomeArq, "r");
-
-	if(!fp) {
-		printf("error: impossivel abrir arquivo\n");
-		exit(1);
-	}
+ grafo* le_grafo(FILE * fp) {
 
 	grafo* G = cria_grafo();
 	int id_tarefa, tarefa_executada, duracao_tarefa, inicio_min_tarefa, nro_pre_requisitos, i, pre_requisito;
