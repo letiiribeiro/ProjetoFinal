@@ -182,7 +182,7 @@ void erro_insere_pre_requisito() {
         imprimirRotulo(janela,starty+2,startx+20,msg1);
         imprimirRotulo(janela, starty+3,startx+2,msg2);
         imprimirRotulo(janela,starty+4,startx+2,msg3);
-        imprimirRotulo(janela,starty+6,startx+6,msg4);
+        imprimirRotulo(janela,starty+5,startx+6,msg4);
 
         c = wgetch(janela);
 
@@ -306,25 +306,27 @@ grafo * tela_inserir_pre_requisito(grafo* G, int n_prerequisitos, int id_tarefa)
 
     WINDOW * janela;
     int telaAltura, telaLargura;
-    int startx, starty, i, id_pre_requisito;
-    tarefa * tarefa;
+    int startx, starty, id_pre_requisito, i = 0;
+    tarefa * tarefa; 
 
-    char msg1[] = "ID do pré-requisito: _____";
-    char msg2[] = "[ENTER]";
+    if(n_prerequisitos == 0) {
+        return G;
+    } else {
 
-    init_pair(1,COLOR_GREEN,COLOR_BLACK);
+        char msg1[] = "ID do pré-requisito: _____";
+        char msg2[] = "[ENTER]";
 
-    getmaxyx(stdscr,telaAltura,telaLargura);
-    starty = (LINES - telaAltura)/2;   
-    startx = (COLS - telaLargura)/2; 
-    refresh();
+        init_pair(1,COLOR_GREEN,COLOR_BLACK);
 
-    janela = newwin(ALTURA, LARGURA, startx, starty);
+        getmaxyx(stdscr,telaAltura,telaLargura);
+        starty = (LINES - telaAltura)/2;   
+        startx = (COLS - telaLargura)/2; 
+        refresh();
 
-    wborder(janela, ACS_VLINE, ACS_VLINE,ACS_HLINE,ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
+        janela = newwin(ALTURA, LARGURA, startx, starty);
 
-    for(i = 0; i < n_prerequisitos; i++) {
-        
+        wborder(janela, ACS_VLINE, ACS_VLINE,ACS_HLINE,ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);      
+            
         imprimirRotulo(janela,starty+2,startx+1,msg1);
         imprimirRotulo(janela,starty+5,startx+20,msg2);
 
@@ -334,19 +336,20 @@ grafo * tela_inserir_pre_requisito(grafo* G, int n_prerequisitos, int id_tarefa)
 
         if(pesquisa_tarefa(G,id_pre_requisito)) {
             G = insere_prerequisitos(G,id_tarefa,id_pre_requisito);
+            n_prerequisitos--;
+            i++;
+            destruir_menu(janela);
+            G = tela_inserir_pre_requisito(G, n_prerequisitos, id_tarefa);
         } else {
             destruir_menu(janela);
             erro_insere_pre_requisito();
             tarefa = procura_tarefa(G, id_tarefa);
             tarefa->n_prerequisitos = i;
             return G;
-        }
-
-        i++;
+        }    
 
     } 
 
-    destruir_menu(janela);
     return G;
 
 }
