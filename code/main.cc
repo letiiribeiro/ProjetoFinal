@@ -698,35 +698,35 @@ grafo * operacoes_grafo(grafo * G) {
                 if(opcao == 1) {
                     destruir_menu(menu_win);
                     G = inserir_tarefa(G);
-                    menu_win = newwin(ALTURA, LARGURA, startx, starty);
+                    menu_win = newwin(ALTURA+2, LARGURA, startx, starty);
                     keypad(menu_win,TRUE);
                     refresh(); 
 
                 } else if (opcao == 2) {
                     destruir_menu(menu_win);
                     G = inserir_novo_pre_requisito(G);
-                    menu_win = newwin(ALTURA, LARGURA, startx, starty);
+                    menu_win = newwin(ALTURA+2, LARGURA, startx, starty);
                     keypad(menu_win,TRUE);
                     refresh(); 
 
                 } else if (opcao == 3) {
                     destruir_menu(menu_win);
                     G = remover_tarefa(G);
-                    menu_win = newwin(ALTURA, LARGURA, startx, starty);
+                    menu_win = newwin(ALTURA+2, LARGURA, startx, starty);
                     keypad(menu_win,TRUE);
                     refresh();
 
                 } else if(opcao == 4) {
                     destruir_menu(menu_win);
                     G = remover_pre_requisitos(G);
-                    menu_win = newwin(ALTURA, LARGURA, startx, starty);
+                    menu_win = newwin(ALTURA+2, LARGURA, startx, starty);
                     keypad(menu_win,TRUE);
                     refresh();
 
                 } else if(opcao == 5) {
                     destruir_menu(menu_win);
                     G = editar_tarefa(G);
-                    menu_win = newwin(ALTURA, LARGURA, startx, starty);
+                    menu_win = newwin(ALTURA+2, LARGURA, startx, starty);
                     keypad(menu_win,TRUE);
                     refresh();
 
@@ -740,7 +740,7 @@ grafo * operacoes_grafo(grafo * G) {
                 } else if(opcao == 7) {
                     destruir_menu(menu_win);
                     imprimir_em_arquivo(G);
-                    menu_win = newwin(ALTURA, LARGURA, startx, starty);
+                    menu_win = newwin(ALTURA+2, LARGURA, startx, starty);
                     keypad(menu_win,TRUE);
                     refresh();
 
