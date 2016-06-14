@@ -1,5 +1,6 @@
 #include <ncurses.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 #include "grafo.h"
 
@@ -22,13 +23,22 @@ char *vOperacoes[] = {
     "(4) Remover pré-requisitos",
     "(5) Editar tarefa",
     "(6) Visualizador de tarefas",
-    "(7) Verificar consistencia de tarefa",
-    "(8) Gerar arquivo com tarefas",
-    "(9) Sair",
+    "(7) Gerar arquivo com tarefas",
+    "(8) Voltar",
+};
+
+char *vVisualizador[] = {
+    "(1) Mostrar tarefas",
+    "(2) Mostrar pre-requisitos de cada tarefa",
+    "(3) Caminhos que indicam menor tempo de execucao",
+    "(4) Quais tarefas foram completadas ou não",
+    "(5) Filtrar tarefas completadas ate determinado periodo",
+    "(6) Voltar",
 };
 
 int n_opcoes = sizeof(vOpcoes) / sizeof(char *);
 int n_operacoes = sizeof(vOperacoes) / sizeof(char*);
+int n_visualizador = sizeof(vVisualizador) / sizeof(char*);
 
 void print_menu(WINDOW *menu_win, int highlight) {
 
@@ -68,6 +78,28 @@ void print_operacoes(WINDOW *menu_win, int highlight) {
         }
         else
             mvwprintw(menu_win,y,x,"\t%s",vOperacoes[i]);
+            ++y;
+    }
+
+    wrefresh(menu_win);
+}
+
+void print_visualizador(WINDOW *menu_win, int highlight) {
+
+    int x,y,i;
+    x = 1; 
+    y = 1;
+
+    box(menu_win,0,0);
+    for(i=0; i< n_visualizador; i++){
+        if(highlight == i+1) 
+        {
+            wattron(menu_win,A_REVERSE);
+            mvwprintw(menu_win,y,x,"\t%s",vVisualizador[i]);
+            wattroff(menu_win,A_REVERSE);
+        }
+        else
+            mvwprintw(menu_win,y,x,"\t%s",vVisualizador[i]);
             ++y;
     }
 
@@ -150,7 +182,7 @@ void erro_insere_pre_requisito() {
         imprimirRotulo(janela,starty+2,startx+20,msg1);
         imprimirRotulo(janela, starty+3,startx+2,msg2);
         imprimirRotulo(janela,starty+4,startx+2,msg3);
-        imprimirRotulo(janela,starty+6,startx+6,msg4);
+        imprimirRotulo(janela,starty+5,startx+6,msg4);
 
         c = wgetch(janela);
 
@@ -274,25 +306,27 @@ grafo * tela_inserir_pre_requisito(grafo* G, int n_prerequisitos, int id_tarefa)
 
     WINDOW * janela;
     int telaAltura, telaLargura;
-    int startx, starty, i, id_pre_requisito;
-    tarefa * tarefa;
+    int startx, starty, id_pre_requisito, i = 0;
+    tarefa * tarefa; 
 
-    char msg1[] = "ID do pré-requisito: _____";
-    char msg2[] = "[ENTER]";
+    if(n_prerequisitos == 0) {
+        return G;
+    } else {
 
-    init_pair(1,COLOR_GREEN,COLOR_BLACK);
+        char msg1[] = "ID do pré-requisito: _____";
+        char msg2[] = "[ENTER]";
 
-    getmaxyx(stdscr,telaAltura,telaLargura);
-    starty = (LINES - telaAltura)/2;   
-    startx = (COLS - telaLargura)/2; 
-    refresh();
+        init_pair(1,COLOR_GREEN,COLOR_BLACK);
 
-    janela = newwin(ALTURA, LARGURA, startx, starty);
+        getmaxyx(stdscr,telaAltura,telaLargura);
+        starty = (LINES - telaAltura)/2;   
+        startx = (COLS - telaLargura)/2; 
+        refresh();
 
-    wborder(janela, ACS_VLINE, ACS_VLINE,ACS_HLINE,ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
+        janela = newwin(ALTURA, LARGURA, startx, starty);
 
-    for(i = 0; i < n_prerequisitos; i++) {
-        
+        wborder(janela, ACS_VLINE, ACS_VLINE,ACS_HLINE,ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);      
+            
         imprimirRotulo(janela,starty+2,startx+1,msg1);
         imprimirRotulo(janela,starty+5,startx+20,msg2);
 
@@ -302,19 +336,20 @@ grafo * tela_inserir_pre_requisito(grafo* G, int n_prerequisitos, int id_tarefa)
 
         if(pesquisa_tarefa(G,id_pre_requisito)) {
             G = insere_prerequisitos(G,id_tarefa,id_pre_requisito);
+            n_prerequisitos--;
+            i++;
+            destruir_menu(janela);
+            G = tela_inserir_pre_requisito(G, n_prerequisitos, id_tarefa);
         } else {
             destruir_menu(janela);
             erro_insere_pre_requisito();
             tarefa = procura_tarefa(G, id_tarefa);
             tarefa->n_prerequisitos = i;
             return G;
-        }
-
-        i++;
+        }    
 
     } 
 
-    destruir_menu(janela);
     return G;
 
 }
@@ -574,6 +609,7 @@ grafo * remover_tarefa(grafo* G) {
         return G;
     }
 
+
     G = remove_tarefa(G, id_tarefa);
 
     destruir_menu(janela);
@@ -582,7 +618,7 @@ grafo * remover_tarefa(grafo* G) {
 
 }
 
-void visualizador_tarefas(grafo * G) {
+void ver_tarefas(grafo * G) {
 
     WINDOW * janela;
     int telaAltura, telaLargura;
@@ -597,7 +633,7 @@ void visualizador_tarefas(grafo * G) {
     startx = (COLS - telaLargura)/2; 
     refresh();
 
-    janela = newwin(ALTURA+35, LARGURA, startx, starty);
+    janela = newwin(ALTURA+35, LARGURA+25, startx, starty);
 
     wborder(janela, ACS_VLINE, ACS_VLINE,ACS_HLINE,ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
 
@@ -607,7 +643,7 @@ void visualizador_tarefas(grafo * G) {
 
     for(tmp = G->T; tmp != NULL; tmp = tmp->prox) {
         mvwprintw(janela,starty+i,startx+1,"%d",tmp->id_tarefa);
-        mvwprintw(janela,starty+i,startx+17,"%s",tmp->nome_tarefa);
+        mvwprintw(janela,starty+i,startx+16,"%s",tmp->nome_tarefa);
         i++;
     }
     
@@ -658,6 +694,92 @@ grafo * remover_pre_requisitos(grafo* G) {
     destruir_menu(janela);
 
     return G;
+
+}
+
+void visualizador_tarefas(grafo * G) {
+
+    WINDOW * menu_win;
+    int c;
+    int highlight = 1;
+    int opcao = 1;
+    int LARGURA_V = LARGURA + 25;
+
+    menu_win = newwin(ALTURA, LARGURA_V, startx, starty);
+    keypad(menu_win,TRUE);
+    refresh();
+
+    do {
+  
+    print_visualizador(menu_win,highlight);
+    c = wgetch(menu_win);
+
+        switch(c) {
+            case KEY_UP:
+                if(highlight == 1)
+                    highlight = n_visualizador;
+                else
+                    --highlight;
+            break;
+
+            case KEY_DOWN:
+                if(highlight == n_visualizador)
+                    highlight = 1;
+                else
+                    ++highlight;
+            break;
+
+            case 10:
+                opcao = highlight;
+
+                if(opcao == 1) {
+                    destruir_menu(menu_win);
+                    ver_tarefas(G);
+                    menu_win = newwin(ALTURA, LARGURA_V, startx, starty);
+                    keypad(menu_win,TRUE);
+                    refresh(); 
+
+                } else if (opcao == 2) {
+                    destruir_menu(menu_win);
+                    //G = inserir_novo_pre_requisito(G);
+                    menu_win = newwin(ALTURA, LARGURA_V, startx, starty);
+                    keypad(menu_win,TRUE);
+                    refresh(); 
+
+                } else if (opcao == 3) {
+                    destruir_menu(menu_win);
+                    //G = remover_tarefa(G);
+                    menu_win = newwin(ALTURA, LARGURA_V, startx, starty);
+                    keypad(menu_win,TRUE);
+                    refresh();
+
+                } else if(opcao == 4) {
+                    destruir_menu(menu_win);
+                    //G = remover_pre_requisitos(G);
+                    menu_win = newwin(ALTURA, LARGURA_V, startx, starty);
+                    keypad(menu_win,TRUE);
+                    refresh();
+
+                } else if(opcao == 5) {
+                    destruir_menu(menu_win);
+                    //G = editar_tarefa(G);
+                    menu_win = newwin(ALTURA, LARGURA_V, startx, starty);
+                    keypad(menu_win,TRUE);
+                    refresh();
+
+                } else if(opcao == 6) {
+                    destruir_menu(menu_win);
+                    return;
+                }
+
+            break;
+
+            default:
+                refresh();
+            break;
+        }
+        
+    } while(1);   
 
 }
 
@@ -744,7 +866,7 @@ grafo * operacoes_grafo(grafo * G) {
                     keypad(menu_win,TRUE);
                     refresh();
 
-                } else if(opcao == 9) {
+                } else if(opcao == 8) {
                     destruir_menu(menu_win);
                     return G;
                 }
