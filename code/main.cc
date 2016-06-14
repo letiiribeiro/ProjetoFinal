@@ -10,35 +10,13 @@
 int startx = 0;
 int starty = 0;
 
-char *vOpcoes[] = {
-    "(1) Importar arquivo com tarefas",
-    "(2) Criar novas tarefas",
-    "(3) Sair",
-};
+char vOpcoes[3][70];
+char vOperacoes[8][70];
+char vVisualizador[6][70];
 
-char *vOperacoes[] = {
-    "(1) Inserir tarefa",
-    "(2) Inserir novo pré-requisito",
-    "(3) Remover tarefa",
-    "(4) Remover pré-requisitos",
-    "(5) Editar tarefa",
-    "(6) Visualizador de tarefas",
-    "(7) Gerar arquivo com tarefas",
-    "(8) Voltar",
-};
-
-char *vVisualizador[] = {
-    "(1) Mostrar tarefas",
-    "(2) Mostrar pre-requisitos de cada tarefa",
-    "(3) Caminhos que indicam menor tempo de execucao",
-    "(4) Quais tarefas foram completadas ou não",
-    "(5) Filtrar tarefas completadas ate determinado periodo",
-    "(6) Voltar",
-};
-
-int n_opcoes = sizeof(vOpcoes) / sizeof(char *);
-int n_operacoes = sizeof(vOperacoes) / sizeof(char*);
-int n_visualizador = sizeof(vVisualizador) / sizeof(char*);
+int n_opcoes = 3;
+int n_operacoes = 8;
+int n_visualizador = 6;
 
 void print_menu(WINDOW *menu_win, int highlight) {
 
@@ -957,6 +935,26 @@ int main () {
 
 	initscr();
 
+	strcpy(vOpcoes[0],"(1) Importar arquivo com tarefas");
+	strcpy(vOpcoes[1],"(2) Criar novas tarefas");
+	strcpy(vOpcoes[2],"(3) Sair");
+	
+	strcpy(vOperacoes[0],"(1) Inserir tarefa");
+	strcpy(vOperacoes[1],"(2) Inserir novo pré-requisito");
+	strcpy(vOperacoes[2],"(3) Remover tarefa");
+	strcpy(vOperacoes[3],"(4) Remover pré-requisitos");
+	strcpy(vOperacoes[4],"(5) Editar tarefa");
+	strcpy(vOperacoes[5],"(6) Visualizador de tarefas");
+	strcpy(vOperacoes[6],"(7) Gerar arquivo com tarefas");
+	strcpy(vOperacoes[7],"(8) Voltar");
+	
+	strcpy(vVisualizador[0],"(1) Mostrar tarefas");
+	strcpy(vVisualizador[1],"(2) Mostrar pre-requisitos de cada tarefa");
+	strcpy(vVisualizador[2],"(3) Caminhos que indicam menor tempo de execucao");
+	strcpy(vVisualizador[3],"(4) Quais tarefas foram completadas ou não");
+	strcpy(vVisualizador[4],"(5) Filtrar tarefas completadas ate determinado periodo");
+	strcpy(vVisualizador[5],"(6) Voltar");
+ 
  	if(has_colors() == FALSE)
     {   
        endwin();
