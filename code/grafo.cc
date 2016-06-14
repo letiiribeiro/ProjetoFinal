@@ -141,7 +141,7 @@ tarefa * procura_tarefa(grafo* G, int id_tarefa) {
 grafo* remove_tarefa(grafo* G, int id_tarefa){
     tarefa *tmp;
     for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
-        if(tmp->prox && tmp->id_tarefa == id_tarefa){
+        if(tmp->prox && tmp->prox->id_tarefa == id_tarefa){
             tarefa* k = tmp->prox;
             tmp->prox = k->prox;
             free(k);
