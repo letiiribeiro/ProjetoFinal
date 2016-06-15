@@ -54,7 +54,7 @@ grafo* remove_tarefa(grafo* G, int id_tarefa);
 grafo* remove_prerequisitos(grafo* G, int id_tarefa);
 int peso_caminho(grafo* G, char* vorig, char* vdest);
 int grafo_conexo(grafo* G);
-grafo* le_grafo(FILE *);
+grafo* le_grafo(FILE* fp);
 void libera_grafo(grafo* G);
 void imprime_grafo(grafo* G, char* nome_arq);
 int verifica_consistencia(grafo* G);

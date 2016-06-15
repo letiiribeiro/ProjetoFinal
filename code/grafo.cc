@@ -198,7 +198,7 @@ grafo* remove_prerequisitos(grafo* G, int id_tarefa){
     }
     return G;
 }
-
+/*
  grafo* le_grafo(FILE * fp) {
 
 	grafo* G = cria_grafo();
@@ -225,8 +225,8 @@ grafo* remove_prerequisitos(grafo* G, int id_tarefa){
 		G = insere_tarefa(G, id_tarefa, nome_tarefa, tarefa_executada, duracao_tarefa, inicio_min_tarefa, nro_pre_requisitos); // TODO: acrescentar na estrutura esses itens?
 
 		for(i = 0; i < nro_pre_requisitos; i++) {
-			fscanf(fp, "%d", &pre_requisito);
-			fscanf(fp, "%c", &lixo);
+			fscanf(fp, " %d", &pre_requisito);
+		//	fscanf(fp, "%c", &lixo);
 
 			if(pesquisa_tarefa(G, pre_requisito)) {						// verifica se pre-requisito existe, se sim, insere na prerequisitos_tarefa
 				G = insere_prerequisitos(G, id_tarefa, pre_requisito);
@@ -241,7 +241,67 @@ grafo* remove_prerequisitos(grafo* G, int id_tarefa){
 	return G;
 
  }
+*/
+grafo* le_grafo(FILE* fp){
+    char buffer[100];
+    int i;
+    grafo* G = cria_grafo();
+    
+    while(fgets(buffer,100,fp) != NULL){
+        i = 0;
+        buffer[strlen(buffer)-1] = '\0';
+        while(buffer[i] != 0x20)
+            i++;
+        buffer[i] = '\0';
+        int id_tarefa = atoi(buffer);
+        i += 2;
+        int ini = i;
+        while(buffer[i] != 0x27)
+            i++;
+        buffer[i] = '\0';
+        char nome_tarefa[100];
+        strcpy(nome_tarefa,&buffer[ini]);
+        i += 2;
+        ini = i;
+        while(buffer[i] != 0x20)
+            i++;
+        buffer[i] = '\0';
+        int tarefa_executada = atoi(&buffer[ini]);
+        i++;
+        ini = i;
+        while(buffer[i] != 0x20)
+            i++;
+        buffer[i] = '\0';
+        int duracao_tarefa = atoi(&buffer[ini]);
+        i++;
+        ini = i;
+        while(buffer[i] != 0x20)
+            i++;
+        buffer[i] = '\0';
+        int inicio_min_tarefa = atoi(&buffer[ini]);
+        i++;
+        ini = i;
+        while(buffer[i] != 0x20)
+            i++;
+        buffer[i] = '\0';
+        int n_prerequisitos = atoi(&buffer[ini]);
+        int prerequisitos[n_prerequisitos];
+        G = insere_tarefa(G, id_tarefa, nome_tarefa, tarefa_executada,
+        duracao_tarefa, inicio_min_tarefa, n_prerequisitos);
+        int j;
+        for(j=0;j<n_prerequisitos;j++) {
+            i++;
+            ini = i;
+            while(buffer[i] != 0x20)
+                i++;
+            buffer[i] = '\0';
+            prerequisitos[j] = atoi(&buffer[ini]);
+            G = insere_prerequisitos(G, id_tarefa, prerequisitos[j]);
+        }
+    }
 
+    return G;
+}
 /*
 typedef struct LISTA{
     tarefa* v;
@@ -359,7 +419,10 @@ void imprime_grafo(grafo* G, char* nome_arq) {
 		fprintf(fp, "%d ", tmp->tarefa_executada);
 		fprintf(fp, "%d ", tmp->duracao_tarefa);
 		fprintf(fp, "%d ", tmp->inicio_min_tarefa);
-		fprintf(fp, "%d ", tmp->n_prerequisitos);
+        if(tmp->n_prerequisitos != 0)
+            fprintf(fp, "%d ", tmp->n_prerequisitos);
+        else
+            fprintf(fp, "%d", tmp->n_prerequisitos);
 
 		prerequisitos * tmp2 = tmp->prerequisitos_tarefa;
 
