@@ -1,0 +1,98 @@
+\hypertarget{classtesting_1_1internal_1_1FloatingPoint}{\section{Referência à classe Template testing\-:\-:internal\-:\-:Floating\-Point$<$ Raw\-Type $>$}
+\label{classtesting_1_1internal_1_1FloatingPoint}\index{testing\-::internal\-::\-Floating\-Point$<$ Raw\-Type $>$@{testing\-::internal\-::\-Floating\-Point$<$ Raw\-Type $>$}}
+}
+\subsection*{Tipos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classtesting_1_1internal_1_1FloatingPoint_abf228bf6cd48f12c8b44c85b4971a731}{typedef \hyperlink{classtesting_1_1internal_1_1TypeWithSize}{Type\-With\-Size}$<$ sizeof(Raw\-Type)$>$\\*
+\-::U\-Int {\bfseries Bits}}\label{classtesting_1_1internal_1_1FloatingPoint_abf228bf6cd48f12c8b44c85b4971a731}
+
+\end{DoxyCompactItemize}
+\subsection*{Membros públicos}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classtesting_1_1internal_1_1FloatingPoint_a0dabf840863e0df84046f171c891fe71}{{\bfseries Floating\-Point} (const Raw\-Type \&x)}\label{classtesting_1_1internal_1_1FloatingPoint_a0dabf840863e0df84046f171c891fe71}
+
+\item 
+\hypertarget{classtesting_1_1internal_1_1FloatingPoint_abead51f16ec6ea84360a976da1cd1387}{const Bits \& {\bfseries bits} () const }\label{classtesting_1_1internal_1_1FloatingPoint_abead51f16ec6ea84360a976da1cd1387}
+
+\item 
+\hypertarget{classtesting_1_1internal_1_1FloatingPoint_af53c50b85408c582540d6244c026ce2b}{Bits {\bfseries exponent\-\_\-bits} () const }\label{classtesting_1_1internal_1_1FloatingPoint_af53c50b85408c582540d6244c026ce2b}
+
+\item 
+\hypertarget{classtesting_1_1internal_1_1FloatingPoint_aa0167b7b10a934b743ba3c1f47421e63}{Bits {\bfseries fraction\-\_\-bits} () const }\label{classtesting_1_1internal_1_1FloatingPoint_aa0167b7b10a934b743ba3c1f47421e63}
+
+\item 
+\hypertarget{classtesting_1_1internal_1_1FloatingPoint_a6176cc4d443724477f2799bcbd9f020a}{Bits {\bfseries sign\-\_\-bit} () const }\label{classtesting_1_1internal_1_1FloatingPoint_a6176cc4d443724477f2799bcbd9f020a}
+
+\item 
+\hypertarget{classtesting_1_1internal_1_1FloatingPoint_aaef2fd2cd8cdf791206a5e9fed8ef90d}{bool {\bfseries is\-\_\-nan} () const }\label{classtesting_1_1internal_1_1FloatingPoint_aaef2fd2cd8cdf791206a5e9fed8ef90d}
+
+\item 
+\hypertarget{classtesting_1_1internal_1_1FloatingPoint_adb0fe9ab1d9e5288f8e5550234211166}{bool {\bfseries Almost\-Equals} (const \hyperlink{classtesting_1_1internal_1_1FloatingPoint}{Floating\-Point} \&rhs) const }\label{classtesting_1_1internal_1_1FloatingPoint_adb0fe9ab1d9e5288f8e5550234211166}
+
+\item 
+\hypertarget{classtesting_1_1internal_1_1FloatingPoint_af2eda9331e679229a1baa3404b57b51d}{{\footnotesize template$<$$>$ }\\float {\bfseries Max} ()}\label{classtesting_1_1internal_1_1FloatingPoint_af2eda9331e679229a1baa3404b57b51d}
+
+\item 
+\hypertarget{classtesting_1_1internal_1_1FloatingPoint_afc2e85c0e886cb13b2300e961c9a9648}{{\footnotesize template$<$$>$ }\\double {\bfseries Max} ()}\label{classtesting_1_1internal_1_1FloatingPoint_afc2e85c0e886cb13b2300e961c9a9648}
+
+\end{DoxyCompactItemize}
+\subsection*{Membros públicos estáticos}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classtesting_1_1internal_1_1FloatingPoint_ac551f793522e54fbd8a25acb79eac5b1}{static Raw\-Type {\bfseries Reinterpret\-Bits} (const Bits bits)}\label{classtesting_1_1internal_1_1FloatingPoint_ac551f793522e54fbd8a25acb79eac5b1}
+
+\item 
+\hypertarget{classtesting_1_1internal_1_1FloatingPoint_a460027cc19cf01ae8e09cc3796b2b575}{static Raw\-Type {\bfseries Infinity} ()}\label{classtesting_1_1internal_1_1FloatingPoint_a460027cc19cf01ae8e09cc3796b2b575}
+
+\item 
+\hypertarget{classtesting_1_1internal_1_1FloatingPoint_aae5954d8a57d3ff0987c6930cb68e114}{static Raw\-Type {\bfseries Max} ()}\label{classtesting_1_1internal_1_1FloatingPoint_aae5954d8a57d3ff0987c6930cb68e114}
+
+\end{DoxyCompactItemize}
+\subsection*{Atributos Públicos Estáticos}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classtesting_1_1internal_1_1FloatingPoint_ab819d2e8f93e9e482373999f0f8d71b9}{static const size\-\_\-t {\bfseries k\-Bit\-Count} = 8$\ast$sizeof(Raw\-Type)}\label{classtesting_1_1internal_1_1FloatingPoint_ab819d2e8f93e9e482373999f0f8d71b9}
+
+\item 
+static const size\-\_\-t {\bfseries k\-Fraction\-Bit\-Count}
+\item 
+\hypertarget{classtesting_1_1internal_1_1FloatingPoint_a1973d843c00781053d3073daa8a40119}{static const size\-\_\-t {\bfseries k\-Exponent\-Bit\-Count} = k\-Bit\-Count -\/ 1 -\/ k\-Fraction\-Bit\-Count}\label{classtesting_1_1internal_1_1FloatingPoint_a1973d843c00781053d3073daa8a40119}
+
+\item 
+\hypertarget{classtesting_1_1internal_1_1FloatingPoint_aca98b5ea6f2222a66a82e52421682efa}{static const Bits {\bfseries k\-Sign\-Bit\-Mask} = static\-\_\-cast$<$Bits$>$(1) $<$$<$ (k\-Bit\-Count -\/ 1)}\label{classtesting_1_1internal_1_1FloatingPoint_aca98b5ea6f2222a66a82e52421682efa}
+
+\item 
+static const Bits {\bfseries k\-Fraction\-Bit\-Mask}
+\item 
+\hypertarget{classtesting_1_1internal_1_1FloatingPoint_a66065dfc4d5f41100f686159637af23b}{static const Bits {\bfseries k\-Exponent\-Bit\-Mask} = $\sim$(k\-Sign\-Bit\-Mask $\vert$ k\-Fraction\-Bit\-Mask)}\label{classtesting_1_1internal_1_1FloatingPoint_a66065dfc4d5f41100f686159637af23b}
+
+\item 
+\hypertarget{classtesting_1_1internal_1_1FloatingPoint_aac498b3714d93f8e88cdc30e4c5935f6}{static const size\-\_\-t {\bfseries k\-Max\-Ulps} = 4}\label{classtesting_1_1internal_1_1FloatingPoint_aac498b3714d93f8e88cdc30e4c5935f6}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Documentação dos dados membro}
+\hypertarget{classtesting_1_1internal_1_1FloatingPoint_a0b756a6d2a4f5f5b41ca79651c06c043}{\index{testing\-::internal\-::\-Floating\-Point@{testing\-::internal\-::\-Floating\-Point}!k\-Fraction\-Bit\-Count@{k\-Fraction\-Bit\-Count}}
+\index{k\-Fraction\-Bit\-Count@{k\-Fraction\-Bit\-Count}!testing::internal::FloatingPoint@{testing\-::internal\-::\-Floating\-Point}}
+\subsubsection[{k\-Fraction\-Bit\-Count}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Raw\-Type $>$ const size\-\_\-t {\bf testing\-::internal\-::\-Floating\-Point}$<$ Raw\-Type $>$\-::k\-Fraction\-Bit\-Count\hspace{0.3cm}{\ttfamily [static]}}}\label{classtesting_1_1internal_1_1FloatingPoint_a0b756a6d2a4f5f5b41ca79651c06c043}
+{\bfseries Valor inicial\-:}
+\begin{DoxyCode}
+=
+    std::numeric\_limits<RawType>::digits - 1
+\end{DoxyCode}
+\hypertarget{classtesting_1_1internal_1_1FloatingPoint_a0ac75d4ffd24f14bca452abe8a718da1}{\index{testing\-::internal\-::\-Floating\-Point@{testing\-::internal\-::\-Floating\-Point}!k\-Fraction\-Bit\-Mask@{k\-Fraction\-Bit\-Mask}}
+\index{k\-Fraction\-Bit\-Mask@{k\-Fraction\-Bit\-Mask}!testing::internal::FloatingPoint@{testing\-::internal\-::\-Floating\-Point}}
+\subsubsection[{k\-Fraction\-Bit\-Mask}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Raw\-Type $>$ const Bits {\bf testing\-::internal\-::\-Floating\-Point}$<$ Raw\-Type $>$\-::k\-Fraction\-Bit\-Mask\hspace{0.3cm}{\ttfamily [static]}}}\label{classtesting_1_1internal_1_1FloatingPoint_a0ac75d4ffd24f14bca452abe8a718da1}
+{\bfseries Valor inicial\-:}
+\begin{DoxyCode}
+=
+    ~static\_cast<Bits>(0) >> (kExponentBitCount + 1)
+\end{DoxyCode}
+
+
+A documentação para esta classe foi gerada a partir do seguinte ficheiro\-:\begin{DoxyCompactItemize}
+\item 
+include/gtest/internal/gtest-\/internal.\-h\end{DoxyCompactItemize}
