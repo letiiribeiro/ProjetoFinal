@@ -280,6 +280,36 @@ grafo * inserir_novo_pre_requisito(grafo* G) {
 
 }
 
+int tela_inserir_pre_requisito_edicao() {
+
+    WINDOW * janela;
+    int telaAltura, telaLargura;
+    int startx, starty, id_pre_requisito;
+
+    char msg1[] = "ID do pré-requisito: _____";
+    char msg2[] = "[ENTER]";
+
+    init_pair(1,COLOR_GREEN,COLOR_BLACK);
+
+    getmaxyx(stdscr,telaAltura,telaLargura);
+    starty = (LINES - telaAltura)/2;   
+    startx = (COLS - telaLargura)/2; 
+    refresh();
+
+    janela = newwin(ALTURA, LARGURA, startx, starty);
+
+    wborder(janela, ACS_VLINE, ACS_VLINE,ACS_HLINE,ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);      
+        
+    imprimirRotulo(janela,starty+2,startx+1,msg1);
+    imprimirRotulo(janela,starty+5,startx+20,msg2);
+
+    echo();
+    wmove(janela,starty+2,startx+23);
+    wscanw(janela,"%d",&id_pre_requisito);
+    
+    return id_pre_requisito;
+}
+
 grafo * tela_inserir_pre_requisito(grafo* G, int n_prerequisitos, int id_tarefa) {
 
     WINDOW * janela;
@@ -443,7 +473,7 @@ grafo * edicao_tarefa(grafo * G, int id) {
     WINDOW * janela;
     int telaAltura, telaLargura;
     int startx, starty;
-    int id_tarefa, tarefa_executada, duracao_tarefa, ini_min_tarefa, n_prerequisitos;
+    int id_tarefa, tarefa_executada, duracao_tarefa, ini_min_tarefa, n_prerequisitos, i;
     char nome_tarefa[100];
     char msg1[] = "Novo ID: _______";
     char msg2[] = "Novo nome:         ___________________________";
@@ -497,13 +527,14 @@ grafo * edicao_tarefa(grafo * G, int id) {
         return G;
     }
 
-    //G = editar_tarefa(G,id,id_tarefa,nome_tarefa,tarefa_executada,duracao_tarefa,ini_min_tarefa,n_prerequisitos,id_prerequisitos,FLG_NOME|FLG_INIC|FLG_PRER);
+    int * ids_pre_requisitos = (int*) malloc(100*sizeof(int));
 
-    if (n_prerequisitos != 0) {
+    for(i = 0; i < n_prerequisitos; i++) {
         destruir_menu(janela);
-        G = tela_inserir_pre_requisito(G, n_prerequisitos, id_tarefa);
-        return G;
+        ids_pre_requisitos[i] = tela_inserir_pre_requisito_edicao();
     }
+
+    G = edita_tarefa(G,id,id_tarefa,nome_tarefa,tarefa_executada,duracao_tarefa,ini_min_tarefa,n_prerequisitos,ids_pre_requisitos,FLG_NOME|FLG_INIC|FLG_PRER|FLG_EXEC|FLG_DURA|FLG_IDTR);
 
     destruir_menu(janela);
 
