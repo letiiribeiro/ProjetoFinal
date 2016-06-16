@@ -611,6 +611,95 @@ void ver_tarefas(grafo * G) {
     startx = (COLS - telaLargura)/2; 
     refresh();
 
+    janela = newwin(ALTURA+50, LARGURA+25, startx, starty);
+
+    wborder(janela, ACS_VLINE, ACS_VLINE,ACS_HLINE,ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
+
+    imprimirRotulo(janela,starty+1,startx+1,msg1);
+
+    i = 3;
+
+    for(tmp = G->T; tmp != NULL; tmp = tmp->prox) {
+        mvwprintw(janela,starty+i,startx+1,"%d",tmp->id_tarefa);
+        mvwprintw(janela,starty+i,startx+16,"%s",tmp->nome_tarefa);
+        i++;
+    }
+    
+    c = wgetch(janela);
+
+    if(c) 
+        destruir_menu(janela);
+        return;
+
+}
+
+void mostrar_pre_requisitos(grafo * G) {
+
+    WINDOW * janela;
+    int telaAltura, telaLargura;
+    int startx, starty, i, j;
+    char msg1[] = "ID             Tarefa                Pré-requisitos", c;
+    tarefa * tmp;
+    prerequisitos * tmp2;
+
+    init_pair(1,COLOR_BLUE,COLOR_BLACK);
+
+    getmaxyx(stdscr,telaAltura,telaLargura);
+    starty = (LINES - telaAltura)/2;   
+    startx = (COLS - telaLargura)/2; 
+    refresh();
+
+    janela = newwin(ALTURA+50, LARGURA+50, startx, starty);
+
+    wborder(janela, ACS_VLINE, ACS_VLINE,ACS_HLINE,ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
+
+    imprimirRotulo(janela,starty+1,startx+1,msg1);
+
+    i = 3;
+    j = 38;
+
+    for(tmp = G->T; tmp != NULL; tmp = tmp->prox) {
+        mvwprintw(janela,starty+i,startx+1,"%d",tmp->id_tarefa);
+        mvwprintw(janela,starty+i,startx+16,"%s",tmp->nome_tarefa);
+      
+        if (tmp->prerequisitos_tarefa != NULL) {
+            tmp2 = tmp->prerequisitos_tarefa;
+
+            while(tmp2 != NULL) {
+                mvwprintw(janela, starty+i, startx+j, "%d", tmp2->id_prerequisito);
+                tmp2 = tmp2->prox;
+                j = j + 5;
+            }
+        }
+
+        i++;
+    }
+    
+    c = wgetch(janela);
+
+    if(c) 
+        destruir_menu(janela);
+        return;
+
+}
+
+
+void ver_tarefas_concluidas(grafo * G) {
+
+    WINDOW * janela;
+    int telaAltura, telaLargura;
+    int startx, starty, i;
+    char msg1[] = "ID             Tarefa", c;
+    tarefa * tmp;
+    //int* tarefas_completadas;
+
+    init_pair(1,COLOR_BLUE,COLOR_BLACK);
+
+    getmaxyx(stdscr,telaAltura,telaLargura);
+    starty = (LINES - telaAltura)/2;   
+    startx = (COLS - telaLargura)/2; 
+    refresh();
+
     janela = newwin(ALTURA+35, LARGURA+25, startx, starty);
 
     wborder(janela, ACS_VLINE, ACS_VLINE,ACS_HLINE,ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
@@ -632,6 +721,7 @@ void ver_tarefas(grafo * G) {
         return;
 
 }
+
 
 grafo * remover_pre_requisitos(grafo* G) {
 
@@ -719,14 +809,14 @@ void visualizador_tarefas(grafo * G) {
 
                 } else if (opcao == 2) {
                     destruir_menu(menu_win);
-                    //G = inserir_novo_pre_requisito(G);
+                    mostrar_pre_requisitos(G);
                     menu_win = newwin(ALTURA, LARGURA_V, startx, starty);
                     keypad(menu_win,TRUE);
                     refresh(); 
 
                 } else if (opcao == 3) {
                     destruir_menu(menu_win);
-                    //G = remover_tarefa(G);
+                    ver_tarefas_concluidas(G);
                     menu_win = newwin(ALTURA, LARGURA_V, startx, starty);
                     keypad(menu_win,TRUE);
                     refresh();
