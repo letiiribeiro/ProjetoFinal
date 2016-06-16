@@ -24,6 +24,9 @@ grafo* insere_tarefa(grafo* G, int id_tarefa, char* nome_tarefa, int tarefa_exec
         exit(1);
     }
 
+    if(id_tarefa < 0)
+        return G;
+    
     t->id_tarefa = id_tarefa;
     strcpy(t->nome_tarefa, nome_tarefa);
     t->tarefa_executada = tarefa_executada;
@@ -45,7 +48,6 @@ grafo* insere_tarefa(grafo* G, int id_tarefa, char* nome_tarefa, int tarefa_exec
 
     return G;
 }
-
 
 grafo* edita_tarefa(grafo* G, int id_tarefa, int novo_id_tarefa, char* nome_tarefa, int
 tarefa_executada, int duracao_tarefa, int inicio_min_tarefa, int
@@ -467,18 +469,18 @@ int verifica_consistencia(grafo* G){
         tarefa* tmp2;
         for(tmp2=tmp->prox;tmp2!=NULL;tmp2=tmp2->prox){
             if(tmp->id_tarefa == tmp2-> id_tarefa){
-                printf("Inconsistencia encontrada. Possui duas tarefas com o mesmo id: %d.\n", tmp->id_tarefa);
-                return 0;
-            }
+                return tmp->id_tarefa;
+            } else 
+                return -1;
         }
         prerequisitos* e;
         for(e=tmp->prerequisitos_tarefa;e!=NULL;e=e->prox){
             prerequisitos* e2;
             for(e2=e->prox;e2!=NULL;e2=e2->prox){
                 if(e->id_prerequisito == e2->id_prerequisito){
-                    printf("Inconsistencia encontrada. A tarefa de id %d possui dois pre requisitos com o mesmo id: %d.\n", tmp->id_tarefa, e->id_prerequisito);
-                    return 0;
-                }
+                    return tmp->prerequisitos_tarefa->id_prerequisito;
+                } else 
+                    return -1;
             }
         }
     }
