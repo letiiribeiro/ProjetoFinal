@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['hasnewfatalfailurehelper',['HasNewFatalFailureHelper',['../classtesting_1_1internal_1_1HasNewFatalFailureHelper.html',1,'testing::internal']]]
+  ['unittestimpl',['UnitTestImpl',['../classtesting_1_1internal_1_1UnitTestImpl.html',1,'testing::internal']]],
+  ['unittestoptions',['UnitTestOptions',['../classtesting_1_1internal_1_1UnitTestOptions.html',1,'testing::internal']]]
 ];

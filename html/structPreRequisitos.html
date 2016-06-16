@@ -61,7 +61,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Lista&#160;de&#160;componentes</span></a></li>
       <li><a href="classes.html"><span>Índice&#160;dos&#160;componentes</span></a></li>
-      <li><a href="hierarchy.html"><span>Hierarquia&#160;de&#160;classes</span></a></li>
+      <li><a href="functions.html"><span>Componentes&#160;membro</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -69,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tudo</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tudo</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Ficheiros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funções</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variáveis</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Definições de tipos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -87,23 +87,48 @@ var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
 <div class="title">Referência à estrutura PreRequisitos</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="grafo_8h_source.html">grafo.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Atributos Públicos</h2></td></tr>
-<tr class="memitem:aac895640418edfa91ba7c8f01b91459e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aac895640418edfa91ba7c8f01b91459e"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>id_prerequisito</b></td></tr>
+<tr class="memitem:aac895640418edfa91ba7c8f01b91459e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPreRequisitos.html#aac895640418edfa91ba7c8f01b91459e">id_prerequisito</a></td></tr>
 <tr class="separator:aac895640418edfa91ba7c8f01b91459e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad30378886dd7fba5247ad1c77fb395f1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad30378886dd7fba5247ad1c77fb395f1"></a>
-struct <a class="el" href="structPreRequisitos.html">PreRequisitos</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>prox</b></td></tr>
+<tr class="memitem:ad30378886dd7fba5247ad1c77fb395f1"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structPreRequisitos.html">PreRequisitos</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPreRequisitos.html#ad30378886dd7fba5247ad1c77fb395f1">prox</a></td></tr>
 <tr class="separator:ad30378886dd7fba5247ad1c77fb395f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Documentação dos dados membro</h2>
+<a class="anchor" id="aac895640418edfa91ba7c8f01b91459e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int PreRequisitos::id_prerequisito</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad30378886dd7fba5247ad1c77fb395f1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structPreRequisitos.html">PreRequisitos</a>* PreRequisitos::prox</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>A documentação para esta estrutura foi gerada a partir do seguinte ficheiro:<ul>
-<li>code/<a class="el" href="code_2grafo_8h_source.html">grafo.h</a></li>
+<li>code/<a class="el" href="grafo_8h_source.html">grafo.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Gerado em Quarta, 15 de Junho de 2016 17:35:17 para Projeto Final MP por &#160;<a href="http://www.doxygen.org/index.html">
+Gerado em Quinta, 16 de Junho de 2016 18:01:50 para Projeto Final MP por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

@@ -43,27 +43,331 @@ typedef struct Grafo {
     tarefa *T;
 } grafo;
 
+/*******************************************************************************//**
+*	Função: retornar Grafo sem tarefas e pre requisitos.
+*
+*	Descrição:
+*
+*
+*
+*	Parâmetros:
+*
+*
+*	Valor Retornado
+*	
+*	AssertivaEntrada
+*		
+*	AssertivaSaida
+*
+*
+***********************************************************************************/
 grafo* cria_grafo();
+/*******************************************************************************//**
+*	Função: retornar Grafo sem tarefas e pre requisitos.
+*
+*	Descrição:
+*
+*
+*
+*	Parâmetros:
+*
+*
+*	Valor Retornado
+*	
+*	AssertivaEntrada
+*		
+*	AssertivaSaida
+*
+*
+***********************************************************************************/
 grafo* insere_tarefa(grafo* G, int id_tarefa, char* nome_tarefa, int tarefa_executada, int
 duracao_tarefa, int inicio_min_tarefa, int n_prerequisitos);
+/*******************************************************************************//**
+*	Função: retornar Grafo sem tarefas e pre requisitos.
+*
+*	Descrição:
+*
+*
+*
+*	Parâmetros:
+*
+*
+*	Valor Retornado
+*	
+*	AssertivaEntrada
+*		
+*	AssertivaSaida
+*
+*
+***********************************************************************************/
 grafo* edita_tarefa(grafo* G, int id_tarefa, int novo_id_tarefa, char* nome_tarefa, int
 tarefa_executada, int duracao_tarefa, int inicio_min_tarefa, int
 n_prerequisitos,int* id_prerequisitos, int flag);
+/*******************************************************************************//**
+*	Função: retornar Grafo sem tarefas e pre requisitos.
+*
+*	Descrição:
+*
+*
+*
+*	Parâmetros:
+*
+*
+*	Valor Retornado
+*	
+*	AssertivaEntrada
+*		
+*	AssertivaSaida
+*
+*
+***********************************************************************************/
 grafo* insere_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito);
+/*******************************************************************************//**
+*	Função: retornar Grafo sem tarefas e pre requisitos.
+*
+*	Descrição:
+*
+*
+*
+*	Parâmetros:
+*
+*
+*	Valor Retornado
+*	
+*	AssertivaEntrada
+*		
+*	AssertivaSaida
+*
+*
+***********************************************************************************/
 grafo* remove_tarefa(grafo* G, int id_tarefa);
+/*******************************************************************************//**
+*	Função: retornar Grafo sem tarefas e pre requisitos.
+*
+*	Descrição:
+*
+*
+*
+*	Parâmetros:
+*
+*
+*	Valor Retornado
+*	
+*	AssertivaEntrada
+*		
+*	AssertivaSaida
+*
+*
+***********************************************************************************/
 grafo* remove_prerequisitos(grafo* G, int id_tarefa);
-int peso_caminho(grafo* G, char* vorig, char* vdest);
-int grafo_conexo(grafo* G);
+/*******************************************************************************//**
+*	Função: retornar Grafo sem tarefas e pre requisitos.
+*
+*	Descrição:
+*
+*
+*
+*	Parâmetros:
+*
+*
+*	Valor Retornado
+*	
+*	AssertivaEntrada
+*		
+*	AssertivaSaida
+*
+*
+***********************************************************************************/
 grafo* le_grafo(FILE* fp);
+/*******************************************************************************//**
+*	Função: retornar Grafo sem tarefas e pre requisitos.
+*
+*	Descrição:
+*
+*
+*
+*	Parâmetros:
+*
+*
+*	Valor Retornado
+*	
+*	AssertivaEntrada
+*		
+*	AssertivaSaida
+*
+*
+***********************************************************************************/
 void libera_grafo(grafo* G);
+/*******************************************************************************//**
+*	Função: retornar Grafo sem tarefas e pre requisitos.
+*
+*	Descrição:
+*
+*
+*
+*	Parâmetros:
+*
+*
+*	Valor Retornado
+*	
+*	AssertivaEntrada
+*		
+*	AssertivaSaida
+*
+*
+***********************************************************************************/
 void imprime_grafo(grafo* G, char* nome_arq);
+/*******************************************************************************//**
+*	Função: retornar Grafo sem tarefas e pre requisitos.
+*
+*	Descrição:
+*
+*
+*
+*	Parâmetros:
+*
+*
+*	Valor Retornado
+*	
+*	AssertivaEntrada
+*		
+*	AssertivaSaida
+*
+*
+***********************************************************************************/
 int verifica_consistencia(grafo* G);
+/*******************************************************************************//**
+*	Função: retornar Grafo sem tarefas e pre requisitos.
+*
+*	Descrição:
+*
+*
+*
+*	Parâmetros:
+*
+*
+*	Valor Retornado
+*	
+*	AssertivaEntrada
+*		
+*	AssertivaSaida
+*
+*
+***********************************************************************************/
 int pesquisa_tarefa(grafo* G, int id_tarefa);
+/*******************************************************************************//**
+*	Função: retornar Grafo sem tarefas e pre requisitos.
+*
+*	Descrição:
+*
+*
+*
+*	Parâmetros:
+*
+*
+*	Valor Retornado
+*	
+*	AssertivaEntrada
+*		
+*	AssertivaSaida
+*
+*
+***********************************************************************************/
 int pesquisa_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito);
+/*******************************************************************************//**
+*	Função: retornar Grafo sem tarefas e pre requisitos.
+*
+*	Descrição:
+*
+*
+*
+*	Parâmetros:
+*
+*
+*	Valor Retornado
+*	
+*	AssertivaEntrada
+*		
+*	AssertivaSaida
+*
+*
+***********************************************************************************/
 tarefa* procura_tarefa(grafo* G, int id_tarefa);
+/*******************************************************************************//**
+*	Função: retornar Grafo sem tarefas e pre requisitos.
+*
+*	Descrição:
+*
+*
+*
+*	Parâmetros:
+*
+*
+*	Valor Retornado
+*	
+*	AssertivaEntrada
+*		
+*	AssertivaSaida
+*
+*
+***********************************************************************************/
 int tempo_minimo(grafo* G, int id_tarefa);
+/*******************************************************************************//**
+*	Função: retornar Grafo sem tarefas e pre requisitos.
+*
+*	Descrição:
+*
+*
+*
+*	Parâmetros:
+*
+*
+*	Valor Retornado
+*	
+*	AssertivaEntrada
+*		
+*	AssertivaSaida
+*
+*
+***********************************************************************************/
 int tempo_minimo_total(grafo* G);
+/*******************************************************************************//**
+*	Função: retornar Grafo sem tarefas e pre requisitos.
+*
+*	Descrição:
+*
+*
+*
+*	Parâmetros:
+*
+*
+*	Valor Retornado
+*	
+*	AssertivaEntrada
+*		
+*	AssertivaSaida
+*
+*
+***********************************************************************************/
 int* caminhos(grafo* G);
+/*******************************************************************************//**
+*	Função: retornar Grafo sem tarefas e pre requisitos.
+*
+*	Descrição:
+*
+*
+*
+*	Parâmetros:
+*
+*
+*	Valor Retornado
+*	
+*	AssertivaEntrada
+*		
+*	AssertivaSaida
+*
+*
+***********************************************************************************/
 int* tarefas_concluidas(grafo* G, int periodo);
 
 #endif

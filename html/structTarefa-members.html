@@ -61,7 +61,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Lista&#160;de&#160;componentes</span></a></li>
       <li><a href="classes.html"><span>Índice&#160;dos&#160;componentes</span></a></li>
-      <li><a href="hierarchy.html"><span>Hierarquia&#160;de&#160;classes</span></a></li>
+      <li><a href="functions.html"><span>Componentes&#160;membro</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -69,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tudo</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tudo</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Ficheiros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funções</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variáveis</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Definições de tipos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -87,20 +87,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
 
 <p>Lista completa de todos os membros de <a class="el" href="structTarefa.html">Tarefa</a>, incluindo todos os membros herdados.</p>
 <table class="directory">
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>duracao_tarefa</b> (definido em <a class="el" href="structTarefa.html">Tarefa</a>)</td><td class="entry"><a class="el" href="structTarefa.html">Tarefa</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>id_tarefa</b> (definido em <a class="el" href="structTarefa.html">Tarefa</a>)</td><td class="entry"><a class="el" href="structTarefa.html">Tarefa</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>inicio_min_tarefa</b> (definido em <a class="el" href="structTarefa.html">Tarefa</a>)</td><td class="entry"><a class="el" href="structTarefa.html">Tarefa</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>n_prerequisitos</b> (definido em <a class="el" href="structTarefa.html">Tarefa</a>)</td><td class="entry"><a class="el" href="structTarefa.html">Tarefa</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>nome_tarefa</b> (definido em <a class="el" href="structTarefa.html">Tarefa</a>)</td><td class="entry"><a class="el" href="structTarefa.html">Tarefa</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>prerequisitos_tarefa</b> (definido em <a class="el" href="structTarefa.html">Tarefa</a>)</td><td class="entry"><a class="el" href="structTarefa.html">Tarefa</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>prox</b> (definido em <a class="el" href="structTarefa.html">Tarefa</a>)</td><td class="entry"><a class="el" href="structTarefa.html">Tarefa</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>tarefa_executada</b> (definido em <a class="el" href="structTarefa.html">Tarefa</a>)</td><td class="entry"><a class="el" href="structTarefa.html">Tarefa</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>tempo_inic</b> (definido em <a class="el" href="structTarefa.html">Tarefa</a>)</td><td class="entry"><a class="el" href="structTarefa.html">Tarefa</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>tempo_min</b> (definido em <a class="el" href="structTarefa.html">Tarefa</a>)</td><td class="entry"><a class="el" href="structTarefa.html">Tarefa</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structTarefa.html#a7962bef326f487f4ffa7dc0f04153729">duracao_tarefa</a></td><td class="entry"><a class="el" href="structTarefa.html">Tarefa</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structTarefa.html#a1509b75b75f758e2d0502df4162366f2">id_tarefa</a></td><td class="entry"><a class="el" href="structTarefa.html">Tarefa</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structTarefa.html#a7d09c30d0162c55a0aab1ad71716fae6">inicio_min_tarefa</a></td><td class="entry"><a class="el" href="structTarefa.html">Tarefa</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structTarefa.html#a9f6369cef91f4b9d544d9e1be0bc705f">n_prerequisitos</a></td><td class="entry"><a class="el" href="structTarefa.html">Tarefa</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structTarefa.html#a43c0db59f4e6a3031ef2a5951ad8910f">nome_tarefa</a></td><td class="entry"><a class="el" href="structTarefa.html">Tarefa</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structTarefa.html#abdbaac144f089e939832a4d6cbf0759a">prerequisitos_tarefa</a></td><td class="entry"><a class="el" href="structTarefa.html">Tarefa</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structTarefa.html#a1b0bbf147698174596c486d12afa254e">prox</a></td><td class="entry"><a class="el" href="structTarefa.html">Tarefa</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structTarefa.html#a86ef331b855e3f91eec492a00171cc9c">tarefa_executada</a></td><td class="entry"><a class="el" href="structTarefa.html">Tarefa</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structTarefa.html#a202a3c8fbee0bf74488fa057587f13df">tempo_inic</a></td><td class="entry"><a class="el" href="structTarefa.html">Tarefa</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structTarefa.html#a4fd1b4c3fd98a3fb754116f6cc80c906">tempo_min</a></td><td class="entry"><a class="el" href="structTarefa.html">Tarefa</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Gerado em Quarta, 15 de Junho de 2016 17:35:17 para Projeto Final MP por &#160;<a href="http://www.doxygen.org/index.html">
+Gerado em Quinta, 16 de Junho de 2016 18:01:50 para Projeto Final MP por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

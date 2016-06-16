@@ -61,7 +61,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Lista&#160;de&#160;componentes</span></a></li>
       <li><a href="classes.html"><span>Índice&#160;dos&#160;componentes</span></a></li>
-      <li><a href="hierarchy.html"><span>Hierarquia&#160;de&#160;classes</span></a></li>
+      <li><a href="functions.html"><span>Componentes&#160;membro</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -69,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tudo</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tudo</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Ficheiros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funções</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variáveis</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Definições de tipos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -87,47 +87,160 @@ var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
 <div class="title">Referência à estrutura Tarefa</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="grafo_8h_source.html">grafo.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Atributos Públicos</h2></td></tr>
-<tr class="memitem:a1509b75b75f758e2d0502df4162366f2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1509b75b75f758e2d0502df4162366f2"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>id_tarefa</b></td></tr>
+<tr class="memitem:a1509b75b75f758e2d0502df4162366f2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structTarefa.html#a1509b75b75f758e2d0502df4162366f2">id_tarefa</a></td></tr>
 <tr class="separator:a1509b75b75f758e2d0502df4162366f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43c0db59f4e6a3031ef2a5951ad8910f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a43c0db59f4e6a3031ef2a5951ad8910f"></a>
-char&#160;</td><td class="memItemRight" valign="bottom"><b>nome_tarefa</b> [TAM_STRING]</td></tr>
+<tr class="memitem:a43c0db59f4e6a3031ef2a5951ad8910f"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structTarefa.html#a43c0db59f4e6a3031ef2a5951ad8910f">nome_tarefa</a> [<a class="el" href="grafo_8h.html#a5d28dfdab86222715d699097e8cd092f">TAM_STRING</a>]</td></tr>
 <tr class="separator:a43c0db59f4e6a3031ef2a5951ad8910f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a86ef331b855e3f91eec492a00171cc9c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a86ef331b855e3f91eec492a00171cc9c"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>tarefa_executada</b></td></tr>
+<tr class="memitem:a86ef331b855e3f91eec492a00171cc9c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structTarefa.html#a86ef331b855e3f91eec492a00171cc9c">tarefa_executada</a></td></tr>
 <tr class="separator:a86ef331b855e3f91eec492a00171cc9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7962bef326f487f4ffa7dc0f04153729"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7962bef326f487f4ffa7dc0f04153729"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>duracao_tarefa</b></td></tr>
+<tr class="memitem:a7962bef326f487f4ffa7dc0f04153729"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structTarefa.html#a7962bef326f487f4ffa7dc0f04153729">duracao_tarefa</a></td></tr>
 <tr class="separator:a7962bef326f487f4ffa7dc0f04153729"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d09c30d0162c55a0aab1ad71716fae6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7d09c30d0162c55a0aab1ad71716fae6"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>inicio_min_tarefa</b></td></tr>
+<tr class="memitem:a7d09c30d0162c55a0aab1ad71716fae6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structTarefa.html#a7d09c30d0162c55a0aab1ad71716fae6">inicio_min_tarefa</a></td></tr>
 <tr class="separator:a7d09c30d0162c55a0aab1ad71716fae6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9f6369cef91f4b9d544d9e1be0bc705f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9f6369cef91f4b9d544d9e1be0bc705f"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>n_prerequisitos</b></td></tr>
+<tr class="memitem:a9f6369cef91f4b9d544d9e1be0bc705f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structTarefa.html#a9f6369cef91f4b9d544d9e1be0bc705f">n_prerequisitos</a></td></tr>
 <tr class="separator:a9f6369cef91f4b9d544d9e1be0bc705f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b0bbf147698174596c486d12afa254e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1b0bbf147698174596c486d12afa254e"></a>
-struct <a class="el" href="structTarefa.html">Tarefa</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>prox</b></td></tr>
+<tr class="memitem:a1b0bbf147698174596c486d12afa254e"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structTarefa.html">Tarefa</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structTarefa.html#a1b0bbf147698174596c486d12afa254e">prox</a></td></tr>
 <tr class="separator:a1b0bbf147698174596c486d12afa254e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abdbaac144f089e939832a4d6cbf0759a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abdbaac144f089e939832a4d6cbf0759a"></a>
-<a class="el" href="structPreRequisitos.html">prerequisitos</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>prerequisitos_tarefa</b></td></tr>
+<tr class="memitem:abdbaac144f089e939832a4d6cbf0759a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="grafo_8h.html#a8d260ebf15bfe9b5f9366d2245289e15">prerequisitos</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structTarefa.html#abdbaac144f089e939832a4d6cbf0759a">prerequisitos_tarefa</a></td></tr>
 <tr class="separator:abdbaac144f089e939832a4d6cbf0759a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4fd1b4c3fd98a3fb754116f6cc80c906"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4fd1b4c3fd98a3fb754116f6cc80c906"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>tempo_min</b></td></tr>
+<tr class="memitem:a4fd1b4c3fd98a3fb754116f6cc80c906"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structTarefa.html#a4fd1b4c3fd98a3fb754116f6cc80c906">tempo_min</a></td></tr>
 <tr class="separator:a4fd1b4c3fd98a3fb754116f6cc80c906"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a202a3c8fbee0bf74488fa057587f13df"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a202a3c8fbee0bf74488fa057587f13df"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>tempo_inic</b></td></tr>
+<tr class="memitem:a202a3c8fbee0bf74488fa057587f13df"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structTarefa.html#a202a3c8fbee0bf74488fa057587f13df">tempo_inic</a></td></tr>
 <tr class="separator:a202a3c8fbee0bf74488fa057587f13df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Documentação dos dados membro</h2>
+<a class="anchor" id="a7962bef326f487f4ffa7dc0f04153729"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Tarefa::duracao_tarefa</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1509b75b75f758e2d0502df4162366f2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Tarefa::id_tarefa</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7d09c30d0162c55a0aab1ad71716fae6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Tarefa::inicio_min_tarefa</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a9f6369cef91f4b9d544d9e1be0bc705f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Tarefa::n_prerequisitos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a43c0db59f4e6a3031ef2a5951ad8910f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char Tarefa::nome_tarefa[<a class="el" href="grafo_8h.html#a5d28dfdab86222715d699097e8cd092f">TAM_STRING</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="abdbaac144f089e939832a4d6cbf0759a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="grafo_8h.html#a8d260ebf15bfe9b5f9366d2245289e15">prerequisitos</a>* Tarefa::prerequisitos_tarefa</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1b0bbf147698174596c486d12afa254e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structTarefa.html">Tarefa</a>* Tarefa::prox</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a86ef331b855e3f91eec492a00171cc9c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Tarefa::tarefa_executada</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a202a3c8fbee0bf74488fa057587f13df"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Tarefa::tempo_inic</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4fd1b4c3fd98a3fb754116f6cc80c906"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Tarefa::tempo_min</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>A documentação para esta estrutura foi gerada a partir do seguinte ficheiro:<ul>
-<li>code/<a class="el" href="code_2grafo_8h_source.html">grafo.h</a></li>
+<li>code/<a class="el" href="grafo_8h_source.html">grafo.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Gerado em Quarta, 15 de Junho de 2016 17:35:17 para Projeto Final MP por &#160;<a href="http://www.doxygen.org/index.html">
+Gerado em Quinta, 16 de Junho de 2016 18:01:50 para Projeto Final MP por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

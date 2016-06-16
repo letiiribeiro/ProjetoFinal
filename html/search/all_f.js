@@ -1,17 +1,10 @@
 var searchData=
 [
-  ['samesizetupleprefixcomparator',['SameSizeTuplePrefixComparator',['../structstd_1_1tr1_1_1gtest__internal_1_1SameSizeTuplePrefixComparator.html',1,'std::tr1::gtest_internal']]],
-  ['samesizetupleprefixcomparator_3c_200_2c_200_20_3e',['SameSizeTuplePrefixComparator&lt; 0, 0 &gt;',['../structstd_1_1tr1_1_1gtest__internal_1_1SameSizeTuplePrefixComparator_3_010_00_010_01_4.html',1,'std::tr1::gtest_internal']]],
-  ['samesizetupleprefixcomparator_3c_20k_2c_20k_20_3e',['SameSizeTuplePrefixComparator&lt; k, k &gt;',['../structstd_1_1tr1_1_1gtest__internal_1_1SameSizeTuplePrefixComparator_3_01k_00_01k_01_4.html',1,'std::tr1::gtest_internal']]],
-  ['scoped_5fptr',['scoped_ptr',['../classtesting_1_1internal_1_1scoped__ptr.html',1,'testing::internal']]],
-  ['scoped_5fptr_3c_20_3a_3astd_3a_3astring_20_3e',['scoped_ptr&lt; ::std::string &gt;',['../classtesting_1_1internal_1_1scoped__ptr.html',1,'testing::internal']]],
-  ['scoped_5fptr_3c_20_3a_3astd_3a_3astringstream_20_3e',['scoped_ptr&lt; ::std::stringstream &gt;',['../classtesting_1_1internal_1_1scoped__ptr.html',1,'testing::internal']]],
-  ['scoped_5fptr_3c_20const_20_3a_3astd_3a_3astring_20_3e',['scoped_ptr&lt; const ::std::string &gt;',['../classtesting_1_1internal_1_1scoped__ptr.html',1,'testing::internal']]],
-  ['scopedfaketestpartresultreporter',['ScopedFakeTestPartResultReporter',['../classtesting_1_1ScopedFakeTestPartResultReporter.html',1,'testing']]],
-  ['scopedprematureexitfile',['ScopedPrematureExitFile',['../classtesting_1_1internal_1_1ScopedPrematureExitFile.html',1,'testing::internal']]],
-  ['scopedtrace',['ScopedTrace',['../classtesting_1_1internal_1_1ScopedTrace.html',1,'testing::internal']]],
-  ['singlefailurechecker',['SingleFailureChecker',['../classtesting_1_1internal_1_1SingleFailureChecker.html',1,'testing::internal']]],
-  ['staticasserttypeeqhelper',['StaticAssertTypeEqHelper',['../structtesting_1_1internal_1_1StaticAssertTypeEqHelper.html',1,'testing::internal']]],
-  ['staticasserttypeeqhelper_3c_20t_2c_20t_20_3e',['StaticAssertTypeEqHelper&lt; T, T &gt;',['../structtesting_1_1internal_1_1StaticAssertTypeEqHelper_3_01T_00_01T_01_4.html',1,'testing::internal']]],
-  ['string',['String',['../classtesting_1_1internal_1_1String.html',1,'testing::internal']]]
+  ['ver_5ftarefas',['ver_tarefas',['../main_8cc.html#aa0ac4a2d1125c89ec5acc37dfde748c6',1,'main.cc']]],
+  ['verifica_5fconsistencia',['verifica_consistencia',['../grafo_8cc.html#ad44b772951e7f095b7ad67dbddbc5404',1,'verifica_consistencia(grafo *G):&#160;grafo.cc'],['../grafo_8h.html#ad44b772951e7f095b7ad67dbddbc5404',1,'verifica_consistencia(grafo *G):&#160;grafo.cc']]],
+  ['vetor',['vetor',['../structvetor.html',1,'']]],
+  ['visualizador_5ftarefas',['visualizador_tarefas',['../main_8cc.html#a5d247f6e8ee275a8cd007f922ae2acb3',1,'main.cc']]],
+  ['vopcoes',['vOpcoes',['../main_8cc.html#a7e3eb983c89b73fc26206eb49d9e53f6',1,'main.cc']]],
+  ['voperacoes',['vOperacoes',['../main_8cc.html#a282382d81ff49bb355edf4b0e0c33ab5',1,'main.cc']]],
+  ['vvisualizador',['vVisualizador',['../main_8cc.html#ac830448011ecd7178e23030edbff0311',1,'main.cc']]]
 ];

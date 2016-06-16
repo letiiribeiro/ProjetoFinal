@@ -1,0 +1,283 @@
+\hypertarget{main_8cc}{\section{Referência ao ficheiro code/main.cc}
+\label{main_8cc}\index{code/main.\-cc@{code/main.\-cc}}
+}
+{\ttfamily \#include $<$ncurses.\-h$>$}\\*
+{\ttfamily \#include $<$stdlib.\-h$>$}\\*
+{\ttfamily \#include $<$stdio.\-h$>$}\\*
+{\ttfamily \#include $<$string.\-h$>$}\\*
+{\ttfamily \#include \char`\"{}grafo.\-h\char`\"{}}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{main_8cc_a39993a19ea179e022fb3346fdc794808}{L\-A\-R\-G\-U\-R\-A}~50
+\item 
+\#define \hyperlink{main_8cc_a0ca6912086aeaf9fbab770dcb97ea5c8}{A\-L\-T\-U\-R\-A}~10
+\end{DoxyCompactItemize}
+\subsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{main_8cc_a810164b29b6ded682dff19d56ec8e4b0}{print\-\_\-menu} (W\-I\-N\-D\-O\-W $\ast$menu\-\_\-win, int highlight)
+\item 
+void \hyperlink{main_8cc_a8b39b6c1f4d3623c384e80826e5b633e}{print\-\_\-operacoes} (W\-I\-N\-D\-O\-W $\ast$menu\-\_\-win, int highlight)
+\item 
+void \hyperlink{main_8cc_a4611d53166aabe6d0fb24bcfd407bd53}{print\-\_\-visualizador} (W\-I\-N\-D\-O\-W $\ast$menu\-\_\-win, int highlight)
+\item 
+void \hyperlink{main_8cc_ad2a06ffdf1033b3b1c11f337fa12553b}{imprimir\-Rotulo} (W\-I\-N\-D\-O\-W $\ast$tmp\-Janela, int y, int x, char $\ast$s\-Rotulo)
+\item 
+void \hyperlink{main_8cc_abe7109d6b800c7cd9f5c2097bc8df894}{destruir\-\_\-menu} (W\-I\-N\-D\-O\-W $\ast$menu\-\_\-win)
+\item 
+char $\ast$ \hyperlink{main_8cc_af680447ac3023912e86df70f144373d8}{importar\-\_\-de\-\_\-arquivo} (char $\ast$nome\-Arquivo)
+\item 
+void \hyperlink{main_8cc_aef0e5ebaf10f94ec3baf710468b2bca8}{erro\-\_\-insere\-\_\-pre\-\_\-requisito} ()
+\item 
+void \hyperlink{main_8cc_acec6efd5f1ee225764d814040f142268}{erro\-\_\-id\-\_\-existente} ()
+\item 
+void \hyperlink{main_8cc_a8e3083a90f6cf70bdfd6abd70494c74e}{erro\-\_\-id\-\_\-inexistente} ()
+\item 
+\hyperlink{grafo_8h_abfb99265d91141543f92efaec783231d}{grafo} $\ast$ \hyperlink{main_8cc_a16c89e840263b1af21caf3211b6640b2}{inserir\-\_\-novo\-\_\-pre\-\_\-requisito} (\hyperlink{grafo_8h_abfb99265d91141543f92efaec783231d}{grafo} $\ast$G)
+\item 
+\hyperlink{grafo_8h_abfb99265d91141543f92efaec783231d}{grafo} $\ast$ \hyperlink{main_8cc_a5c0ceb9634231b92e0dfc9db33b727fa}{tela\-\_\-inserir\-\_\-pre\-\_\-requisito} (\hyperlink{grafo_8h_abfb99265d91141543f92efaec783231d}{grafo} $\ast$G, int n\-\_\-prerequisitos, int id\-\_\-tarefa)
+\item 
+\hyperlink{grafo_8h_abfb99265d91141543f92efaec783231d}{grafo} $\ast$ \hyperlink{main_8cc_adb3b0c3b009c68f86673eb7bdeef601c}{inserir\-\_\-tarefa} (\hyperlink{grafo_8h_abfb99265d91141543f92efaec783231d}{grafo} $\ast$G)
+\item 
+void \hyperlink{main_8cc_abc30d77428eefe83c569f49b7e48a7f8}{imprimir\-\_\-em\-\_\-arquivo} (\hyperlink{grafo_8h_abfb99265d91141543f92efaec783231d}{grafo} $\ast$G)
+\item 
+\hyperlink{grafo_8h_abfb99265d91141543f92efaec783231d}{grafo} $\ast$ \hyperlink{main_8cc_a8d8002aa0f76981dad9ce30329767981}{edicao\-\_\-tarefa} (\hyperlink{grafo_8h_abfb99265d91141543f92efaec783231d}{grafo} $\ast$G, int id)
+\item 
+\hyperlink{grafo_8h_abfb99265d91141543f92efaec783231d}{grafo} $\ast$ \hyperlink{main_8cc_a7769e05575359d89d7467b1e46940ecf}{editar\-\_\-tarefa} (\hyperlink{grafo_8h_abfb99265d91141543f92efaec783231d}{grafo} $\ast$G)
+\item 
+\hyperlink{grafo_8h_abfb99265d91141543f92efaec783231d}{grafo} $\ast$ \hyperlink{main_8cc_ab5f698491708904442d9d4f8583cd809}{remover\-\_\-tarefa} (\hyperlink{grafo_8h_abfb99265d91141543f92efaec783231d}{grafo} $\ast$G)
+\item 
+void \hyperlink{main_8cc_aa0ac4a2d1125c89ec5acc37dfde748c6}{ver\-\_\-tarefas} (\hyperlink{grafo_8h_abfb99265d91141543f92efaec783231d}{grafo} $\ast$G)
+\item 
+\hyperlink{grafo_8h_abfb99265d91141543f92efaec783231d}{grafo} $\ast$ \hyperlink{main_8cc_ae96b9adf5e390d1a516e3fe5164714cc}{remover\-\_\-pre\-\_\-requisitos} (\hyperlink{grafo_8h_abfb99265d91141543f92efaec783231d}{grafo} $\ast$G)
+\item 
+void \hyperlink{main_8cc_a5d247f6e8ee275a8cd007f922ae2acb3}{visualizador\-\_\-tarefas} (\hyperlink{grafo_8h_abfb99265d91141543f92efaec783231d}{grafo} $\ast$G)
+\item 
+\hyperlink{grafo_8h_abfb99265d91141543f92efaec783231d}{grafo} $\ast$ \hyperlink{main_8cc_af852bc15cf3d5217386a9bb0bf3b9abd}{operacoes\-\_\-grafo} (\hyperlink{grafo_8h_abfb99265d91141543f92efaec783231d}{grafo} $\ast$G)
+\item 
+\hyperlink{grafo_8h_abfb99265d91141543f92efaec783231d}{grafo} $\ast$ \hyperlink{main_8cc_af1ccf694bcf905341f10b534e5a272fa}{abrir\-\_\-arquivo} (char $\ast$nome\-Arquivo)
+\item 
+int \hyperlink{main_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
+\end{DoxyCompactItemize}
+\subsection*{Variáveis}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{main_8cc_a8f0744c55ee97ebf34757f8499a66139}{startx} = 0
+\item 
+int \hyperlink{main_8cc_a19e264821cbd530471c1cf985d7cd239}{starty} = 0
+\item 
+char \hyperlink{main_8cc_a7e3eb983c89b73fc26206eb49d9e53f6}{v\-Opcoes} \mbox{[}3\mbox{]}\mbox{[}70\mbox{]}
+\item 
+char \hyperlink{main_8cc_a282382d81ff49bb355edf4b0e0c33ab5}{v\-Operacoes} \mbox{[}8\mbox{]}\mbox{[}70\mbox{]}
+\item 
+char \hyperlink{main_8cc_ac830448011ecd7178e23030edbff0311}{v\-Visualizador} \mbox{[}6\mbox{]}\mbox{[}70\mbox{]}
+\item 
+int \hyperlink{main_8cc_a24167c503992e21d9d3b767742346d4b}{n\-\_\-opcoes} = 3
+\item 
+int \hyperlink{main_8cc_a4e96567620b8107a3844f6a3b5860c74}{n\-\_\-operacoes} = 8
+\item 
+int \hyperlink{main_8cc_a44042648455eb7c48a35466047cd5911}{n\-\_\-visualizador} = 6
+\end{DoxyCompactItemize}
+
+
+\subsection{Documentação das macros}
+\hypertarget{main_8cc_a0ca6912086aeaf9fbab770dcb97ea5c8}{\index{main.\-cc@{main.\-cc}!A\-L\-T\-U\-R\-A@{A\-L\-T\-U\-R\-A}}
+\index{A\-L\-T\-U\-R\-A@{A\-L\-T\-U\-R\-A}!main.cc@{main.\-cc}}
+\subsubsection[{A\-L\-T\-U\-R\-A}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\-L\-T\-U\-R\-A~10}}\label{main_8cc_a0ca6912086aeaf9fbab770dcb97ea5c8}
+\hypertarget{main_8cc_a39993a19ea179e022fb3346fdc794808}{\index{main.\-cc@{main.\-cc}!L\-A\-R\-G\-U\-R\-A@{L\-A\-R\-G\-U\-R\-A}}
+\index{L\-A\-R\-G\-U\-R\-A@{L\-A\-R\-G\-U\-R\-A}!main.cc@{main.\-cc}}
+\subsubsection[{L\-A\-R\-G\-U\-R\-A}]{\setlength{\rightskip}{0pt plus 5cm}\#define L\-A\-R\-G\-U\-R\-A~50}}\label{main_8cc_a39993a19ea179e022fb3346fdc794808}
+
+
+\subsection{Documentação das funções}
+\hypertarget{main_8cc_af1ccf694bcf905341f10b534e5a272fa}{\index{main.\-cc@{main.\-cc}!abrir\-\_\-arquivo@{abrir\-\_\-arquivo}}
+\index{abrir\-\_\-arquivo@{abrir\-\_\-arquivo}!main.cc@{main.\-cc}}
+\subsubsection[{abrir\-\_\-arquivo}]{\setlength{\rightskip}{0pt plus 5cm}{\bf grafo}$\ast$ abrir\-\_\-arquivo (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{nome\-Arquivo}
+\end{DoxyParamCaption}
+)}}\label{main_8cc_af1ccf694bcf905341f10b534e5a272fa}
+\hypertarget{main_8cc_abe7109d6b800c7cd9f5c2097bc8df894}{\index{main.\-cc@{main.\-cc}!destruir\-\_\-menu@{destruir\-\_\-menu}}
+\index{destruir\-\_\-menu@{destruir\-\_\-menu}!main.cc@{main.\-cc}}
+\subsubsection[{destruir\-\_\-menu}]{\setlength{\rightskip}{0pt plus 5cm}void destruir\-\_\-menu (
+\begin{DoxyParamCaption}
+\item[{W\-I\-N\-D\-O\-W $\ast$}]{menu\-\_\-win}
+\end{DoxyParamCaption}
+)}}\label{main_8cc_abe7109d6b800c7cd9f5c2097bc8df894}
+\hypertarget{main_8cc_a8d8002aa0f76981dad9ce30329767981}{\index{main.\-cc@{main.\-cc}!edicao\-\_\-tarefa@{edicao\-\_\-tarefa}}
+\index{edicao\-\_\-tarefa@{edicao\-\_\-tarefa}!main.cc@{main.\-cc}}
+\subsubsection[{edicao\-\_\-tarefa}]{\setlength{\rightskip}{0pt plus 5cm}{\bf grafo}$\ast$ edicao\-\_\-tarefa (
+\begin{DoxyParamCaption}
+\item[{{\bf grafo} $\ast$}]{G, }
+\item[{int}]{id}
+\end{DoxyParamCaption}
+)}}\label{main_8cc_a8d8002aa0f76981dad9ce30329767981}
+\hypertarget{main_8cc_a7769e05575359d89d7467b1e46940ecf}{\index{main.\-cc@{main.\-cc}!editar\-\_\-tarefa@{editar\-\_\-tarefa}}
+\index{editar\-\_\-tarefa@{editar\-\_\-tarefa}!main.cc@{main.\-cc}}
+\subsubsection[{editar\-\_\-tarefa}]{\setlength{\rightskip}{0pt plus 5cm}{\bf grafo}$\ast$ editar\-\_\-tarefa (
+\begin{DoxyParamCaption}
+\item[{{\bf grafo} $\ast$}]{G}
+\end{DoxyParamCaption}
+)}}\label{main_8cc_a7769e05575359d89d7467b1e46940ecf}
+\hypertarget{main_8cc_acec6efd5f1ee225764d814040f142268}{\index{main.\-cc@{main.\-cc}!erro\-\_\-id\-\_\-existente@{erro\-\_\-id\-\_\-existente}}
+\index{erro\-\_\-id\-\_\-existente@{erro\-\_\-id\-\_\-existente}!main.cc@{main.\-cc}}
+\subsubsection[{erro\-\_\-id\-\_\-existente}]{\setlength{\rightskip}{0pt plus 5cm}void erro\-\_\-id\-\_\-existente (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{main_8cc_acec6efd5f1ee225764d814040f142268}
+\hypertarget{main_8cc_a8e3083a90f6cf70bdfd6abd70494c74e}{\index{main.\-cc@{main.\-cc}!erro\-\_\-id\-\_\-inexistente@{erro\-\_\-id\-\_\-inexistente}}
+\index{erro\-\_\-id\-\_\-inexistente@{erro\-\_\-id\-\_\-inexistente}!main.cc@{main.\-cc}}
+\subsubsection[{erro\-\_\-id\-\_\-inexistente}]{\setlength{\rightskip}{0pt plus 5cm}void erro\-\_\-id\-\_\-inexistente (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{main_8cc_a8e3083a90f6cf70bdfd6abd70494c74e}
+\hypertarget{main_8cc_aef0e5ebaf10f94ec3baf710468b2bca8}{\index{main.\-cc@{main.\-cc}!erro\-\_\-insere\-\_\-pre\-\_\-requisito@{erro\-\_\-insere\-\_\-pre\-\_\-requisito}}
+\index{erro\-\_\-insere\-\_\-pre\-\_\-requisito@{erro\-\_\-insere\-\_\-pre\-\_\-requisito}!main.cc@{main.\-cc}}
+\subsubsection[{erro\-\_\-insere\-\_\-pre\-\_\-requisito}]{\setlength{\rightskip}{0pt plus 5cm}void erro\-\_\-insere\-\_\-pre\-\_\-requisito (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{main_8cc_aef0e5ebaf10f94ec3baf710468b2bca8}
+\hypertarget{main_8cc_af680447ac3023912e86df70f144373d8}{\index{main.\-cc@{main.\-cc}!importar\-\_\-de\-\_\-arquivo@{importar\-\_\-de\-\_\-arquivo}}
+\index{importar\-\_\-de\-\_\-arquivo@{importar\-\_\-de\-\_\-arquivo}!main.cc@{main.\-cc}}
+\subsubsection[{importar\-\_\-de\-\_\-arquivo}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ importar\-\_\-de\-\_\-arquivo (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{nome\-Arquivo}
+\end{DoxyParamCaption}
+)}}\label{main_8cc_af680447ac3023912e86df70f144373d8}
+\hypertarget{main_8cc_abc30d77428eefe83c569f49b7e48a7f8}{\index{main.\-cc@{main.\-cc}!imprimir\-\_\-em\-\_\-arquivo@{imprimir\-\_\-em\-\_\-arquivo}}
+\index{imprimir\-\_\-em\-\_\-arquivo@{imprimir\-\_\-em\-\_\-arquivo}!main.cc@{main.\-cc}}
+\subsubsection[{imprimir\-\_\-em\-\_\-arquivo}]{\setlength{\rightskip}{0pt plus 5cm}void imprimir\-\_\-em\-\_\-arquivo (
+\begin{DoxyParamCaption}
+\item[{{\bf grafo} $\ast$}]{G}
+\end{DoxyParamCaption}
+)}}\label{main_8cc_abc30d77428eefe83c569f49b7e48a7f8}
+\hypertarget{main_8cc_ad2a06ffdf1033b3b1c11f337fa12553b}{\index{main.\-cc@{main.\-cc}!imprimir\-Rotulo@{imprimir\-Rotulo}}
+\index{imprimir\-Rotulo@{imprimir\-Rotulo}!main.cc@{main.\-cc}}
+\subsubsection[{imprimir\-Rotulo}]{\setlength{\rightskip}{0pt plus 5cm}void imprimir\-Rotulo (
+\begin{DoxyParamCaption}
+\item[{W\-I\-N\-D\-O\-W $\ast$}]{tmp\-Janela, }
+\item[{int}]{y, }
+\item[{int}]{x, }
+\item[{char $\ast$}]{s\-Rotulo}
+\end{DoxyParamCaption}
+)}}\label{main_8cc_ad2a06ffdf1033b3b1c11f337fa12553b}
+\hypertarget{main_8cc_a16c89e840263b1af21caf3211b6640b2}{\index{main.\-cc@{main.\-cc}!inserir\-\_\-novo\-\_\-pre\-\_\-requisito@{inserir\-\_\-novo\-\_\-pre\-\_\-requisito}}
+\index{inserir\-\_\-novo\-\_\-pre\-\_\-requisito@{inserir\-\_\-novo\-\_\-pre\-\_\-requisito}!main.cc@{main.\-cc}}
+\subsubsection[{inserir\-\_\-novo\-\_\-pre\-\_\-requisito}]{\setlength{\rightskip}{0pt plus 5cm}{\bf grafo}$\ast$ inserir\-\_\-novo\-\_\-pre\-\_\-requisito (
+\begin{DoxyParamCaption}
+\item[{{\bf grafo} $\ast$}]{G}
+\end{DoxyParamCaption}
+)}}\label{main_8cc_a16c89e840263b1af21caf3211b6640b2}
+\hypertarget{main_8cc_adb3b0c3b009c68f86673eb7bdeef601c}{\index{main.\-cc@{main.\-cc}!inserir\-\_\-tarefa@{inserir\-\_\-tarefa}}
+\index{inserir\-\_\-tarefa@{inserir\-\_\-tarefa}!main.cc@{main.\-cc}}
+\subsubsection[{inserir\-\_\-tarefa}]{\setlength{\rightskip}{0pt plus 5cm}{\bf grafo}$\ast$ inserir\-\_\-tarefa (
+\begin{DoxyParamCaption}
+\item[{{\bf grafo} $\ast$}]{G}
+\end{DoxyParamCaption}
+)}}\label{main_8cc_adb3b0c3b009c68f86673eb7bdeef601c}
+\hypertarget{main_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{\index{main.\-cc@{main.\-cc}!main@{main}}
+\index{main@{main}!main.cc@{main.\-cc}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{main_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}
+\hypertarget{main_8cc_af852bc15cf3d5217386a9bb0bf3b9abd}{\index{main.\-cc@{main.\-cc}!operacoes\-\_\-grafo@{operacoes\-\_\-grafo}}
+\index{operacoes\-\_\-grafo@{operacoes\-\_\-grafo}!main.cc@{main.\-cc}}
+\subsubsection[{operacoes\-\_\-grafo}]{\setlength{\rightskip}{0pt plus 5cm}{\bf grafo}$\ast$ operacoes\-\_\-grafo (
+\begin{DoxyParamCaption}
+\item[{{\bf grafo} $\ast$}]{G}
+\end{DoxyParamCaption}
+)}}\label{main_8cc_af852bc15cf3d5217386a9bb0bf3b9abd}
+\hypertarget{main_8cc_a810164b29b6ded682dff19d56ec8e4b0}{\index{main.\-cc@{main.\-cc}!print\-\_\-menu@{print\-\_\-menu}}
+\index{print\-\_\-menu@{print\-\_\-menu}!main.cc@{main.\-cc}}
+\subsubsection[{print\-\_\-menu}]{\setlength{\rightskip}{0pt plus 5cm}void print\-\_\-menu (
+\begin{DoxyParamCaption}
+\item[{W\-I\-N\-D\-O\-W $\ast$}]{menu\-\_\-win, }
+\item[{int}]{highlight}
+\end{DoxyParamCaption}
+)}}\label{main_8cc_a810164b29b6ded682dff19d56ec8e4b0}
+\hypertarget{main_8cc_a8b39b6c1f4d3623c384e80826e5b633e}{\index{main.\-cc@{main.\-cc}!print\-\_\-operacoes@{print\-\_\-operacoes}}
+\index{print\-\_\-operacoes@{print\-\_\-operacoes}!main.cc@{main.\-cc}}
+\subsubsection[{print\-\_\-operacoes}]{\setlength{\rightskip}{0pt plus 5cm}void print\-\_\-operacoes (
+\begin{DoxyParamCaption}
+\item[{W\-I\-N\-D\-O\-W $\ast$}]{menu\-\_\-win, }
+\item[{int}]{highlight}
+\end{DoxyParamCaption}
+)}}\label{main_8cc_a8b39b6c1f4d3623c384e80826e5b633e}
+\hypertarget{main_8cc_a4611d53166aabe6d0fb24bcfd407bd53}{\index{main.\-cc@{main.\-cc}!print\-\_\-visualizador@{print\-\_\-visualizador}}
+\index{print\-\_\-visualizador@{print\-\_\-visualizador}!main.cc@{main.\-cc}}
+\subsubsection[{print\-\_\-visualizador}]{\setlength{\rightskip}{0pt plus 5cm}void print\-\_\-visualizador (
+\begin{DoxyParamCaption}
+\item[{W\-I\-N\-D\-O\-W $\ast$}]{menu\-\_\-win, }
+\item[{int}]{highlight}
+\end{DoxyParamCaption}
+)}}\label{main_8cc_a4611d53166aabe6d0fb24bcfd407bd53}
+\hypertarget{main_8cc_ae96b9adf5e390d1a516e3fe5164714cc}{\index{main.\-cc@{main.\-cc}!remover\-\_\-pre\-\_\-requisitos@{remover\-\_\-pre\-\_\-requisitos}}
+\index{remover\-\_\-pre\-\_\-requisitos@{remover\-\_\-pre\-\_\-requisitos}!main.cc@{main.\-cc}}
+\subsubsection[{remover\-\_\-pre\-\_\-requisitos}]{\setlength{\rightskip}{0pt plus 5cm}{\bf grafo}$\ast$ remover\-\_\-pre\-\_\-requisitos (
+\begin{DoxyParamCaption}
+\item[{{\bf grafo} $\ast$}]{G}
+\end{DoxyParamCaption}
+)}}\label{main_8cc_ae96b9adf5e390d1a516e3fe5164714cc}
+\hypertarget{main_8cc_ab5f698491708904442d9d4f8583cd809}{\index{main.\-cc@{main.\-cc}!remover\-\_\-tarefa@{remover\-\_\-tarefa}}
+\index{remover\-\_\-tarefa@{remover\-\_\-tarefa}!main.cc@{main.\-cc}}
+\subsubsection[{remover\-\_\-tarefa}]{\setlength{\rightskip}{0pt plus 5cm}{\bf grafo}$\ast$ remover\-\_\-tarefa (
+\begin{DoxyParamCaption}
+\item[{{\bf grafo} $\ast$}]{G}
+\end{DoxyParamCaption}
+)}}\label{main_8cc_ab5f698491708904442d9d4f8583cd809}
+\hypertarget{main_8cc_a5c0ceb9634231b92e0dfc9db33b727fa}{\index{main.\-cc@{main.\-cc}!tela\-\_\-inserir\-\_\-pre\-\_\-requisito@{tela\-\_\-inserir\-\_\-pre\-\_\-requisito}}
+\index{tela\-\_\-inserir\-\_\-pre\-\_\-requisito@{tela\-\_\-inserir\-\_\-pre\-\_\-requisito}!main.cc@{main.\-cc}}
+\subsubsection[{tela\-\_\-inserir\-\_\-pre\-\_\-requisito}]{\setlength{\rightskip}{0pt plus 5cm}{\bf grafo}$\ast$ tela\-\_\-inserir\-\_\-pre\-\_\-requisito (
+\begin{DoxyParamCaption}
+\item[{{\bf grafo} $\ast$}]{G, }
+\item[{int}]{n\-\_\-prerequisitos, }
+\item[{int}]{id\-\_\-tarefa}
+\end{DoxyParamCaption}
+)}}\label{main_8cc_a5c0ceb9634231b92e0dfc9db33b727fa}
+\hypertarget{main_8cc_aa0ac4a2d1125c89ec5acc37dfde748c6}{\index{main.\-cc@{main.\-cc}!ver\-\_\-tarefas@{ver\-\_\-tarefas}}
+\index{ver\-\_\-tarefas@{ver\-\_\-tarefas}!main.cc@{main.\-cc}}
+\subsubsection[{ver\-\_\-tarefas}]{\setlength{\rightskip}{0pt plus 5cm}void ver\-\_\-tarefas (
+\begin{DoxyParamCaption}
+\item[{{\bf grafo} $\ast$}]{G}
+\end{DoxyParamCaption}
+)}}\label{main_8cc_aa0ac4a2d1125c89ec5acc37dfde748c6}
+\hypertarget{main_8cc_a5d247f6e8ee275a8cd007f922ae2acb3}{\index{main.\-cc@{main.\-cc}!visualizador\-\_\-tarefas@{visualizador\-\_\-tarefas}}
+\index{visualizador\-\_\-tarefas@{visualizador\-\_\-tarefas}!main.cc@{main.\-cc}}
+\subsubsection[{visualizador\-\_\-tarefas}]{\setlength{\rightskip}{0pt plus 5cm}void visualizador\-\_\-tarefas (
+\begin{DoxyParamCaption}
+\item[{{\bf grafo} $\ast$}]{G}
+\end{DoxyParamCaption}
+)}}\label{main_8cc_a5d247f6e8ee275a8cd007f922ae2acb3}
+
+
+\subsection{Documentação das variáveis}
+\hypertarget{main_8cc_a24167c503992e21d9d3b767742346d4b}{\index{main.\-cc@{main.\-cc}!n\-\_\-opcoes@{n\-\_\-opcoes}}
+\index{n\-\_\-opcoes@{n\-\_\-opcoes}!main.cc@{main.\-cc}}
+\subsubsection[{n\-\_\-opcoes}]{\setlength{\rightskip}{0pt plus 5cm}int n\-\_\-opcoes = 3}}\label{main_8cc_a24167c503992e21d9d3b767742346d4b}
+\hypertarget{main_8cc_a4e96567620b8107a3844f6a3b5860c74}{\index{main.\-cc@{main.\-cc}!n\-\_\-operacoes@{n\-\_\-operacoes}}
+\index{n\-\_\-operacoes@{n\-\_\-operacoes}!main.cc@{main.\-cc}}
+\subsubsection[{n\-\_\-operacoes}]{\setlength{\rightskip}{0pt plus 5cm}int n\-\_\-operacoes = 8}}\label{main_8cc_a4e96567620b8107a3844f6a3b5860c74}
+\hypertarget{main_8cc_a44042648455eb7c48a35466047cd5911}{\index{main.\-cc@{main.\-cc}!n\-\_\-visualizador@{n\-\_\-visualizador}}
+\index{n\-\_\-visualizador@{n\-\_\-visualizador}!main.cc@{main.\-cc}}
+\subsubsection[{n\-\_\-visualizador}]{\setlength{\rightskip}{0pt plus 5cm}int n\-\_\-visualizador = 6}}\label{main_8cc_a44042648455eb7c48a35466047cd5911}
+\hypertarget{main_8cc_a8f0744c55ee97ebf34757f8499a66139}{\index{main.\-cc@{main.\-cc}!startx@{startx}}
+\index{startx@{startx}!main.cc@{main.\-cc}}
+\subsubsection[{startx}]{\setlength{\rightskip}{0pt plus 5cm}int startx = 0}}\label{main_8cc_a8f0744c55ee97ebf34757f8499a66139}
+\hypertarget{main_8cc_a19e264821cbd530471c1cf985d7cd239}{\index{main.\-cc@{main.\-cc}!starty@{starty}}
+\index{starty@{starty}!main.cc@{main.\-cc}}
+\subsubsection[{starty}]{\setlength{\rightskip}{0pt plus 5cm}int starty = 0}}\label{main_8cc_a19e264821cbd530471c1cf985d7cd239}
+\hypertarget{main_8cc_a7e3eb983c89b73fc26206eb49d9e53f6}{\index{main.\-cc@{main.\-cc}!v\-Opcoes@{v\-Opcoes}}
+\index{v\-Opcoes@{v\-Opcoes}!main.cc@{main.\-cc}}
+\subsubsection[{v\-Opcoes}]{\setlength{\rightskip}{0pt plus 5cm}char v\-Opcoes\mbox{[}3\mbox{]}\mbox{[}70\mbox{]}}}\label{main_8cc_a7e3eb983c89b73fc26206eb49d9e53f6}
+\hypertarget{main_8cc_a282382d81ff49bb355edf4b0e0c33ab5}{\index{main.\-cc@{main.\-cc}!v\-Operacoes@{v\-Operacoes}}
+\index{v\-Operacoes@{v\-Operacoes}!main.cc@{main.\-cc}}
+\subsubsection[{v\-Operacoes}]{\setlength{\rightskip}{0pt plus 5cm}char v\-Operacoes\mbox{[}8\mbox{]}\mbox{[}70\mbox{]}}}\label{main_8cc_a282382d81ff49bb355edf4b0e0c33ab5}
+\hypertarget{main_8cc_ac830448011ecd7178e23030edbff0311}{\index{main.\-cc@{main.\-cc}!v\-Visualizador@{v\-Visualizador}}
+\index{v\-Visualizador@{v\-Visualizador}!main.cc@{main.\-cc}}
+\subsubsection[{v\-Visualizador}]{\setlength{\rightskip}{0pt plus 5cm}char v\-Visualizador\mbox{[}6\mbox{]}\mbox{[}70\mbox{]}}}\label{main_8cc_ac830448011ecd7178e23030edbff0311}
