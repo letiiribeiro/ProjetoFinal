@@ -200,54 +200,16 @@ grafo* remove_prerequisitos(grafo* G, int id_tarefa){
     }
     return G;
 }
-/*
- grafo* le_grafo(FILE * fp) {
 
-	grafo* G = cria_grafo();
-	int id_tarefa, tarefa_executada, duracao_tarefa, inicio_min_tarefa, nro_pre_requisitos, i, pre_requisito;
-	char lixo;
-	char nome_tarefa[500];
-
-	while(!feof(fp)) {
-
-		fscanf(fp, "%d", &id_tarefa);		// le id_tarefa
-		fscanf(fp, "%c", &lixo);			// descarta espaço ao lado de id_tarefa
-		fscanf(fp, "%c", &lixo);			// descarta ' antes do nome tarefa
-		fscanf(fp, "%[^']s", nome_tarefa);
-		fscanf(fp, "%c", &lixo);			// descarta '
-		fscanf(fp, "%c", &lixo);			// descarta próximo espaço
-		fscanf(fp, "%d", &tarefa_executada);
-		fscanf(fp, "%c", &lixo);			// descarta próximo espaço
-		fscanf(fp, "%d", &duracao_tarefa);
-		fscanf(fp, "%c", &lixo);			// descarta próximo espaço
-		fscanf(fp, "%d", &inicio_min_tarefa);
-		fscanf(fp, "%c", &lixo);			// descarta próximo espaço
-		fscanf(fp, "%d", &nro_pre_requisitos);
-
-		G = insere_tarefa(G, id_tarefa, nome_tarefa, tarefa_executada, duracao_tarefa, inicio_min_tarefa, nro_pre_requisitos); // TODO: acrescentar na estrutura esses itens?
-
-		for(i = 0; i < nro_pre_requisitos; i++) {
-			fscanf(fp, " %d", &pre_requisito);
-		//	fscanf(fp, "%c", &lixo);
-
-			if(pesquisa_tarefa(G, pre_requisito)) {						// verifica se pre-requisito existe, se sim, insere na prerequisitos_tarefa
-				G = insere_prerequisitos(G, id_tarefa, pre_requisito);
-			}
-		}
-
-		fscanf(fp, "%c", &lixo);
-
-	}
-
-	fclose(fp);
-	return G;
-
- }
-*/
-grafo* le_grafo(FILE* fp){
+grafo* le_grafo(char * nomeArquivo){
     char buffer[100];
     int i;
     grafo* G = cria_grafo();
+    FILE * fp = fopen(nomeArquivo,  "r");
+
+    if(!fp) {
+        printf("error: impossivel abrir arquivo\n");
+    }
     
     while(fgets(buffer,100,fp) != NULL){
         i = 0;
@@ -302,6 +264,7 @@ grafo* le_grafo(FILE* fp){
         }
     }
 
+    fclose(fp);
     return G;
 }
 /*

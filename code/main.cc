@@ -204,6 +204,40 @@ void erro_id_existente() {
 
 }
 
+void erro_id_invalido() {
+
+    WINDOW * janela;
+    int telaAltura, telaLargura;
+    int startx, starty;
+    char c;
+    char msg1[] = "ATENCAO!";
+    char msg2[] = "ID negativo invalido!";
+    char msg3[] = "Pressione qualquer tecla para retornar";
+
+    init_pair(1,COLOR_RED,COLOR_BLACK);
+
+    getmaxyx(stdscr,telaAltura,telaLargura);
+    starty = (LINES - telaAltura)/2;   
+    startx = (COLS - telaLargura)/2; 
+    refresh();    
+
+    janela = newwin(ALTURA, LARGURA, startx, starty);
+
+    wborder(janela, ACS_VLINE, ACS_VLINE,ACS_HLINE,ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
+
+    
+        imprimirRotulo(janela,starty+2,startx+20,msg1);
+        imprimirRotulo(janela, starty+3,startx+13,msg2);
+        imprimirRotulo(janela,starty+6,startx+6,msg3);
+
+        c = wgetch(janela);
+
+        if(c) {
+            destruir_menu(janela);
+        }
+
+}
+
 void erro_id_inexistente() {
 
     WINDOW * janela;
@@ -414,6 +448,12 @@ grafo * inserir_tarefa(grafo* G) {
 
     wmove(janela,starty+6,startx+21);
     wscanw(janela,"%d",&n_prerequisitos);
+
+    if(id_tarefa < 0) {
+        destruir_menu(janela);
+        erro_id_invalido();
+        return G;
+    }
 
     if(pesquisa_tarefa(G, id_tarefa)) {
         destruir_menu(janela);
@@ -796,6 +836,81 @@ grafo * remover_pre_requisitos(grafo* G) {
 
 }
 
+void mostrar_tarefas_filtradas(grafo * G, int * tarefas) {
+
+    WINDOW * janela;
+    int telaAltura, telaLargura;
+    int startx, starty, i, linha;
+    int n_tarefas = sizeof(tarefas) / sizeof(int);
+    char msg1[] = "ID             Tarefa", c;
+    tarefa * tmp;
+
+    init_pair(1,COLOR_BLUE,COLOR_BLACK);
+
+    getmaxyx(stdscr,telaAltura,telaLargura);
+    starty = (LINES - telaAltura)/2;   
+    startx = (COLS - telaLargura)/2; 
+    refresh();
+
+    janela = newwin(ALTURA+35, LARGURA+25, startx, starty);
+
+    wborder(janela, ACS_VLINE, ACS_VLINE,ACS_HLINE,ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
+
+    imprimirRotulo(janela,starty+1,startx+1,msg1);
+
+    linha = 3;
+
+    for(i = 0; i < n_tarefas; i++) { 
+        tmp = procura_tarefa(G, tarefas[i]);
+        mvwprintw(janela,starty+linha,startx+1,"%d",tmp->id_tarefa);
+        mvwprintw(janela,starty+linha,startx+16,"%s",tmp->nome_tarefa);
+        linha++;
+    }
+    
+    c = wgetch(janela);
+
+    if(c) 
+        destruir_menu(janela);
+        return;
+
+
+}
+
+void filtrar_tarefas_completadas(grafo * G) {
+    
+    WINDOW * janela;
+    int telaAltura, telaLargura;
+    int startx, starty;
+    int periodo;
+    char msg1[] = "Período: _______";
+    char msg2[] = "[ENTER]";
+    int * tarefas;
+
+    init_pair(1,COLOR_GREEN,COLOR_BLACK);
+
+    getmaxyx(stdscr,telaAltura,telaLargura);
+    starty = (LINES - telaAltura)/2;   
+    startx = (COLS - telaLargura)/2; 
+    refresh();
+
+    janela = newwin(ALTURA, LARGURA, startx, starty);
+
+    wborder(janela, ACS_VLINE, ACS_VLINE,ACS_HLINE,ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
+
+    imprimirRotulo(janela,starty+2,startx+1,msg1);
+    imprimirRotulo(janela,starty+5,startx+20,msg2);
+    
+    echo();
+    wmove(janela,starty+2,startx+11);
+    wscanw(janela,"%d",&periodo);
+
+    destruir_menu(janela);
+
+    tarefas = tarefas_concluidas(G, periodo);
+    mostrar_tarefas_filtradas(G, tarefas);
+
+}
+
 void visualizador_tarefas(grafo * G) {
 
     WINDOW * menu_win;
@@ -861,7 +976,7 @@ void visualizador_tarefas(grafo * G) {
 
                 } else if(opcao == 5) {
                     destruir_menu(menu_win);
-                    //G = editar_tarefa(G);
+                    filtrar_tarefas_completadas(G);
                     menu_win = newwin(ALTURA, LARGURA_V, startx, starty);
                     keypad(menu_win,TRUE);
                     refresh();
@@ -1029,7 +1144,7 @@ grafo * abrir_arquivo(char * nomeArquivo) {
 		
 	} else {
 
-        G = le_grafo(fp);
+        G = le_grafo(nomeArquivo);
 
 		imprimirRotulo(janela,starty+2,startx+10,msg5);
         imprimirRotulo(janela,starty+4,startx+20,msg6);
