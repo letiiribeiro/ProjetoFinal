@@ -1,0 +1,7 @@
+<map id="remover_tarefa" name="remover_tarefa">
+<area shape="rect" id="node2" href="$main_8cc.html#ad2a06ffdf1033b3b1c11f337fa12553b" title="imprimirRotulo" alt="" coords="341,55,448,82"/>
+<area shape="rect" id="node3" href="$grafo_8cc.html#a1e996ff4a17fa0e42fc8ff6bdc605dc1" title="pesquisa_tarefa" alt="" coords="171,30,285,56"/>
+<area shape="rect" id="node4" href="$main_8cc.html#abe7109d6b800c7cd9f5c2097bc8df894" title="destruir_menu" alt="" coords="343,118,447,144"/>
+<area shape="rect" id="node5" href="$main_8cc.html#a8e3083a90f6cf70bdfd6abd70494c74e" title="erro_id_inexistente" alt="" coords="163,80,293,107"/>
+<area shape="rect" id="node6" href="$grafo_8cc.html#abab0a8730861a86fe9a0713b3dcc018b" title="remove_tarefa" alt="" coords="175,182,281,208"/>
+</map>

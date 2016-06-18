@@ -1,0 +1,22 @@
+<map id="imprimirRotulo" name="imprimirRotulo">
+<area shape="rect" id="node2" href="$main_8cc.html#af680447ac3023912e86df70f144373d8" title="importar_de_arquivo" alt="" coords="789,100,928,127"/>
+<area shape="rect" id="node4" href="$main_8cc.html#aef0e5ebaf10f94ec3baf710468b2bca8" title="erro_insere_pre_requisito" alt="" coords="161,340,327,367"/>
+<area shape="rect" id="node5" href="$main_8cc.html#a16c89e840263b1af21caf3211b6640b2" title="inserir_novo_pre_requisito" alt="" coords="376,340,549,367"/>
+<area shape="rect" id="node7" href="$main_8cc.html#af1ccf694bcf905341f10b534e5a272fa" title="abrir_arquivo" alt="" coords="976,467,1072,494"/>
+<area shape="rect" id="node8" href="$main_8cc.html#a5c0ceb9634231b92e0dfc9db33b727fa" title="tela_inserir_pre_requisito" alt="" coords="379,391,546,418"/>
+<area shape="rect" id="node9" href="$main_8cc.html#adb3b0c3b009c68f86673eb7bdeef601c" title="inserir_tarefa" alt="" coords="621,442,718,468"/>
+<area shape="rect" id="node10" href="$main_8cc.html#acec6efd5f1ee225764d814040f142268" title="erro_id_existente" alt="" coords="183,492,305,519"/>
+<area shape="rect" id="node11" href="$main_8cc.html#a8d8002aa0f76981dad9ce30329767981" title="edicao_tarefa" alt="" coords="413,564,513,591"/>
+<area shape="rect" id="node12" href="$main_8cc.html#a7769e05575359d89d7467b1e46940ecf" title="editar_tarefa" alt="" coords="622,619,717,646"/>
+<area shape="rect" id="node13" href="$main_8cc.html#a8e3083a90f6cf70bdfd6abd70494c74e" title="erro_id_inexistente" alt="" coords="179,711,309,738"/>
+<area shape="rect" id="node14" href="$main_8cc.html#ab5f698491708904442d9d4f8583cd809" title="remover_tarefa" alt="" coords="408,762,517,788"/>
+<area shape="rect" id="node15" href="$main_8cc.html#ae96b9adf5e390d1a516e3fe5164714cc" title="remover_pre_requisitos" alt="" coords="384,812,541,839"/>
+<area shape="rect" id="node16" href="$main_8cc.html#a5f90fb7a7aa9c2393d70b4f95d675955" title="tela_inserir_pre_requisito\l_edicao" alt="" coords="161,544,327,585"/>
+<area shape="rect" id="node17" href="$main_8cc.html#abc30d77428eefe83c569f49b7e48a7f8" title="imprimir_em_arquivo" alt="" coords="598,156,741,183"/>
+<area shape="rect" id="node18" href="$main_8cc.html#aa0ac4a2d1125c89ec5acc37dfde748c6" title="ver_tarefas" alt="" coords="201,239,287,266"/>
+<area shape="rect" id="node20" href="$main_8cc.html#a4f8f29b1eba21e0b51992f8de173a582" title="mostrar_pre_requisitos" alt="" coords="167,138,321,164"/>
+<area shape="rect" id="node21" href="$main_8cc.html#ab05b93d97a47c67aab51426cdad29a86" title="ver_tarefas_concluidas" alt="" coords="166,188,322,215"/>
+<area shape="rect" id="node3" href="$main_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="main" alt="" coords="1120,416,1171,443"/>
+<area shape="rect" id="node6" href="$main_8cc.html#af852bc15cf3d5217386a9bb0bf3b9abd" title="operacoes_grafo" alt="" coords="799,442,918,468"/>
+<area shape="rect" id="node19" href="$main_8cc.html#a5d247f6e8ee275a8cd007f922ae2acb3" title="visualizador_tarefas" alt="" coords="393,214,532,240"/>
+</map>

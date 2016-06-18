@@ -1,0 +1,13 @@
+<map id="pesquisa_tarefa" name="pesquisa_tarefa">
+<area shape="rect" id="node2" href="$grafo_8h.html#adaeb2e2aa0bf8a2fbb149376a33bd443" title="edita_tarefa" alt="" coords="207,5,297,32"/>
+<area shape="rect" id="node3" href="$main_8cc.html#a8d8002aa0f76981dad9ce30329767981" title="edicao_tarefa" alt="" coords="389,56,489,83"/>
+<area shape="rect" id="node4" href="$main_8cc.html#a7769e05575359d89d7467b1e46940ecf" title="editar_tarefa" alt="" coords="581,107,675,133"/>
+<area shape="rect" id="node8" href="$main_8cc.html#a16c89e840263b1af21caf3211b6640b2" title="inserir_novo_pre_requisito" alt="" coords="541,160,715,187"/>
+<area shape="rect" id="node9" href="$main_8cc.html#a5c0ceb9634231b92e0dfc9db33b727fa" title="tela_inserir_pre_requisito" alt="" coords="169,208,335,235"/>
+<area shape="rect" id="node10" href="$main_8cc.html#adb3b0c3b009c68f86673eb7bdeef601c" title="inserir_tarefa" alt="" coords="390,217,487,244"/>
+<area shape="rect" id="node11" href="$main_8cc.html#ab5f698491708904442d9d4f8583cd809" title="remover_tarefa" alt="" coords="384,295,493,321"/>
+<area shape="rect" id="node12" href="$main_8cc.html#ae96b9adf5e390d1a516e3fe5164714cc" title="remover_pre_requisitos" alt="" coords="549,356,707,383"/>
+<area shape="rect" id="node5" href="$main_8cc.html#af852bc15cf3d5217386a9bb0bf3b9abd" title="operacoes_grafo" alt="" coords="763,217,882,244"/>
+<area shape="rect" id="node6" href="$main_8cc.html#af1ccf694bcf905341f10b534e5a272fa" title="abrir_arquivo" alt="" coords="931,192,1027,219"/>
+<area shape="rect" id="node7" href="$main_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="main" alt="" coords="1075,217,1125,244"/>
+</map>

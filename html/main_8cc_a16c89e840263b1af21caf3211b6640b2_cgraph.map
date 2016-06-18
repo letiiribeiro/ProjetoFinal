@@ -1,0 +1,8 @@
+<map id="inserir_novo_pre_requisito" name="inserir_novo_pre_requisito">
+<area shape="rect" id="node2" href="$main_8cc.html#ad2a06ffdf1033b3b1c11f337fa12553b" title="imprimirRotulo" alt="" coords="443,6,549,33"/>
+<area shape="rect" id="node3" href="$grafo_8cc.html#a1e996ff4a17fa0e42fc8ff6bdc605dc1" title="pesquisa_tarefa" alt="" coords="253,32,368,58"/>
+<area shape="rect" id="node4" href="$main_8cc.html#abe7109d6b800c7cd9f5c2097bc8df894" title="destruir_menu" alt="" coords="444,108,548,134"/>
+<area shape="rect" id="node5" href="$main_8cc.html#aef0e5ebaf10f94ec3baf710468b2bca8" title="erro_insere_pre_requisito" alt="" coords="227,82,394,109"/>
+<area shape="rect" id="node6" href="$grafo_8cc.html#a3fe6389b74d0356a95800a3d29d7d664" title="insere_prerequisitos" alt="" coords="241,184,380,210"/>
+<area shape="rect" id="node7" href="$grafo_8cc.html#a0e6585acadedc05719f93fa778cf1dcb" title="procura_tarefa" alt="" coords="443,184,549,210"/>
+</map>

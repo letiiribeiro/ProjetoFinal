@@ -1,0 +1,8 @@
+<map id="visualizador_tarefas" name="visualizador_tarefas">
+<area shape="rect" id="node2" href="$main_8cc.html#a4611d53166aabe6d0fb24bcfd407bd53" title="print_visualizador" alt="" coords="209,5,332,32"/>
+<area shape="rect" id="node3" href="$main_8cc.html#abe7109d6b800c7cd9f5c2097bc8df894" title="destruir_menu" alt="" coords="399,107,503,133"/>
+<area shape="rect" id="node4" href="$main_8cc.html#aa0ac4a2d1125c89ec5acc37dfde748c6" title="ver_tarefas" alt="" coords="227,107,314,133"/>
+<area shape="rect" id="node6" href="$main_8cc.html#a4f8f29b1eba21e0b51992f8de173a582" title="mostrar_pre_requisitos" alt="" coords="193,157,348,184"/>
+<area shape="rect" id="node7" href="$main_8cc.html#ab05b93d97a47c67aab51426cdad29a86" title="ver_tarefas_concluidas" alt="" coords="193,208,349,235"/>
+<area shape="rect" id="node5" href="$main_8cc.html#ad2a06ffdf1033b3b1c11f337fa12553b" title="imprimirRotulo" alt="" coords="397,157,504,184"/>
+</map>
