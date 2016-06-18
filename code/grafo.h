@@ -178,7 +178,7 @@ grafo* remove_prerequisitos(grafo* G, int id_tarefa);
 *
 *
 ***********************************************************************************/
-grafo* le_grafo(FILE* fp);
+grafo* le_grafo(char * nomeArquivo);
 /*******************************************************************************//**
 *	Função: retornar Grafo sem tarefas e pre requisitos.
 *
