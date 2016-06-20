@@ -62,7 +62,7 @@ var sectionId = 'dynsection-9';
 </g>
 <!-- Node2 -->
 <g id="node2" class="node"><title>Node2</title>
-<g id="a_node2"><a xlink:href="grafo_8h.html#adaeb2e2aa0bf8a2fbb149376a33bd443" target="_top" xlink:title="edita_tarefa">
+<g id="a_node2"><a xlink:href="include_2grafo_8h.html#adaeb2e2aa0bf8a2fbb149376a33bd443" target="_top" xlink:title="edita_tarefa">
 <polygon fill="white" stroke="black" points="140,-114.5 140,-133.5 208,-133.5 208,-114.5 140,-114.5"/>
 <text text-anchor="middle" x="174" y="-121.5" font-family="Helvetica,sans-Serif" font-size="10.00">edita_tarefa</text>
 </a>
@@ -75,7 +75,7 @@ var sectionId = 'dynsection-9';
 </g>
 <!-- Node8 -->
 <g id="node8" class="node"><title>Node8</title>
-<g id="a_node8"><a xlink:href="grafo_8h.html#a07e2bda52af22bd5988dfab266b696f3" target="_top" xlink:title="le_grafo">
+<g id="a_node8"><a xlink:href="code_2grafo_8h.html#a0a4567a2f65956112b02ab39cbdeb152" target="_top" xlink:title="le_grafo">
 <polygon fill="white" stroke="black" points="148.5,-152.5 148.5,-171.5 199.5,-171.5 199.5,-152.5 148.5,-152.5"/>
 <text text-anchor="middle" x="174" y="-159.5" font-family="Helvetica,sans-Serif" font-size="10.00">le_grafo</text>
 </a>

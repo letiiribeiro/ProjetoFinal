@@ -10,7 +10,7 @@ var indexSectionsWithContent =
   0: "acdefgilmnoprstv",
   1: "glptv",
   2: "gm",
-  3: "acdeilmoprtv",
+  3: "acdefilmoprtv",
   4: "adinpstv",
   5: "glpt",
   6: "afilmt"

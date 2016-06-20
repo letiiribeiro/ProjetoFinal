@@ -25,7 +25,7 @@ USER_DIR = ../code
 CPPFLAGS += -isystem $(GTEST_DIR)/include
 
 # Flags passed to the C++ compiler.
-CXXFLAGS += -g -Wall -Wextra -pthread -ftest-coverage -fprofile-arcs
+CXXFLAGS += -g -Wall -Wextra -pthread -ftest-coverage -fprofile-arcs -lncurses
 
 # All tests produced by this Makefile.  Remember to add new tests you
 # created to the list.

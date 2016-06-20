@@ -1,11 +1,12 @@
 <map id="inserir_tarefa" name="inserir_tarefa">
-<area shape="rect" id="node2" href="$main_8cc.html#ad2a06ffdf1033b3b1c11f337fa12553b" title="imprimirRotulo" alt="" coords="584,155,691,182"/>
-<area shape="rect" id="node3" href="$grafo_8cc.html#a1e996ff4a17fa0e42fc8ff6bdc605dc1" title="pesquisa_tarefa" alt="" coords="395,383,509,410"/>
-<area shape="rect" id="node4" href="$main_8cc.html#abe7109d6b800c7cd9f5c2097bc8df894" title="destruir_menu" alt="" coords="585,54,689,80"/>
-<area shape="rect" id="node5" href="$main_8cc.html#acec6efd5f1ee225764d814040f142268" title="erro_id_existente" alt="" coords="391,28,513,55"/>
-<area shape="rect" id="node6" href="$grafo_8cc.html#a563a8912631e461ec1d9a2bff50426d9" title="insere_tarefa" alt="" coords="187,307,285,334"/>
-<area shape="rect" id="node7" href="$main_8cc.html#a5c0ceb9634231b92e0dfc9db33b727fa" title="tela_inserir_pre_requisito" alt="" coords="153,206,319,232"/>
-<area shape="rect" id="node8" href="$grafo_8cc.html#a3fe6389b74d0356a95800a3d29d7d664" title="insere_prerequisitos" alt="" coords="383,332,521,359"/>
-<area shape="rect" id="node9" href="$grafo_8cc.html#a0e6585acadedc05719f93fa778cf1dcb" title="procura_tarefa" alt="" coords="585,307,690,334"/>
-<area shape="rect" id="node10" href="$main_8cc.html#aef0e5ebaf10f94ec3baf710468b2bca8" title="erro_insere_pre_requisito" alt="" coords="369,180,535,207"/>
+<area shape="rect" id="node2" href="$main_8cc.html#ad2a06ffdf1033b3b1c11f337fa12553b" title="imprimirRotulo" alt="" coords="584,83,691,109"/>
+<area shape="rect" id="node3" href="$main_8cc.html#abe7109d6b800c7cd9f5c2097bc8df894" title="destruir_menu" alt="" coords="585,184,689,211"/>
+<area shape="rect" id="node4" href="$main_8cc.html#acf899fb4107a26f962c26ec5292148cd" title="erro_id_invalido" alt="" coords="396,32,508,59"/>
+<area shape="rect" id="node5" href="$grafo_8cc.html#a1e996ff4a17fa0e42fc8ff6bdc605dc1" title="pesquisa_tarefa" alt="" coords="395,437,509,464"/>
+<area shape="rect" id="node6" href="$main_8cc.html#acec6efd5f1ee225764d814040f142268" title="erro_id_existente" alt="" coords="391,133,513,160"/>
+<area shape="rect" id="node7" href="$grafo_8cc.html#a563a8912631e461ec1d9a2bff50426d9" title="insere_tarefa" alt="" coords="187,361,285,388"/>
+<area shape="rect" id="node8" href="$main_8cc.html#a5c0ceb9634231b92e0dfc9db33b727fa" title="tela_inserir_pre_requisito" alt="" coords="153,260,319,287"/>
+<area shape="rect" id="node9" href="$grafo_8cc.html#a3fe6389b74d0356a95800a3d29d7d664" title="insere_prerequisitos" alt="" coords="383,336,521,363"/>
+<area shape="rect" id="node10" href="$grafo_8cc.html#a0e6585acadedc05719f93fa778cf1dcb" title="procura_tarefa" alt="" coords="585,361,690,388"/>
+<area shape="rect" id="node11" href="$main_8cc.html#aef0e5ebaf10f94ec3baf710468b2bca8" title="erro_insere_pre_requisito" alt="" coords="369,235,535,261"/>
 </map>

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['main',['main',['../gtest__grafo_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;gtest_grafo.cc'],['../main_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;main.cc']]],
-  ['mostrar_5fpre_5frequisitos',['mostrar_pre_requisitos',['../main_8cc.html#a4f8f29b1eba21e0b51992f8de173a582',1,'main.cc']]]
+  ['le_5fgrafo',['le_grafo',['../grafo_8cc.html#a0a4567a2f65956112b02ab39cbdeb152',1,'le_grafo(char *nomeArquivo):&#160;grafo.cc'],['../code_2grafo_8h.html#a0a4567a2f65956112b02ab39cbdeb152',1,'le_grafo(char *nomeArquivo):&#160;grafo.cc'],['../include_2grafo_8h.html#a07e2bda52af22bd5988dfab266b696f3',1,'le_grafo(FILE *fp):&#160;grafo.h']]],
+  ['libera_5fgrafo',['libera_grafo',['../grafo_8cc.html#a64cc9fac8ef1d2aa018e1bad3e43d87e',1,'libera_grafo(grafo *G):&#160;grafo.cc'],['../code_2grafo_8h.html#a64cc9fac8ef1d2aa018e1bad3e43d87e',1,'libera_grafo(grafo *G):&#160;grafo.cc'],['../include_2grafo_8h.html#a64cc9fac8ef1d2aa018e1bad3e43d87e',1,'libera_grafo(grafo *G):&#160;grafo.cc']]]
 ];

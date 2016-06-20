@@ -1,8 +1,16 @@
 <map id="visualizador_tarefas" name="visualizador_tarefas">
-<area shape="rect" id="node2" href="$main_8cc.html#a4611d53166aabe6d0fb24bcfd407bd53" title="print_visualizador" alt="" coords="209,5,332,32"/>
-<area shape="rect" id="node3" href="$main_8cc.html#abe7109d6b800c7cd9f5c2097bc8df894" title="destruir_menu" alt="" coords="399,107,503,133"/>
-<area shape="rect" id="node4" href="$main_8cc.html#aa0ac4a2d1125c89ec5acc37dfde748c6" title="ver_tarefas" alt="" coords="227,107,314,133"/>
-<area shape="rect" id="node6" href="$main_8cc.html#a4f8f29b1eba21e0b51992f8de173a582" title="mostrar_pre_requisitos" alt="" coords="193,157,348,184"/>
-<area shape="rect" id="node7" href="$main_8cc.html#ab05b93d97a47c67aab51426cdad29a86" title="ver_tarefas_concluidas" alt="" coords="193,208,349,235"/>
-<area shape="rect" id="node5" href="$main_8cc.html#ad2a06ffdf1033b3b1c11f337fa12553b" title="imprimirRotulo" alt="" coords="397,157,504,184"/>
+<area shape="rect" id="node2" href="$main_8cc.html#a4611d53166aabe6d0fb24bcfd407bd53" title="print_visualizador" alt="" coords="220,5,343,32"/>
+<area shape="rect" id="node3" href="$main_8cc.html#abe7109d6b800c7cd9f5c2097bc8df894" title="destruir_menu" alt="" coords="636,183,740,209"/>
+<area shape="rect" id="node4" href="$main_8cc.html#aa0ac4a2d1125c89ec5acc37dfde748c6" title="ver_tarefas" alt="" coords="459,107,546,133"/>
+<area shape="rect" id="node6" href="$main_8cc.html#a4f8f29b1eba21e0b51992f8de173a582" title="mostrar_pre_requisitos" alt="" coords="425,208,580,235"/>
+<area shape="rect" id="node7" href="$main_8cc.html#ab05b93d97a47c67aab51426cdad29a86" title="ver_tarefas_concluidas" alt="" coords="425,259,581,285"/>
+<area shape="rect" id="node8" href="$main_8cc.html#adcc550070c8292efdd63f7df8bbdd58a" title="filtrar_tarefas_completadas" alt="" coords="192,309,371,336"/>
+<area shape="rect" id="node5" href="$main_8cc.html#ad2a06ffdf1033b3b1c11f337fa12553b" title="imprimirRotulo" alt="" coords="635,259,741,285"/>
+<area shape="rect" id="node9" href="$grafo_8cc.html#abce1552216c6841949c616cecd5a4c0b" title="tarefas_concluidas" alt="" coords="437,411,568,437"/>
+<area shape="rect" id="node14" href="$main_8cc.html#aaaa25a5b0eda0fab944a03026249b324" title="mostrar_tarefas_filtradas" alt="" coords="419,309,586,336"/>
+<area shape="rect" id="node10" href="$grafo_8cc.html#acbf9093cdf86cc258309a203729436b2" title="insere_lista" alt="" coords="644,411,732,437"/>
+<area shape="rect" id="node11" href="$grafo_8cc.html#a6884bc1455bdfb3648b3e2514998e599" title="tempo_minimo" alt="" coords="635,485,741,512"/>
+<area shape="rect" id="node12" href="$grafo_8cc.html#ae12d615ab927bce766dcc94b9f1b404d" title="remove_lista" alt="" coords="640,536,736,563"/>
+<area shape="rect" id="node13" href="$grafo_8cc.html#a755ed9b778398a7614e61bdb3084717b" title="compara" alt="" coords="652,360,724,387"/>
+<area shape="rect" id="node15" href="$grafo_8cc.html#a0e6585acadedc05719f93fa778cf1dcb" title="procura_tarefa" alt="" coords="635,309,741,336"/>
 </map>

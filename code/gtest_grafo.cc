@@ -133,7 +133,7 @@ TEST(TestImportaTarefasArquivo, le_grafo) {
     FILE* fp = fopen(str_arq,"r");
     ASSERT_TRUE(fp);
     
-    grafo* G = le_grafo(fp);
+    grafo* G = le_grafo(str_arq);
     ASSERT_TRUE(G);
     
     EXPECT_EQ(G->T->id_tarefa,100);
@@ -163,7 +163,7 @@ TEST(TestGravaTarefasArquivo, imprime_grafo) {
     FILE* fp = fopen(str_arq, "r");
     ASSERT_TRUE(fp);
 
-    G = le_grafo(fp);
+    G = le_grafo(str_arq);
     EXPECT_EQ(G->T->id_tarefa,1);
     EXPECT_EQ(G->T->prox->id_tarefa,2);
     EXPECT_EQ(G->T->prox->prox->id_tarefa,3);

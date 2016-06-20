@@ -1,0 +1,185 @@
+        -:    0:Source:../code/gtest_grafo.cc
+        -:    0:Graph:gtest_grafo.gcno
+        -:    0:Data:gtest_grafo.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:#include"gtest/gtest.h"
+        -:    2:#include "grafo.h"
+        -:    3:/*
+        -:    4:TEST(TestInsereVertice, insere_vertice){
+        -:    5:    char str_arq[] = "../code/grafo.txt";
+        -:    6:    char str_vertice[] = "HELLO";
+        -:    7:    
+        -:    8:    grafo* G = le_grafo(str_arq);
+        -:    9:    G = insere_vertice(G, str_vertice);
+        -:   10:    EXPECT_EQ(1, pesquisa_vertice(G, str_vertice));
+        -:   11:    libera_grafo(G);
+        -:   12:    G = cria_grafo(); //testando para grafo criado manualmente
+        -:   13:    G = insere_vertice(G, str_vertice);
+        -:   14:    EXPECT_EQ(1, pesquisa_vertice(G, str_vertice));
+        -:   15:    libera_grafo(G);
+        -:   16:}
+        -:   17:
+        -:   18:TEST(TestRemoveVertice, remove_vertice){
+        -:   19:    char str_arq[] = "../code/grafo.txt";
+        -:   20:    char str_vertice[] = "HELLO";
+        -:   21:    
+        -:   22:    grafo* G = le_grafo(str_arq);
+        -:   23:    G = insere_vertice(G, str_vertice);
+        -:   24:    G = remove_vertice(G, str_vertice);
+        -:   25:    EXPECT_NE(1, pesquisa_vertice(G, str_vertice));
+        -:   26:    libera_grafo(G);
+        -:   27:    G = cria_grafo();
+        -:   28:    G = insere_vertice(G, str_vertice);
+        -:   29:    G = remove_vertice(G, str_vertice);
+        -:   30:    EXPECT_NE(1, pesquisa_vertice(G, str_vertice));
+        -:   31:    libera_grafo(G);
+        -:   32:    
+        -:   33:}
+        -:   34:
+        -:   35:TEST(TestInsereAresta, insere_aresta){
+        -:   36:    char str_arq[] = "../code/grafo.txt";
+        -:   37:    char str_vorig[] = "HELLO";
+        -:   38:    char str_vdest[] = "ITSME";
+        -:   39:    double peso = 9.0;
+        -:   40:    
+        -:   41:    grafo* G = le_grafo(str_arq);
+        -:   42:    G = insere_vertice(G, str_vorig);
+        -:   43:    G = insere_vertice(G, str_vdest);
+        -:   44:    G = insere_aresta(G, str_vorig, str_vdest, peso);
+        -:   45:    EXPECT_EQ(1, pesquisa_aresta(G, str_vorig, str_vdest, peso));
+        -:   46:    libera_grafo(G);
+        -:   47:    G = cria_grafo();
+        -:   48:    G = insere_vertice(G, str_vorig);
+        -:   49:    G = insere_vertice(G, str_vdest);
+        -:   50:    G = insere_aresta(G, str_vorig, str_vdest, peso);
+        -:   51:    EXPECT_EQ(1, pesquisa_aresta(G, str_vorig, str_vdest, peso));
+        -:   52:    libera_grafo(G);
+        -:   53:    
+        -:   54:}
+        -:   55:
+        -:   56:TEST(TestRemoveAresta, remove_aresta){
+        -:   57:    char str_arq[] = "../code/grafo.txt";
+        -:   58:    char str_vorig[] = "HELLO";
+        -:   59:    char str_vdest[] = "ITSME";
+        -:   60:    double peso = 9.0;
+        -:   61:    
+        -:   62:    grafo* G = le_grafo(str_arq);
+        -:   63:    G = insere_vertice(G, str_vorig);
+        -:   64:    G = insere_vertice(G, str_vdest);
+        -:   65:    G = insere_aresta(G, str_vorig, str_vdest, peso);
+        -:   66:    G = remove_aresta(G, str_vorig, str_vdest);
+        -:   67:    EXPECT_NE(1, pesquisa_aresta(G, str_vorig, str_vdest, peso));
+        -:   68:    libera_grafo(G);
+        -:   69:    G = cria_grafo();
+        -:   70:    G = insere_vertice(G, str_vorig);
+        -:   71:    G = insere_vertice(G, str_vdest);
+        -:   72:    G = insere_aresta(G, str_vorig, str_vdest, peso);
+        -:   73:    G = remove_aresta(G, str_vorig, str_vdest);
+        -:   74:    EXPECT_NE(1, pesquisa_aresta(G, str_vorig, str_vdest, peso));
+        -:   75:    libera_grafo(G);
+        -:   76:    
+        -:   77:}
+        -:   78:
+        -:   79:TEST(TestPesoCaminho, peso_caminho){
+        -:   80:    char str_arq[] = "../code/grafo.txt";
+        -:   81:    char str_vorig[] = "A";
+        -:   82:    char str_vdest[] = "C";
+        -:   83:    double pesocaminho;
+        -:   84:    double peso = 5.0;
+        -:   85:    
+        -:   86:    grafo* G = le_grafo(str_arq);
+        -:   87:    pesocaminho = peso_caminho(G, str_vorig, str_vdest);
+        -:   88:    EXPECT_EQ(7.0, pesocaminho);
+        -:   89:    libera_grafo(G);
+        -:   90:    G = cria_grafo();
+        -:   91:    G = insere_vertice(G, str_vorig);
+        -:   92:    G = insere_vertice(G, str_vdest);
+        -:   93:    G = insere_aresta(G, str_vorig, str_vdest, peso);
+        -:   94:    pesocaminho = peso_caminho(G, str_vorig, str_vdest);
+        -:   95:    EXPECT_EQ(5.0, pesocaminho);
+        -:   96:    
+        -:   97:}
+        -:   98:
+        -:   99:TEST(TestGrafoConexo, grafo_conexo){
+        -:  100:    char str_arq[] = "../code/grafo.txt";
+        -:  101:    char str_vorig[] = "B";
+        -:  102:    char str_vdest[] = "A";
+        -:  103:    double peso = 7.5;
+        -:  104:    
+        -:  105:    grafo* G = le_grafo(str_arq);
+        -:  106:    EXPECT_EQ(0, grafo_conexo(G));
+        -:  107:    G = insere_aresta(G, str_vorig, str_vdest, peso);
+        -:  108:    EXPECT_EQ(1, grafo_conexo(G));
+        -:  109:    libera_grafo(G);
+        -:  110:} 
+        -:  111:
+        -:  112:TEST(TestVerificaConsistencia, verifica_consistencia){
+        -:  113:    char str_arq[] = "../code/grafo.txt";
+        -:  114:    char str_vertice[] = "A";
+        -:  115:    char str_vorig[] = "B";
+        -:  116:    char str_vdest[] = "C";
+        -:  117:    double peso = 4.0;
+        -:  118:    
+        -:  119:    grafo* G = le_grafo(str_arq);
+        -:  120:    EXPECT_EQ(1, verifica_consistencia(G));
+        -:  121:    G = insere_vertice(G, str_vertice);
+        -:  122:    EXPECT_EQ(0, verifica_consistencia(G)); 
+        -:  123:    G = remove_vertice(G, str_vertice);
+        -:  124:    G = insere_aresta(G, str_vorig, str_vdest, peso);
+        -:  125:    EXPECT_EQ(0, verifica_consistencia(G));
+        -:  126:    libera_grafo(G);
+        -:  127:}    
+        -:  128:*/
+        -:  129:
+        5:  130:TEST(TestImportaTarefasArquivo, le_grafo) {
+        1:  131:    char str_arq[] = "../code/arquivo.txt";
+        -:  132:
+        1:  133:    FILE* fp = fopen(str_arq,"r");
+        1:  134:    ASSERT_TRUE(fp);
+        -:  135:    
+        1:  136:    grafo* G = le_grafo(str_arq);
+        1:  137:    ASSERT_TRUE(G);
+        -:  138:    
+        1:  139:    EXPECT_EQ(G->T->id_tarefa,100);
+        1:  140:    EXPECT_EQ(G->T->prox->id_tarefa,101);
+        1:  141:    EXPECT_EQ(G->T->prox->prox->id_tarefa,102);
+        -:  142:   
+        -:  143:}
+        -:  144:
+        5:  145:TEST(TestGravaTarefasArquivo, imprime_grafo) {
+        1:  146:    char str_arq[] = "../code/saida.txt";
+        1:  147:    char str1[] = "primeira";
+        1:  148:    char str2[] = "segunda";
+        1:  149:    char str3[] = "terceira";
+        -:  150:    
+        1:  151:    grafo* G = cria_grafo();
+        1:  152:    ASSERT_TRUE(G);
+        -:  153:
+        1:  154:    G = insere_tarefa(G, 1, str1, 0, 1, 0, 0);
+        1:  155:    G = insere_tarefa(G, 2, str2, 0, 2, 2, 1);
+        1:  156:    G = insere_tarefa(G, 3, str3, 0, 3, 5, 1);
+        -:  157:
+        1:  158:    G = insere_prerequisitos(G, 2, 1);
+        1:  159:    G = insere_prerequisitos(G, 3, 2);
+        -:  160:
+        1:  161:    imprime_grafo(G, str_arq);
+        -:  162:
+        1:  163:    FILE* fp = fopen(str_arq, "r");
+        1:  164:    ASSERT_TRUE(fp);
+        -:  165:
+        1:  166:    G = le_grafo(str_arq);
+        1:  167:    EXPECT_EQ(G->T->id_tarefa,1);
+        1:  168:    EXPECT_EQ(G->T->prox->id_tarefa,2);
+        1:  169:    EXPECT_EQ(G->T->prox->prox->id_tarefa,3);
+        1:  170:    ASSERT_TRUE(!G->T->prerequisitos_tarefa);
+        1:  171:    EXPECT_EQ(G->T->prox->prerequisitos_tarefa->id_prerequisito, 1);
+        1:  172:    EXPECT_EQ(G->T->prox->prox->prerequisitos_tarefa->id_prerequisito, 2);
+        -:  173:
+        -:  174:
+        -:  175:}
+        -:  176:
+        1:  177:int main(int argc, char **argv) {
+        1:  178:        ::testing::InitGoogleTest( &argc, argv );
+        1:  179:        return RUN_ALL_TESTS();
+        3:  180:    }

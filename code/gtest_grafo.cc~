@@ -1,6 +1,6 @@
 #include"gtest/gtest.h"
 #include "grafo.h"
-
+/*
 TEST(TestInsereVertice, insere_vertice){
     char str_arq[] = "../code/grafo.txt";
     char str_vertice[] = "HELLO";
@@ -103,7 +103,6 @@ TEST(TestGrafoConexo, grafo_conexo){
     double peso = 7.5;
     
     grafo* G = le_grafo(str_arq);
-    ASSERT_NE(NULL, G->V);
     EXPECT_EQ(0, grafo_conexo(G));
     G = insere_aresta(G, str_vorig, str_vdest, peso);
     EXPECT_EQ(1, grafo_conexo(G));
@@ -126,6 +125,54 @@ TEST(TestVerificaConsistencia, verifica_consistencia){
     EXPECT_EQ(0, verifica_consistencia(G));
     libera_grafo(G);
 }    
+*/
+
+TEST(TestImportaTarefasArquivo, le_grafo) {
+    char str_arq[] = "../code/arquivo.txt";
+
+    FILE* fp = fopen(str_arq,"r");
+    ASSERT_TRUE(fp);
+    
+    grafo* G = le_grafo(fp);
+    ASSERT_TRUE(G);
+    
+    EXPECT_EQ(G->T->id_tarefa,100);
+    EXPECT_EQ(G->T->prox->id_tarefa,101);
+    EXPECT_EQ(G->T->prox->prox->id_tarefa,102);
+   
+}
+
+TEST(TestGravaTarefasArquivo, imprime_grafo) {
+    char str_arq[] = "../code/saida.txt";
+    char str1[] = "primeira";
+    char str2[] = "segunda";
+    char str3[] = "terceira";
+    
+    grafo* G = cria_grafo();
+    ASSERT_TRUE(G);
+
+    G = insere_tarefa(G, 1, str1, 0, 1, 0, 0);
+    G = insere_tarefa(G, 2, str2, 0, 2, 2, 1);
+    G = insere_tarefa(G, 3, str3, 0, 3, 5, 1);
+
+    G = insere_prerequisitos(G, 2, 1);
+    G = insere_prerequisitos(G, 3, 2);
+
+    imprime_grafo(G, str_arq);
+
+    FILE* fp = fopen(str_arq, "r");
+    ASSERT_TRUE(fp);
+
+    G = le_grafo(fp);
+    EXPECT_EQ(G->T->id_tarefa,1);
+    EXPECT_EQ(G->T->prox->id_tarefa,2);
+    EXPECT_EQ(G->T->prox->prox->id_tarefa,3);
+    ASSERT_TRUE(!G->T->prerequisitos_tarefa);
+    EXPECT_EQ(G->T->prox->prerequisitos_tarefa->id_prerequisito, 1);
+    EXPECT_EQ(G->T->prox->prox->prerequisitos_tarefa->id_prerequisito, 2);
+
+
+}
 
 int main(int argc, char **argv) {
         ::testing::InitGoogleTest( &argc, argv );
