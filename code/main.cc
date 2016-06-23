@@ -860,12 +860,12 @@ void mostrar_tarefas_filtradas(grafo * G, int * tarefas) {
 
     linha = 3;
 
-    for(i = 0; i < n_tarefas; i++) { 
-        tmp = procura_tarefa(G, tarefas[i]);
-        mvwprintw(janela,starty+linha,startx+1,"%d",tmp->id_tarefa);
-        mvwprintw(janela,starty+linha,startx+16,"%s",tmp->nome_tarefa);
-        linha++;
-    }
+   // for(i = 0; i < n_tarefas; i++) { 
+     //   tmp = procura_tarefa(G, tarefas[i]);
+        mvwprintw(janela,starty+linha,startx+1,"%d",tarefas[0]);
+       // mvwprintw(janela,starty+linha,startx+16,"%s",tmp->nome_tarefa);
+       // linha++;
+    //}
     
     c = wgetch(janela);
 

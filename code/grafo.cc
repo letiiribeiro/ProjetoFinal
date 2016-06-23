@@ -509,7 +509,7 @@ lista* insere_lista(lista* a, int id){
     l->ant = NULL;
     l->prox = a;
     if(a)
-            a->ant = l;
+        a->ant = l;
     return l;
 }
 
