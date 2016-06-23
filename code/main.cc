@@ -840,7 +840,8 @@ void mostrar_tarefas_filtradas(grafo * G, int * tarefas) {
 
     WINDOW * janela;
     int telaAltura, telaLargura;
-    int startx, starty, i = 0, linha;
+    int startx, starty, i, linha;
+    int n_tarefas = sizeof(tarefas) / sizeof(int);
     char msg1[] = "ID             Tarefa", c;
     tarefa * tmp;
 
@@ -859,23 +860,20 @@ void mostrar_tarefas_filtradas(grafo * G, int * tarefas) {
 
     linha = 3;
 
-    mvwprintw(janela,starty+linha,startx+1,"%d",tarefas[i]);
-
-    //while(i != -1) { 
-        //mvwprintw(janela,starty+linha,startx+1,"%d",tarefas[i]);
-
-        //tmp = procura_tarefa(G, tarefas[i]);
-        //mvwprintw(janela,starty+linha,startx+1,"%d",tmp->id_tarefa);
-        //mvwprintw(janela,starty+linha,startx+16,"%s",tmp->nome_tarefa);
-        //linha++;
-    //}
+    for(i = 0; i < n_tarefas; i++) { 
+        tmp = procura_tarefa(G, tarefas[i]);
+        mvwprintw(janela,starty+linha,startx+1,"%d",tmp->id_tarefa);
+        mvwprintw(janela,starty+linha,startx+16,"%s",tmp->nome_tarefa);
+        linha++;
+    }
     
     c = wgetch(janela);
 
     if(c) 
         destruir_menu(janela);
-        
-    return;
+        return;
+
+
 }
 
 void filtrar_tarefas_completadas(grafo * G) {
