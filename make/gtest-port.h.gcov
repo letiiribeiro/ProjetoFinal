@@ -896,8 +896,8 @@
         -:  891: public:
         -:  892:  typedef T element_type;
         -:  893:
-       13:  894:  explicit scoped_ptr(T* p = NULL) : ptr_(p) {}
-       59:  895:  ~scoped_ptr() { reset(); }
+       20:  894:  explicit scoped_ptr(T* p = NULL) : ptr_(p) {}
+       70:  895:  ~scoped_ptr() { reset(); }
         -:  896:
         -:  897:  T& operator*() const { return *ptr_; }
     #####:  898:  T* operator->() const { return ptr_; }
@@ -909,14 +909,14 @@
         -:  904:    return ptr;
         -:  905:  }
         -:  906:
-       59:  907:  void reset(T* p = NULL) {
-       59:  908:    if (p != ptr_) {
-       46:  909:      if (IsTrue(sizeof(T) > 0)) {  // Makes sure T is a complete type.
-       46:  910:        delete ptr_;
+       70:  907:  void reset(T* p = NULL) {
+       70:  908:    if (p != ptr_) {
+       50:  909:      if (IsTrue(sizeof(T) > 0)) {  // Makes sure T is a complete type.
+       50:  910:        delete ptr_;
         -:  911:      }
-       46:  912:      ptr_ = p;
+       50:  912:      ptr_ = p;
         -:  913:    }
-       59:  914:  }
+       70:  914:  }
         -:  915:
         -:  916: private:
         -:  917:  T* ptr_;
@@ -1033,7 +1033,7 @@
         -: 1028:  // Flushes the buffers and, if severity is GTEST_FATAL, aborts the program.
         -: 1029:  ~GTestLog();
         -: 1030:
-        -: 1031:  ::std::ostream& GetStream() { return ::std::cerr; }
+    #####: 1031:  ::std::ostream& GetStream() { return ::std::cerr; }
         -: 1032:
         -: 1033: private:
         -: 1034:  const GTestLogSeverity severity_;
@@ -1147,10 +1147,10 @@
         -: 1142:// When RTTI is available, the function performs a runtime
         -: 1143:// check to enforce this.
         -: 1144:template <class Derived, class Base>
-        -: 1145:Derived* CheckedDowncastToActualType(Base* base) {
+    #####: 1145:Derived* CheckedDowncastToActualType(Base* base) {
         -: 1146:#if GTEST_HAS_RTTI
-        -: 1147:  GTEST_CHECK_(typeid(*base) == typeid(Derived));
-        -: 1148:  return dynamic_cast<Derived*>(base);  // NOLINT
+    #####: 1147:  GTEST_CHECK_(typeid(*base) == typeid(Derived));
+    #####: 1148:  return dynamic_cast<Derived*>(base);  // NOLINT
         -: 1149:#else
         -: 1150:  return static_cast<Derived*>(base);  // Poor man's downcast.
         -: 1151:#endif
@@ -1248,7 +1248,7 @@
         -: 1243:// problem.
         -: 1244:class ThreadWithParamBase {
         -: 1245: public:
-        -: 1246:  virtual ~ThreadWithParamBase() {}
+    #####: 1246:  virtual ~ThreadWithParamBase() {}
         -: 1247:  virtual void Run() = 0;
         -: 1248:};
         -: 1249:
@@ -1436,7 +1436,7 @@
         -: 1431:// ThreadLocalValueHolderBase.
         -: 1432:class ThreadLocalValueHolderBase {
         -: 1433: public:
-        -: 1434:  virtual ~ThreadLocalValueHolderBase() {}
+    #####: 1434:  virtual ~ThreadLocalValueHolderBase() {}
         -: 1435:};
         -: 1436:
         -: 1437:// Called by pthread to delete thread-local data stored by

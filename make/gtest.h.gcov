@@ -258,16 +258,16 @@
         -:  253://   Expected: Foo() is even
         -:  254://     Actual: it's 5
         -:  255://
-       13:  256:class GTEST_API_ AssertionResult {
+       20:  256:class GTEST_API_ AssertionResult {
         -:  257: public:
         -:  258:  // Copy constructor.
         -:  259:  // Used in EXPECT_TRUE/FALSE(assertion_result).
         -:  260:  AssertionResult(const AssertionResult& other);
         -:  261:  // Used in the EXPECT_TRUE/FALSE(bool_expression).
-       13:  262:  explicit AssertionResult(bool success) : success_(success) {}
+       20:  262:  explicit AssertionResult(bool success) : success_(success) {}
         -:  263:
         -:  264:  // Returns true iff the assertion succeeded.
-       13:  265:  operator bool() const { return success_; }  // NOLINT
+       20:  265:  operator bool() const { return success_; }  // NOLINT
         -:  266:
         -:  267:  // Returns the assertion's negation. Used with EXPECT/ASSERT_FALSE.
         -:  268:  AssertionResult operator!() const;
@@ -367,7 +367,7 @@
         -:  362:  // test in test case Foo.  Hence a sub-class can define its own
         -:  363:  // SetUpTestCase() method to shadow the one defined in the super
         -:  364:  // class.
-        2:  365:  static void SetUpTestCase() {}
+        3:  365:  static void SetUpTestCase() {}
         -:  366:
         -:  367:  // Tears down the stuff shared by all tests in this test case.
         -:  368:  //
@@ -375,7 +375,7 @@
         -:  370:  // test in test case Foo.  Hence a sub-class can define its own
         -:  371:  // TearDownTestCase() method to shadow the one defined in the super
         -:  372:  // class.
-        2:  373:  static void TearDownTestCase() {}
+        3:  373:  static void TearDownTestCase() {}
         -:  374:
         -:  375:  // Returns true iff the current test has a fatal failure.
         -:  376:  static bool HasFatalFailure();
@@ -945,25 +945,25 @@
         -:  940:class Environment {
         -:  941: public:
         -:  942:  // The d'tor is virtual as we need to subclass Environment.
-        -:  943:  virtual ~Environment() {}
+    #####:  943:  virtual ~Environment() {}
         -:  944:
         -:  945:  // Override this to define how to set up the environment.
-        -:  946:  virtual void SetUp() {}
+    #####:  946:  virtual void SetUp() {}
         -:  947:
         -:  948:  // Override this to define how to tear down the environment.
-        -:  949:  virtual void TearDown() {}
+    #####:  949:  virtual void TearDown() {}
         -:  950: private:
         -:  951:  // If you see an error about overriding the following function or
         -:  952:  // about it being private, you have mis-spelled SetUp() as Setup().
         -:  953:  struct Setup_should_be_spelled_SetUp {};
-        -:  954:  virtual Setup_should_be_spelled_SetUp* Setup() { return NULL; }
+    #####:  954:  virtual Setup_should_be_spelled_SetUp* Setup() { return NULL; }
         -:  955:};
         -:  956:
         -:  957:// The interface for tracing execution of tests. The methods are organized in
         -:  958:// the order the corresponding events are fired.
         -:  959:class TestEventListener {
         -:  960: public:
-        -:  961:  virtual ~TestEventListener() {}
+    #####:  961:  virtual ~TestEventListener() {}
         -:  962:
         -:  963:  // Fired before any test activity starts.
         -:  964:  virtual void OnTestProgramStart(const UnitTest& unit_test) = 0;
@@ -1440,7 +1440,7 @@
         -: 1435:
         -: 1436:// The helper function for {ASSERT|EXPECT}_EQ.
         -: 1437:template <typename T1, typename T2>
-        8: 1438:AssertionResult CmpHelperEQ(const char* expected_expression,
+       12: 1438:AssertionResult CmpHelperEQ(const char* expected_expression,
         -: 1439:                            const char* actual_expression,
         -: 1440:                            const T1& expected,
         -: 1441:                            const T2& actual) {
@@ -1450,8 +1450,8 @@
         -: 1445:                                // signed/unsigned mismatch.
         -: 1446:#endif
         -: 1447:
-        8: 1448:  if (expected == actual) {
-        8: 1449:    return AssertionSuccess();
+       12: 1448:  if (expected == actual) {
+       12: 1449:    return AssertionSuccess();
         -: 1450:  }
         -: 1451:
         -: 1452:#ifdef _MSC_VER
@@ -1482,12 +1482,12 @@
         -: 1477: public:
         -: 1478:  // This templatized version is for the general case.
         -: 1479:  template <typename T1, typename T2>
-        8: 1480:  static AssertionResult Compare(const char* expected_expression,
+       12: 1480:  static AssertionResult Compare(const char* expected_expression,
         -: 1481:                                 const char* actual_expression,
         -: 1482:                                 const T1& expected,
         -: 1483:                                 const T2& actual) {
         -: 1484:    return CmpHelperEQ(expected_expression, actual_expression, expected,
-        8: 1485:                       actual);
+       12: 1485:                       actual);
         -: 1486:  }
         -: 1487:
         -: 1488:  // With this overloaded version, we allow anonymous enums to be used

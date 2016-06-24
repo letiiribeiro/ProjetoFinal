@@ -438,14 +438,14 @@
         -:  433:// of a Test object.
         -:  434:class TestFactoryBase {
         -:  435: public:
-        2:  436:  virtual ~TestFactoryBase() {}
+        3:  436:  virtual ~TestFactoryBase() {}
         -:  437:
         -:  438:  // Creates a test instance to run. The instance is both created and destroyed
         -:  439:  // within TestInfoImpl::Run()
         -:  440:  virtual Test* CreateTest() = 0;
         -:  441:
         -:  442: protected:
-        2:  443:  TestFactoryBase() {}
+        3:  443:  TestFactoryBase() {}
         -:  444:
         -:  445: private:
         -:  446:  GTEST_DISALLOW_COPY_AND_ASSIGN_(TestFactoryBase);
@@ -454,9 +454,9 @@
         -:  449:// This class provides implementation of TeastFactoryBase interface.
         -:  450:// It is used in TEST and TEST_F macros.
         -:  451:template <class TestClass>
-        6:  452:class TestFactoryImpl : public TestFactoryBase {
+        9:  452:class TestFactoryImpl : public TestFactoryBase {
         -:  453: public:
-        2:  454:  virtual Test* CreateTest() { return new TestClass; }
+        3:  454:  virtual Test* CreateTest() { return new TestClass; }
         -:  455:};
         -:  456:
         -:  457:#if GTEST_OS_WINDOWS
