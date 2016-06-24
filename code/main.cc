@@ -16,7 +16,7 @@ char vVisualizador[7][70];
 
 int n_opcoes = 3;
 int n_operacoes = 8;
-int n_visualizador = 7;
+int n_visualizador = 8;
 
 void print_menu(WINDOW *menu_win, int highlight) {
 
@@ -931,6 +931,78 @@ void filtrar_tarefas_completadas(grafo * G) {
 
 }
 
+void tempo_min(grafo * G, int ID) {
+    
+    WINDOW * janela;
+    int telaAltura, telaLargura;
+    int startx, starty;
+    int periodo;
+    char c;
+    char msg1[] = "O tempo minimo para realizar";
+    char msg2[] = "      as tarefas é:";
+    char msg3[] = "[ENTER]";
+
+    init_pair(1,COLOR_BLUE,COLOR_BLACK);
+
+    getmaxyx(stdscr,telaAltura,telaLargura);
+    starty = (LINES - telaAltura)/2;   
+    startx = (COLS - telaLargura)/2; 
+    refresh();
+
+    janela = newwin(ALTURA, LARGURA, startx, starty);
+
+    wborder(janela, ACS_VLINE, ACS_VLINE,ACS_HLINE,ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
+
+    periodo = tempo_minimo(G, ID);
+
+    imprimirRotulo(janela,starty+2,startx+5,msg1);
+    imprimirRotulo(janela,starty+3,startx+7,msg2);
+
+    init_pair(1,COLOR_GREEN,COLOR_BLACK);
+    mvwprintw(janela,starty+3,startx+30,"%d",periodo);
+
+    imprimirRotulo(janela,starty+6,startx+19,msg3);
+
+    c = wgetch(janela);
+
+    if(c) 
+        destruir_menu(janela);
+        return;
+
+}
+
+void mostrar_tempo_min(grafo * G) {
+    
+    WINDOW * janela;
+    int telaAltura, telaLargura;
+    int startx, starty;
+    char msg1[] = "ID: _______";
+    char msg2[] = "[ENTER]";
+    int ID;
+
+    init_pair(1,COLOR_GREEN,COLOR_BLACK);
+
+    getmaxyx(stdscr,telaAltura,telaLargura);
+    starty = (LINES - telaAltura)/2;   
+    startx = (COLS - telaLargura)/2; 
+    refresh();
+
+    janela = newwin(ALTURA, LARGURA, startx, starty);
+
+    wborder(janela, ACS_VLINE, ACS_VLINE,ACS_HLINE,ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
+
+    imprimirRotulo(janela,starty+2,startx+1,msg1);
+    imprimirRotulo(janela,starty+5,startx+20,msg2);
+    
+    echo();
+    wmove(janela,starty+2,startx+6);
+    wscanw(janela,"%d",&ID);
+
+    destruir_menu(janela);
+    tempo_min(G, ID);
+
+}
+
 void mostrar_caminhos(grafo * G) {
     
     WINDOW * janela;
@@ -976,7 +1048,6 @@ void mostrar_caminhos(grafo * G) {
         return;
 
 }
-
 
 void mostrar_tempo_min_total(grafo * G) {
     
@@ -1093,9 +1164,15 @@ void visualizador_tarefas(grafo * G) {
                     mostrar_tempo_min_total(G);
                     menu_win = newwin(ALTURA, LARGURA_V, startx, starty);
                     keypad(menu_win,TRUE);
-                    refresh();    
+                    refresh();
 
-                } else if(opcao == 7) {
+                } else if (opcao == 7) {        
+                    destruir_menu(menu_win);
+                    mostrar_tempo_min(G);
+                    menu_win = newwin(ALTURA, LARGURA_V, startx, starty);
+                    keypad(menu_win,TRUE);
+                    refresh();
+                } else if(opcao == 8) {
                     destruir_menu(menu_win);
                     return;
                 }
@@ -1304,7 +1381,8 @@ int main () {
 	strcpy(vVisualizador[3],"(4) Quais tarefas foram completadas ou não");
 	strcpy(vVisualizador[4],"(5) Filtrar tarefas completadas ate determinado periodo");
     strcpy(vVisualizador[5],"(6) Mostrar tempo minimo total");
-	strcpy(vVisualizador[6],"(7) Voltar");
+    strcpy(vVisualizador[6],"(7) Mostrar tempo minimo");
+	strcpy(vVisualizador[7],"(8) Voltar");
  
  	if(has_colors() == FALSE)
     {   
