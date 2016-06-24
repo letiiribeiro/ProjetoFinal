@@ -1,1 +1,18 @@
-Data | Horas Trabalhadas | Tipo Tarefa | Descrição da Tarefa Realizada
+Data     | Horas Trabalhadas |              Tipo Tarefa                       | Descrição da Tarefa Realizada
+24/05            2h47            reunião com integrantes do grupo     		   planejamento, divisão de tarefas, instalação de frameworks
+25/05            1h04            	 renomeamos módulos                        adaptação do trabalho 2 para o trabalho 3
+28/05            3h11              função que lê arquivo com tarefas           inicei a leitura do arquivo com formato especificado
+12/06			 3h22				função escreve arquivo					   função escreve arquivo com formato especificado
+10/06			 6h35				nova main com ncurses					   estudando ncurses e testando para implementar interface
+12/06			 1h04               trabalhando com ncurses					   novo item de menu 'Visualizador de tarefas'
+12/06 			 0h38                  ajuste em tela						   ajustes na insterface gráfica
+13/06			 0h27				correção de função						   função remove pré-requisitos decrementando número de pré-requisitos quando remove. E 																				modificações na interface gráfica.	
+13/06			 0h35               correção de função							corrigindo operação de inserir nova tarefa
+14/06			 5h54              reunião com o grupo 							corrigimos bugs e implementamos testes para primeira fase do projeto
+16/06			 1h37				ajuste em tela								Novo item para visualizar pre-requisitos das tarefas na interface
+16/06			 2h43				ajuste em tela								Operação editar tarefa terminada em tela
+17/06			 1h					escopo de função em tela					visualizar tarefas concluidas filtradas por determinado periodo
+23/06			 4h46				ajuste em tela								Teste função que filtra tarefas completadas por período
+23/06			 0h39				ajuste em tela								Função na interface para testar tempo minimo total
+26/06			 8h25              finalizando tarefas							Implementação de todos os testes para cobertura. Finalizando interface gráfica.
+

@@ -761,10 +761,13 @@ void ver_tarefas_concluidas(grafo * G) {
     int telaAltura, telaLargura;
     int startx, starty, i;
     char msg1[] = "ID             Tarefa", c;
+    char completadas[] = "-> Completadas";
+    char nao_completadas[] = "-> Nao completadas";
     tarefa * tmp;
-    //int* tarefas_completadas;
 
     init_pair(1,COLOR_BLUE,COLOR_BLACK);
+    init_pair(2,COLOR_GREEN,COLOR_BLACK);
+    init_pair(3,COLOR_RED,COLOR_BLACK);
 
     getmaxyx(stdscr,telaAltura,telaLargura);
     starty = (LINES - telaAltura)/2;   
@@ -775,13 +778,30 @@ void ver_tarefas_concluidas(grafo * G) {
 
     wborder(janela, ACS_VLINE, ACS_VLINE,ACS_HLINE,ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
 
-    imprimirRotulo(janela,starty+1,startx+1,msg1);
+    imprimirRotulo(janela,starty+4,startx+1,msg1);
 
-    i = 3;
+    wattron(janela, COLOR_PAIR(2));
+    mvwprintw(janela,starty+1,startx+1,completadas);
+    wattroff(janela, COLOR_PAIR(2));
+
+    wattron(janela, COLOR_PAIR(3));
+    mvwprintw(janela,starty+2,startx+1,nao_completadas);
+    wattroff(janela, COLOR_PAIR(3));
+
+    i = 6;
 
     for(tmp = G->T; tmp != NULL; tmp = tmp->prox) {
-        mvwprintw(janela,starty+i,startx+1,"%d",tmp->id_tarefa);
-        mvwprintw(janela,starty+i,startx+16,"%s",tmp->nome_tarefa);
+        if(tmp->tarefa_executada) {
+            wattron(janela, COLOR_PAIR(3));
+            mvwprintw(janela,starty+i,startx+1,"%d",tmp->id_tarefa);
+            mvwprintw(janela,starty+i,startx+16,"%s",tmp->nome_tarefa);
+            wattroff(janela, COLOR_PAIR(3));
+        } else {
+            wattron(janela, COLOR_PAIR(2));
+            mvwprintw(janela,starty+i,startx+1,"%d",tmp->id_tarefa);
+            mvwprintw(janela,starty+i,startx+16,"%s",tmp->nome_tarefa);
+            wattroff(janela, COLOR_PAIR(2));
+        }
         i++;
     }
     
@@ -836,13 +856,14 @@ grafo * remover_pre_requisitos(grafo* G) {
 
 }
 
+
 void mostrar_tarefas_filtradas(grafo * G, int * tarefas) {
 
     WINDOW * janela;
     int telaAltura, telaLargura;
-    int startx, starty, i, linha;
-    int n_tarefas = sizeof(tarefas) / sizeof(int);
+    int startx, starty, linha;
     char msg1[] = "ID             Tarefa", c;
+    int  i = 0;
     tarefa * tmp;
 
     init_pair(1,COLOR_BLUE,COLOR_BLACK);
@@ -860,11 +881,12 @@ void mostrar_tarefas_filtradas(grafo * G, int * tarefas) {
 
     linha = 3;
 
-    for(i = 0; i < n_tarefas; i++) { 
+    while(tarefas[i] != -1) {
         tmp = procura_tarefa(G, tarefas[i]);
         mvwprintw(janela,starty+linha,startx+1,"%d",tmp->id_tarefa);
         mvwprintw(janela,starty+linha,startx+16,"%s",tmp->nome_tarefa);
         linha++;
+        i++;
     }
     
     c = wgetch(janela);
@@ -908,6 +930,53 @@ void filtrar_tarefas_completadas(grafo * G) {
     mostrar_tarefas_filtradas(G, tarefas);
 
 }
+
+void mostrar_caminhos(grafo * G) {
+    
+    WINDOW * janela;
+    int telaAltura, telaLargura;
+    int startx, starty, i = 0;
+    int * caminho;
+    char c;
+    char msg1[] = "Caminho com menor tempo:";
+    char msg3[] = "[ENTER]";
+
+    init_pair(1,COLOR_BLUE,COLOR_BLACK);
+
+    getmaxyx(stdscr,telaAltura,telaLargura);
+    starty = (LINES - telaAltura)/2;   
+    startx = (COLS - telaLargura)/2; 
+    refresh();
+
+    janela = newwin(ALTURA, LARGURA, startx, starty);
+
+    wborder(janela, ACS_VLINE, ACS_VLINE,ACS_HLINE,ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
+
+    caminho = caminhos(G);
+
+    imprimirRotulo(janela,starty+2,startx+3,msg1);
+    int coluna = 6;
+
+    while(1) {
+        if(caminho[i] == -1)
+            break;
+        else
+            mvwprintw(janela,starty+3,startx+coluna,"%d -> ",caminho[i]);
+        i++;
+        coluna += 6;
+    }
+    
+
+    imprimirRotulo(janela,starty+6,startx+19,msg3);
+
+    c = wgetch(janela);
+
+    if(c) 
+        destruir_menu(janela);
+        return;
+
+}
+
 
 void mostrar_tempo_min_total(grafo * G) {
     
@@ -1000,14 +1069,14 @@ void visualizador_tarefas(grafo * G) {
 
                 } else if (opcao == 3) {
                     destruir_menu(menu_win);
-                    ver_tarefas_concluidas(G);
+                    mostrar_caminhos(G);
                     menu_win = newwin(ALTURA, LARGURA_V, startx, starty);
                     keypad(menu_win,TRUE);
                     refresh();
 
                 } else if(opcao == 4) {
                     destruir_menu(menu_win);
-                    //G = remover_pre_requisitos(G);
+                    ver_tarefas_concluidas(G);
                     menu_win = newwin(ALTURA, LARGURA_V, startx, starty);
                     keypad(menu_win,TRUE);
                     refresh();

@@ -1,11 +1,11 @@
-        -:    0:Source:/usr/include/c++/4.8/ext/type_traits.h
+        -:    0:Source:/usr/include/c++/4.7/ext/type_traits.h
         -:    0:Graph:gtest_grafo.gcno
         -:    0:Data:gtest_grafo.gcda
         -:    0:Runs:1
         -:    0:Programs:1
         -:    1:// -*- C++ -*-
         -:    2:
-        -:    3:// Copyright (C) 2005-2013 Free Software Foundation, Inc.
+        -:    3:// Copyright (C) 2005, 2006, 2007, 2009 Free Software Foundation, Inc.
         -:    4://
         -:    5:// This file is part of the GNU ISO C++ Library.  This library is free
         -:    6:// software; you can redistribute it and/or modify it under the terms
