@@ -12,11 +12,11 @@ int starty = 0;
 
 char vOpcoes[3][70];
 char vOperacoes[8][70];
-char vVisualizador[6][70];
+char vVisualizador[7][70];
 
 int n_opcoes = 3;
 int n_operacoes = 8;
-int n_visualizador = 6;
+int n_visualizador = 7;
 
 void print_menu(WINDOW *menu_win, int highlight) {
 
@@ -872,8 +872,6 @@ void mostrar_tarefas_filtradas(grafo * G, int * tarefas) {
     if(c) 
         destruir_menu(janela);
         return;
-
-
 }
 
 void filtrar_tarefas_completadas(grafo * G) {
@@ -908,6 +906,46 @@ void filtrar_tarefas_completadas(grafo * G) {
 
     tarefas = tarefas_concluidas(G, periodo);
     mostrar_tarefas_filtradas(G, tarefas);
+
+}
+
+void mostrar_tempo_min_total(grafo * G) {
+    
+    WINDOW * janela;
+    int telaAltura, telaLargura;
+    int startx, starty;
+    int periodo;
+    char c;
+    char msg1[] = "O tempo minimo total para realizar";
+    char msg2[] = "todas as tarefas é:";
+    char msg3[] = "[ENTER]";
+
+    init_pair(1,COLOR_BLUE,COLOR_BLACK);
+
+    getmaxyx(stdscr,telaAltura,telaLargura);
+    starty = (LINES - telaAltura)/2;   
+    startx = (COLS - telaLargura)/2; 
+    refresh();
+
+    janela = newwin(ALTURA, LARGURA, startx, starty);
+
+    wborder(janela, ACS_VLINE, ACS_VLINE,ACS_HLINE,ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
+
+    periodo = tempo_minimo_total(G);
+
+    imprimirRotulo(janela,starty+2,startx+5,msg1);
+    imprimirRotulo(janela,starty+3,startx+7,msg2);
+
+    init_pair(1,COLOR_GREEN,COLOR_BLACK);
+    mvwprintw(janela,starty+3,startx+29,"%d",periodo);
+
+    imprimirRotulo(janela,starty+6,startx+19,msg3);
+
+    c = wgetch(janela);
+
+    if(c) 
+        destruir_menu(janela);
+        return;
 
 }
 
@@ -982,6 +1020,13 @@ void visualizador_tarefas(grafo * G) {
                     refresh();
 
                 } else if(opcao == 6) {
+                    destruir_menu(menu_win);
+                    mostrar_tempo_min_total(G);
+                    menu_win = newwin(ALTURA, LARGURA_V, startx, starty);
+                    keypad(menu_win,TRUE);
+                    refresh();    
+
+                } else if(opcao == 7) {
                     destruir_menu(menu_win);
                     return;
                 }
@@ -1189,7 +1234,8 @@ int main () {
 	strcpy(vVisualizador[2],"(3) Caminhos que indicam menor tempo de execucao");
 	strcpy(vVisualizador[3],"(4) Quais tarefas foram completadas ou não");
 	strcpy(vVisualizador[4],"(5) Filtrar tarefas completadas ate determinado periodo");
-	strcpy(vVisualizador[5],"(6) Voltar");
+    strcpy(vVisualizador[5],"(6) Mostrar tempo minimo total");
+	strcpy(vVisualizador[6],"(7) Voltar");
  
  	if(has_colors() == FALSE)
     {   
