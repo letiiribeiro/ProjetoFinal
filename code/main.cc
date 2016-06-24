@@ -909,6 +909,53 @@ void filtrar_tarefas_completadas(grafo * G) {
 
 }
 
+void mostrar_caminhos(grafo * G) {
+    
+    WINDOW * janela;
+    int telaAltura, telaLargura;
+    int startx, starty, i = 0;
+    int * caminho;
+    char c;
+    char msg1[] = "Caminho com menor tempo:";
+    char msg3[] = "[ENTER]";
+
+    init_pair(1,COLOR_BLUE,COLOR_BLACK);
+
+    getmaxyx(stdscr,telaAltura,telaLargura);
+    starty = (LINES - telaAltura)/2;   
+    startx = (COLS - telaLargura)/2; 
+    refresh();
+
+    janela = newwin(ALTURA, LARGURA, startx, starty);
+
+    wborder(janela, ACS_VLINE, ACS_VLINE,ACS_HLINE,ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
+
+    caminho = caminhos(G);
+
+    imprimirRotulo(janela,starty+2,startx+3,msg1);
+    int coluna = 6;
+
+    while(1) {
+        if(caminho[i] == -1)
+            break;
+        else
+            mvwprintw(janela,starty+3,startx+coluna,"%d -> ",caminho[i]);
+        i++;
+        coluna += 6;
+    }
+    
+
+    imprimirRotulo(janela,starty+6,startx+19,msg3);
+
+    c = wgetch(janela);
+
+    if(c) 
+        destruir_menu(janela);
+        return;
+
+}
+
+
 void mostrar_tempo_min_total(grafo * G) {
     
     WINDOW * janela;
@@ -1000,14 +1047,14 @@ void visualizador_tarefas(grafo * G) {
 
                 } else if (opcao == 3) {
                     destruir_menu(menu_win);
-                    ver_tarefas_concluidas(G);
+                    mostrar_caminhos(G);
                     menu_win = newwin(ALTURA, LARGURA_V, startx, starty);
                     keypad(menu_win,TRUE);
                     refresh();
 
                 } else if(opcao == 4) {
                     destruir_menu(menu_win);
-                    //G = remover_pre_requisitos(G);
+                    
                     menu_win = newwin(ALTURA, LARGURA_V, startx, starty);
                     keypad(menu_win,TRUE);
                     refresh();
