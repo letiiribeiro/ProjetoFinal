@@ -220,8 +220,7 @@ grafo* le_grafo(char * nomeArquivo){
         int id_tarefa = atoi(buffer);
         i += 2;
         int ini = i;
-        while(buffer[i] != 0x27)
-            i++;
+        for(;buffer[i] !=0x27;i++);
         buffer[i] = '\0';
         char nome_tarefa[100];
         strcpy(nome_tarefa,&buffer[ini]);
@@ -267,110 +266,6 @@ grafo* le_grafo(char * nomeArquivo){
     fclose(fp);
     return G;
 }
-/*
-typedef struct LISTA{
-    tarefa* v;
-    struct LISTA* prox;
-}prerequisitos_tarefa;
-
-typedef struct FILA{
-    prerequisitos_tarefa* ini;
-    prerequisitos_tarefa* fim;
-}fila;
-
-fila* criaFila(){
-    fila* f = (fila*)malloc(sizeof(fila));
-    f->fim = f->ini = NULL;
-    return f;
-}
-
-void insereFila(tarefa* v, fila* f){
-    if(f){
-        prerequisitos_tarefa* t = (prerequisitos_tarefa*)malloc(sizeof(prerequisitos_tarefa));
-        t->v = v;
-        t->prox = NULL;
-        if(!f->ini)
-            f->ini = t;
-        if(f->fim)
-            f->fim->prox = t;
-        f->fim = t;
-    }
-}
-
-tarefa* retiraFila(fila* f){
-    if(f && f->ini){
-        prerequisitos_tarefa* t = f->ini;
-        tarefa* v = t->v;
-        f->ini = t->prox;
-        if(!t->prox)
-            f->fim = f->ini;
-        free(t);
-        return v;
-    }
-    else
-        return NULL;
-}
-
-int filaVazia(fila* f){
-    if(f && f->ini)
-        return 0;
-    return 1;
-}
-
-void BFS(grafo* G, char* vorig){
-    tarefa* u;
-    for(u=G->T;u!=NULL;u=u->prox)
-        if(strcmp(u->v,vorig) != 0){
-            u->c = -1;
-            u->d = 0x7FFFFFFF;
-        }
-    for(u=G->T;u!=NULL;u=u->prox)
-        if(strcmp(u->v,vorig) == 0)
-            break;
-    u->c = 0;
-    u->d = 0;
-    fila* Q = criaFila();
-    insereFila(u,Q);
-    while(!filaVazia(Q)){
-        tarefa* j = retiraFila(Q);
-        prerequisitos* e;
-        for(e=j->prerequisitos_tarefa;e!=NULL;e=e->prox){
-            tarefa* tmp;
-            for(tmp=G->T;tmp!=NULL;tmp=tmp->prox)
-                if(strcmp(tmp->v,e->v) == 0)
-                    break;
-            if(tmp && tmp->c == -1){
-                tmp->c = 0;
-                tmp->d = j->d + e->peso;
-                insereFila(tmp,Q);
-            }
-        }
-        j->c = 1;
-    }
-}
-
-double peso_caminho(grafo* G, char* vorig, char* vdest){
-    BFS(G,vorig);
-    tarefa* tmp;
-    for(tmp=G->T;tmp!=NULL;tmp=tmp->prox)
-        if(strcmp(vdest,tmp->v)==0)
-            return tmp->d;
-    return -1;
-}
-
-int grafo_conexo(grafo* G){
-    tarefa* tmp;
-    for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
-        if(tmp->vorig == 1){
-            BFS(G,tmp->v);
-            tarefa* tmp2;
-            for(tmp2=G->T;tmp2!=NULL;tmp2=tmp2->prox)
-                if(tmp2->d == 0x7FFFFFFF)
-                    return 0;
-        }
-   }
-   return 1;
-}*/
 
 void imprime_grafo(grafo* G, char* nome_arq) {
 
@@ -422,7 +317,7 @@ void libera_grafo(grafo* G){
             tarefa* tmp1 = t->prox;
             free(t);
             t = tmp1;
-        }
+        } free(G);
     }
 }
 
