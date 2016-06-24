@@ -156,7 +156,51 @@ TEST(TestEditaTarefa,edita_tarefa) {
     EXPECT_EQ(G->T->prox->prox->prox->id_tarefa, 5);
 }
 
+TEST(TestLiberaGrafo, libera_grafo) {
+    char str1[] = "primeira";
+    char str2[] = "segunda";
+    char str3[] = "terceira";
+    char str4[] = "quarta";
 
+    grafo* G = cria_grafo();
+    ASSERT_TRUE(G);
+
+    G = insere_tarefa(G, 1, str1, 0, 1, 0, 0);
+    G = insere_tarefa(G, 2, str2, 0, 2, 2, 0);
+    G = insere_tarefa(G, 3, str3, 0, 3, 5, 0);
+    G = insere_tarefa(G, 4, str4, 5, 2, 5, 3);
+
+    G = insere_prerequisitos(G, 4, 1);
+    G = insere_prerequisitos(G, 4, 2);
+    G = insere_prerequisitos(G, 4, 3);
+
+    libera_grafo(G);
+
+    ASSERT_TRUE(G);
+}
+
+TEST(TestVerificaConsistencia, verifica_consistencia) {
+    char str1[] = "primeira";
+    char str2[] = "segunda";
+    char str3[] = "terceira";
+    char str4[] = "quarta";
+
+    grafo* G = cria_grafo();
+    ASSERT_TRUE(G);
+
+    G = insere_tarefa(G, 1, str1, 0, 1, 0, 0);
+    G = insere_tarefa(G, 2, str2, 0, 2, 2, 0);
+    G = insere_tarefa(G, 3, str3, 0, 3, 5, 0);
+    G = insere_tarefa(G, 4, str4, 5, 2, 5, 3);
+
+    G = insere_prerequisitos(G, 4, 1);
+    G = insere_prerequisitos(G, 4, 2);
+    G = insere_prerequisitos(G, 4, 3);
+
+    int i = verifica_consistencia(G);
+
+    EXPECT_EQ(i, -1);
+}
 
 TEST(TestRecuperarTarefaPorID, procura_tarefa) {
 
