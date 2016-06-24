@@ -10,139 +10,139 @@
         -:    5:
         -:    6:#define MAX_LINHA 1000
         -:    7:
-        5:    8:grafo* cria_grafo(){
-        5:    9:    grafo* G = (grafo *)malloc(sizeof(grafo));
-        5:   10:    if(!G){
+        8:    8:grafo* cria_grafo(){
+        8:    9:    grafo* G = (grafo *)malloc(sizeof(grafo));
+        8:   10:    if(!G){
     #####:   11:        printf("Erro na alocacao!\n");
     #####:   12:        exit(1);
         -:   13:    }
-        5:   14:    G->T=NULL;
-        5:   15:    return G;
+        8:   14:    G->T=NULL;
+        8:   15:    return G;
         -:   16:}
         -:   17:
-       17:   18:grafo* insere_tarefa(grafo* G, int id_tarefa, char* nome_tarefa, int tarefa_executada, int duracao_tarefa, int inicio_min_tarefa, int n_prerequisitos) {
+       29:   18:grafo* insere_tarefa(grafo* G, int id_tarefa, char* nome_tarefa, int tarefa_executada, int duracao_tarefa, int inicio_min_tarefa, int n_prerequisitos) {
         -:   19:
-       17:   20:    tarefa* t = (tarefa *)malloc(sizeof(tarefa));
+       29:   20:    tarefa* t = (tarefa *)malloc(sizeof(tarefa));
         -:   21:
-       17:   22:    if(!t){
+       29:   22:    if(!t){
     #####:   23:        printf("Erro na alocacao!\n");
     #####:   24:        exit(1);
         -:   25:    }
         -:   26:
-       17:   27:    if(id_tarefa < 0)
+       29:   27:    if(id_tarefa < 0)
     #####:   28:        return G;
         -:   29:    
-       17:   30:    t->id_tarefa = id_tarefa;
-       17:   31:    strcpy(t->nome_tarefa, nome_tarefa);
-       17:   32:    t->tarefa_executada = tarefa_executada;
-       17:   33:    t->duracao_tarefa = duracao_tarefa;
-       17:   34:    t->inicio_min_tarefa = inicio_min_tarefa;
-       17:   35:    t-> n_prerequisitos = n_prerequisitos;
+       29:   30:    t->id_tarefa = id_tarefa;
+       29:   31:    strcpy(t->nome_tarefa, nome_tarefa);
+       29:   32:    t->tarefa_executada = tarefa_executada;
+       29:   33:    t->duracao_tarefa = duracao_tarefa;
+       29:   34:    t->inicio_min_tarefa = inicio_min_tarefa;
+       29:   35:    t-> n_prerequisitos = n_prerequisitos;
         -:   36:
         -:   37:    tarefa* tmp;
         -:   38:
-       17:   39:    if(G->T == NULL)
-        5:   40:        G->T = t;
+       29:   39:    if(G->T == NULL)
+        8:   40:        G->T = t;
         -:   41:    else {
-       12:   42:        for(tmp = G->T; tmp->prox != NULL;tmp = tmp->prox);
-       12:   43:        tmp->prox = t;
+       21:   42:        for(tmp = G->T; tmp->prox != NULL;tmp = tmp->prox);
+       21:   43:        tmp->prox = t;
         -:   44:    }
         -:   45:
-       17:   46:    t->prox = NULL;
-       17:   47:    t->prerequisitos_tarefa = NULL;
+       29:   46:    t->prox = NULL;
+       29:   47:    t->prerequisitos_tarefa = NULL;
         -:   48:
-       17:   49:    return G;
+       29:   49:    return G;
         -:   50:}
         -:   51:
-    #####:   52:grafo* edita_tarefa(grafo* G, int id_tarefa, int novo_id_tarefa, char* nome_tarefa, int
+        1:   52:grafo* edita_tarefa(grafo* G, int id_tarefa, int novo_id_tarefa, char* nome_tarefa, int
         -:   53:tarefa_executada, int duracao_tarefa, int inicio_min_tarefa, int
         -:   54:n_prerequisitos,int* id_prerequisitos, int flag){
         -:   55:    tarefa *tmp;
-    #####:   56:    for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
-    #####:   57:        if(tmp->id_tarefa == id_tarefa){
-    #####:   58:            if(flag&1)
-    #####:   59:                strcpy(tmp->nome_tarefa, nome_tarefa);
-    #####:   60:            if(flag&2)
-    #####:   61:                tmp->tarefa_executada = tarefa_executada;
-    #####:   62:            if(flag&4)
-    #####:   63:                tmp->duracao_tarefa = duracao_tarefa;
-    #####:   64:            if(flag&8)
-    #####:   65:                tmp->inicio_min_tarefa = inicio_min_tarefa;
-    #####:   66:            if(flag&16){
-    #####:   67:                tmp->n_prerequisitos = n_prerequisitos;
+        4:   56:    for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
+        4:   57:        if(tmp->id_tarefa == id_tarefa){
+        1:   58:            if(flag&1)
+        1:   59:                strcpy(tmp->nome_tarefa, nome_tarefa);
+        1:   60:            if(flag&2)
+        1:   61:                tmp->tarefa_executada = tarefa_executada;
+        1:   62:            if(flag&4)
+        1:   63:                tmp->duracao_tarefa = duracao_tarefa;
+        1:   64:            if(flag&8)
+        1:   65:                tmp->inicio_min_tarefa = inicio_min_tarefa;
+        1:   66:            if(flag&16){
+        1:   67:                tmp->n_prerequisitos = n_prerequisitos;
         -:   68:                int i;
         -:   69:                prerequisitos* p;
-    #####:   70:                for(p=tmp->prerequisitos_tarefa;p;){
-    #####:   71:                    prerequisitos* l = p->prox;
-    #####:   72:                    free(p);
-    #####:   73:                    p = l;
+        5:   70:                for(p=tmp->prerequisitos_tarefa;p;){
+        3:   71:                    prerequisitos* l = p->prox;
+        3:   72:                    free(p);
+        3:   73:                    p = l;
         -:   74:                }
-    #####:   75:                tmp->prerequisitos_tarefa = NULL;
-    #####:   76:                for(i=0;i<n_prerequisitos;i++){
+        1:   75:                tmp->prerequisitos_tarefa = NULL;
+        2:   76:                for(i=0;i<n_prerequisitos;i++){
         -:   77:                    tarefa* t;
-    #####:   78:                    for(t=G->T;t&&t->id_tarefa!=id_prerequisitos[i];t=t->prox); 
-    #####:   79:                    G = insere_prerequisitos(G,id_tarefa,id_prerequisitos[i]);
+        1:   78:                    for(t=G->T;t&&t->id_tarefa!=id_prerequisitos[i];t=t->prox); 
+        1:   79:                    G = insere_prerequisitos(G,id_tarefa,id_prerequisitos[i]);
         -:   80:                }
         -:   81:            }
-    #####:   82:            if(flag&32){
-    #####:   83:                if(!pesquisa_tarefa(G,novo_id_tarefa)){
+        1:   82:            if(flag&32){
+        1:   83:                if(!pesquisa_tarefa(G,novo_id_tarefa)){
         -:   84:                    tarefa *t;
-    #####:   85:                    for(t=G->T;t!=NULL;t=t->prox){
+        5:   85:                    for(t=G->T;t!=NULL;t=t->prox){
         -:   86:                        prerequisitos* e;
-    #####:   87:                        for(e=t->prerequisitos_tarefa;e!=NULL;e=e->prox){
-    #####:   88:                            if(e->id_prerequisito == id_tarefa)
+        5:   87:                        for(e=t->prerequisitos_tarefa;e!=NULL;e=e->prox){
+        1:   88:                            if(e->id_prerequisito == id_tarefa)
     #####:   89:                                e->id_prerequisito = novo_id_tarefa;
         -:   90:                        }
         -:   91:                    }
-    #####:   92:                    tmp->id_tarefa = novo_id_tarefa;
+        1:   92:                    tmp->id_tarefa = novo_id_tarefa;
         -:   93:                }
         -:   94:            }
-    #####:   95:            break;   
+        1:   95:            break;   
         -:   96:        } 
         -:   97:        else 
-    #####:   98:            printf("Error: insira a tarefa primeiro para editar.\n");
+        3:   98:            printf("Error: insira a tarefa primeiro para editar.\n");
         -:   99:    }
-    #####:  100:    return G;
+        1:  100:    return G;
         -:  101:}
         -:  102:
-       13:  103:grafo* insere_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito){
+       23:  103:grafo* insere_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito){
         -:  104:
-       13:  105:    prerequisitos* e = (prerequisitos *)malloc(sizeof(prerequisitos));
+       23:  105:    prerequisitos* e = (prerequisitos *)malloc(sizeof(prerequisitos));
         -:  106:    tarefa* tmp;
         -:  107:
-       13:  108:    if(!e) {
+       23:  108:    if(!e) {
     #####:  109:        printf("Erro na alocacao.\n");
     #####:  110:        exit(1);
         -:  111:    }
         -:  112:
-       13:  113:    e->id_prerequisito = id_prerequisito;
+       23:  113:    e->id_prerequisito = id_prerequisito;
         -:  114:
-       13:  115:    tmp = procura_tarefa(G, id_tarefa);
+       23:  115:    tmp = procura_tarefa(G, id_tarefa);
         -:  116:
         -:  117:    prerequisitos* tmp2;
         -:  118:
-       13:  119:    if(tmp->prerequisitos_tarefa == NULL)
-        9:  120:	   tmp->prerequisitos_tarefa = e;
+       23:  119:    if(tmp->prerequisitos_tarefa == NULL)
+       15:  120:	   tmp->prerequisitos_tarefa = e;
         -:  121:	else {
-        4:  122:	   for(tmp2 = tmp->prerequisitos_tarefa; tmp2->prox != NULL; tmp2 = tmp2->prox);
-        4:  123:	   tmp2->prox = e;
+        8:  122:	   for(tmp2 = tmp->prerequisitos_tarefa; tmp2->prox != NULL; tmp2 = tmp2->prox);
+        8:  123:	   tmp2->prox = e;
         -:  124:	}
         -:  125:
-       13:  126:    e->prox = NULL;
+       23:  126:    e->prox = NULL;
         -:  127:
-       13:  128:    return G;
+       23:  128:    return G;
         -:  129:}
         -:  130:
-       13:  131:tarefa * procura_tarefa(grafo* G, int id_tarefa) {
+       24:  131:tarefa * procura_tarefa(grafo* G, int id_tarefa) {
         -:  132:
         -:  133:    tarefa *tmp;
         -:  134:
-       41:  135:    for(tmp = G->T; tmp != NULL; tmp = tmp->prox) {
-       41:  136:        if(tmp->id_tarefa == id_tarefa)
-       13:  137:            return tmp;
+       83:  135:    for(tmp = G->T; tmp != NULL; tmp = tmp->prox) {
+       82:  136:        if(tmp->id_tarefa == id_tarefa)
+       23:  137:            return tmp;
         -:  138:    }
         -:  139:
-    #####:  140:    return NULL;
+        1:  140:    return NULL;
         -:  141:}
         -:  142:
         1:  143:grafo* remove_tarefa(grafo* G, int id_tarefa){
@@ -250,8 +250,8 @@
         6:  245:        int inicio_min_tarefa = atoi(&buffer[ini]);
         6:  246:        i++;
         6:  247:        ini = i;
-      236:  248:        while(buffer[i] != 0x20)
-      224:  249:            i++;
+      244:  248:        while(buffer[i] != 0x20)
+      232:  249:            i++;
         6:  250:        buffer[i] = '\0';
         6:  251:        int n_prerequisitos = atoi(&buffer[ini]);
         6:  252:        int prerequisitos[n_prerequisitos];
@@ -261,8 +261,8 @@
        10:  256:        for(j=0;j<n_prerequisitos;j++) {
         4:  257:            i++;
         4:  258:            ini = i;
-     2136:  259:            while(buffer[i] != 0x20)
-     2128:  260:                i++;
+     1960:  259:            while(buffer[i] != 0x20)
+     1952:  260:                i++;
         4:  261:            buffer[i] = '\0';
         4:  262:            prerequisitos[j] = atoi(&buffer[ini]);
         4:  263:            G = insere_prerequisitos(G, id_tarefa, prerequisitos[j]);
@@ -456,28 +456,28 @@
     #####:  451:    return 1;
         -:  452:}
         -:  453:
-    #####:  454:int pesquisa_tarefa(grafo* G, int id_tarefa){
+        2:  454:int pesquisa_tarefa(grafo* G, int id_tarefa){
         -:  455:    tarefa *tmp;
-    #####:  456:    for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
-    #####:  457:        if(tmp->id_tarefa == id_tarefa)
-    #####:  458:            return 1;
+        8:  456:    for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
+        7:  457:        if(tmp->id_tarefa == id_tarefa)
+        1:  458:            return 1;
         -:  459:    }
-    #####:  460:    return 0;
+        1:  460:    return 0;
         -:  461:}
         -:  462:
         -:  463:
-    #####:  464:int pesquisa_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito){
+        2:  464:int pesquisa_prerequisitos(grafo* G, int id_tarefa, int id_prerequisito){
         -:  465:    tarefa *tmp;
-    #####:  466:    for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
-    #####:  467:        if(tmp->id_tarefa == id_tarefa){
+        9:  466:    for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
+        8:  467:        if(tmp->id_tarefa == id_tarefa){
         -:  468:            prerequisitos* e;
-    #####:  469:            for(e=tmp->prerequisitos_tarefa;e!=NULL;e=e->prox){
-    #####:  470:                if(e->id_prerequisito == id_prerequisito)
-    #####:  471:                    return 1;
+        4:  469:            for(e=tmp->prerequisitos_tarefa;e!=NULL;e=e->prox){
+        3:  470:                if(e->id_prerequisito == id_prerequisito)
+        1:  471:                    return 1;
         -:  472:            }
         -:  473:        }
         -:  474:    }
-    #####:  475:    return 0;
+        1:  475:    return 0;
         -:  476:}
         -:  477:
     #####:  478:int tempo_minimo(grafo* G, int id_tarefa){
