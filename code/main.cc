@@ -952,7 +952,8 @@ void tempo_min(grafo * G, int ID) {
     janela = newwin(ALTURA, LARGURA, startx, starty);
 
     wborder(janela, ACS_VLINE, ACS_VLINE,ACS_HLINE,ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
-
+    
+    inicializa_tempo_minimo(G);
     periodo = tempo_minimo(G, ID);
 
     imprimirRotulo(janela,starty+2,startx+5,msg1);

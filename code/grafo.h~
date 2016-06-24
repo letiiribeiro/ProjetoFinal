@@ -10,22 +10,26 @@
 #define FLG_IDTR 0x20
 #define INT_MAX 2147483647
 
-/*********************
-* Exemplo de uso de edita_tarefa caso o usuario deseje alterar o nome e inicio
-* e prerequisitos
-* edita_tarefa(G,id_tarefa,novo_id_tarefa,nome_tarefa,tarefa_executada,duracao_tarefa,inicio_min_tarefa,n_prerequisitos,id_prerequisitos,FLG_NOME|FLG_INIC|FLG_PRER)
-* 
-flag = 0;
-
-if(quis_nome)
-    flag |= FLG_NOME;
+/**
+* Estrutura de lista para os pré requisitos
+* contendo o Id e um ponteiro para apontar para o
+* próximo elemento.
 */
-
 typedef struct PreRequisitos {
     int id_prerequisito;
     struct PreRequisitos *prox;
 } prerequisitos;
-
+/**
+* Estrutura de lista para as tarefas do grafo
+* contendo o Id da tarefa(id_tarefa), o nome da 
+* tarefa (nome_tarefa), se a tarefa já foi executada
+* ou não (tarefa_executada), a duração da tarefa
+* (duracao_tarefa), o periodo minimo em que uma tarefa pode iniciar
+* (inicio_min_tarefa), o número de pre requisitos dessa tarefa
+* (n_prerequisitos), um ponteiro para apontar para o próximo
+* elemento (*prox) e um ponteiro para apontar para a lista
+* de pré requisitos dessa tarefa (*prerequisitos_tarefa).
+*/
 typedef struct Tarefa {
     int id_tarefa;
     char nome_tarefa[TAM_STRING];
@@ -38,47 +42,51 @@ typedef struct Tarefa {
     int tempo_min;
     int tempo_inic;
 } tarefa;
-
+/**
+* Cabeça de Estrutura de Dados Grafo
+* que possui um ponteiro para apontar para 
+* a lista de tarefas.
+*/
 typedef struct Grafo {
     tarefa *T;
 } grafo;
 
 /*******************************************************************************//**
-*	Função: retornar Grafo sem tarefas e pre requisitos.
+*	Função: 
+*       Retornar Grafo sem tarefas e pre requisitos.
 *
 *	Descrição:
-*
-*
+*       Aloca memoria para o grafo e o retorna.
 *
 *	Parâmetros:
+*       Não possui nenhum parâmetro.
 *
+*	Retorno:
+*	    Retorna a estrutura de dados Grafo. 
 *
-*	Valor Retornado
-*	
-*	AssertivaEntrada
-*		
-*	AssertivaSaida
+*	Assertivas de Entrada:
+*		Não possui.
 *
+*	Assertivas de Saida:
+*       G != NULL;
 *
 ***********************************************************************************/
 grafo* cria_grafo();
 /*******************************************************************************//**
-*	Função: retornar Grafo sem tarefas e pre requisitos.
-*
+*	Função: 
+*       Inserir tarefas na lista de tarefas.
 *	Descrição:
-*
-*
-*
+*       Testa se o id da tarefa é negativo, caso seja é invalidado e não insere
+*   na lista de tarefas. Caso o id seja válido, testa se a lista é vazia, seta
+*   cada parâmetro passado para a tarefa e insere na lista de tarefas. 
 *	Parâmetros:
-*
-*
-*	Valor Retornado
-*	
-*	AssertivaEntrada
-*		
-*	AssertivaSaida
-*
-*
+*       Recebe todos os parâmetros que compoem uma tarefa.
+*	Retorno:
+*	    Retorna a estrutura de dados Grafo. 
+*	Assertivas de Entrada:
+*		G!= NULL;
+*	Assertivas de Saida:
+*       G != NULL; G->T != NULL;
 ***********************************************************************************/
 grafo* insere_tarefa(grafo* G, int id_tarefa, char* nome_tarefa, int tarefa_executada, int
 duracao_tarefa, int inicio_min_tarefa, int n_prerequisitos);
@@ -178,7 +186,7 @@ grafo* remove_prerequisitos(grafo* G, int id_tarefa);
 *
 *
 ***********************************************************************************/
-grafo* le_grafo(FILE* fp);
+grafo* le_grafo(char * nomeArquivo);
 /*******************************************************************************//**
 *	Função: retornar Grafo sem tarefas e pre requisitos.
 *
