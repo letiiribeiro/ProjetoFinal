@@ -350,12 +350,12 @@ Este é o diagrama das funções que utilizam esta função:</div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Função: retornar <a class="el" href="structGrafo.html">Grafo</a> sem tarefas e pre requisitos.</p>
-<p>Descrição:</p>
-<p>Parâmetros:</p>
-<p>Valor Retornado</p>
-<p>AssertivaEntrada</p>
-<p>AssertivaSaida </p>
+<p>Função: Editar uma tarefa</p>
+<p>Descrição: Percorre a lista de tarefas com o id da tarefa a ser editada e usa uma flag para testar quais campos o usuario quer editar, caso ele edite o numero de pre requisitos, o programa percorre a lista de pre requisitos da tarefa que esta sendo editada, apaga todos os pre requisitos da lista e insere os novos pre requisitos que o usuario digitar. Caso o usuario deseje modificar o id da tarefa, percorre a lista de pre requisitos modificando o campo id_prerequisito para apontar para o novo id da tarefa.</p>
+<p>Parâmetros: Recebe todos os parametros que compoem uma tarefa e seus pre requisitos alem de flag para a interface com o usuario.</p>
+<p>Valor Retornado: Retorna um ponteiro para a estrutura <a class="el" href="structGrafo.html">Grafo</a>.</p>
+<p>Assertiva Entrada: G!=NULL; G-&gt;T!=NULL;</p>
+<p>Assertiva Saida: G-&gt;T-&gt;id_tarefa = novo_id_tarefa; G-&gt;T-&gt;prerequisitos_tarefa-&gt;id_prerequisito = novo_id_tarefa; G-&gt;T-&gt;nome_tarefa = nome_tarefa; G-&gt;T-&gt;tarefa_executada = tarefa_executada; G-&gt;T-&gt;duracao_tarefa = duracao_tarefa; G-&gt;T-&gt;inicio_min_tarefa = inicio_min_tarefa; G-&gt;T-&gt;n_prerequisitos = n_prerequisitos; </p>
 
 <p><div class="dynheader">
 Grafo de chamadas desta função:</div>
@@ -474,12 +474,12 @@ Este é o diagrama das funções que utilizam esta função:</div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Função: retornar <a class="el" href="structGrafo.html">Grafo</a> sem tarefas e pre requisitos.</p>
-<p>Descrição:</p>
-<p>Parâmetros:</p>
-<p>Valor Retornado</p>
-<p>AssertivaEntrada</p>
-<p>AssertivaSaida </p>
+<p>Função: Inserir Pre Requisitos.</p>
+<p>Descrição: Percorre a lista de tarefas para achar a com o id onde sera inserido o pre requisito e o insere no final da lista de pre requisitos.</p>
+<p>Parâmetros: Recebe o id da tarefa que possui o pre requisito e o id do pre requisito.</p>
+<p>Valor Retornado: Retorna um ponteiro para a estrutura <a class="el" href="structGrafo.html">Grafo</a>.</p>
+<p>Assertiva Entrada: G != NULL; G-&gt;T-&gt;id_tarefa != NULL;</p>
+<p>Assertiva Saida: G-&gt;T-&gt;prerequisitos_tarefa != NULL; G-&gt;T-&gt;prerequisitos_tarefa-&gt;id_prerequisito = id_prerequisito; </p>
 
 <p><div class="dynheader">
 Grafo de chamadas desta função:</div>
@@ -550,7 +550,12 @@ Este é o diagrama das funções que utilizam esta função:</div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Função: Inserir tarefas na lista de tarefas. Descrição: Testa se o id da tarefa é negativo, caso seja é invalidado e não insere na lista de tarefas. Caso o id seja válido, testa se a lista é vazia, seta cada parâmetro passado para a tarefa e insere na lista de tarefas. Parâmetros: Recebe todos os parâmetros que compoem uma tarefa. Retorno: Retorna a estrutura de dados <a class="el" href="structGrafo.html">Grafo</a>. Assertivas de Entrada: G!= NULL; Assertivas de Saida: G != NULL; G-&gt;T != NULL; </p>
+<p>Função: Inserir tarefas na lista de tarefas.</p>
+<p>Descrição: Testa se o id da tarefa é negativo, caso seja é invalidado e não insere na lista de tarefas. Caso o id seja válido, testa se a lista é vazia, seta cada parâmetro passado para a tarefa e insere na lista de tarefas.</p>
+<p>Parâmetros: Recebe todos os parâmetros que compoem uma tarefa.</p>
+<p>Retorno: Retorna a estrutura de dados <a class="el" href="structGrafo.html">Grafo</a>.</p>
+<p>Assertivas de Entrada: G!= NULL;</p>
+<p>Assertivas de Saida: G != NULL; G-&gt;T != NULL; G-&gt;T-&gt;id_tarefa = id_tarefa; G-&gt;T-&gt;nome_tarefa = nome_tarefa; G-&gt;T-&gt;tarefa_executada = tarefa_executada; G-&gt;T-&gt;duracao_tarefa = duracao_tarefa; G-&gt;T-&gt;inicio_min_tarefa = inicio_min_tarefa; G-&gt;T-&gt;n_prerequisitos = n_prerequisitos; </p>
 
 <p><div class="dynheader">
 Este é o diagrama das funções que utilizam esta função:</div>
@@ -729,7 +734,8 @@ Este é o diagrama das funções que utilizam esta função:</div>
 <p><div class="dynheader">
 Este é o diagrama das funções que utilizam esta função:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="grafo_8cc_a0e6585acadedc05719f93fa778cf1dcb_icgraph.svg" width="100%" height="518"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="grafo_8cc_a0e6585acadedc05719f93fa778cf1dcb_icgraph.svg" width="100%" height="480"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 </div>
 </p>
 
@@ -836,7 +842,7 @@ Este é o diagrama das funções que utilizam esta função:</div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Função: retornar <a class="el" href="structGrafo.html">Grafo</a> sem tarefas e pre requisitos.</p>
+<p>Função: Remover <a class="el" href="structTarefa.html">Tarefa</a>.</p>
 <p>Descrição:</p>
 <p>Parâmetros:</p>
 <p>Valor Retornado</p>
@@ -998,7 +1004,7 @@ Grafo de chamadas desta função:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Gerado em Segunda, 20 de Junho de 2016 10:14:14 para Projeto Final MP por &#160;<a href="http://www.doxygen.org/index.html">
+Gerado em Quinta, 23 de Junho de 2016 18:14:35 para Projeto Final MP por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

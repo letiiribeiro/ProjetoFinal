@@ -174,17 +174,17 @@ Assertivas de Saida\-: G != N\-U\-L\-L; \hypertarget{code_2grafo_8h_adaeb2e2aa0b
 \item[{int}]{flag}
 \end{DoxyParamCaption}
 )}}\label{code_2grafo_8h_adaeb2e2aa0bf8a2fbb149376a33bd443}
-Função\-: retornar \hyperlink{structGrafo}{Grafo} sem tarefas e pre requisitos.
+Função\-: Editar uma tarefa
 
-Descrição\-:
+Descrição\-: Percorre a lista de tarefas com o id da tarefa a ser editada e usa uma flag para testar quais campos o usuario quer editar, caso ele edite o numero de pre requisitos, o programa percorre a lista de pre requisitos da tarefa que esta sendo editada, apaga todos os pre requisitos da lista e insere os novos pre requisitos que o usuario digitar. Caso o usuario deseje modificar o id da tarefa, percorre a lista de pre requisitos modificando o campo id\-\_\-prerequisito para apontar para o novo id da tarefa.
 
-Parâmetros\-:
+Parâmetros\-: Recebe todos os parametros que compoem uma tarefa e seus pre requisitos alem de flag para a interface com o usuario.
 
-Valor Retornado
+Valor Retornado\-: Retorna um ponteiro para a estrutura \hyperlink{structGrafo}{Grafo}.
 
-Assertiva\-Entrada
+Assertiva Entrada\-: G!=N\-U\-L\-L; G-\/$>$T!=N\-U\-L\-L;
 
-Assertiva\-Saida \hypertarget{code_2grafo_8h_ac7a63f8753e7dbbb4117e6d4ebaa5933}{\index{code/grafo.\-h@{code/grafo.\-h}!imprime\-\_\-grafo@{imprime\-\_\-grafo}}
+Assertiva Saida\-: G-\/$>$T-\/$>$id\-\_\-tarefa = novo\-\_\-id\-\_\-tarefa; G-\/$>$T-\/$>$prerequisitos\-\_\-tarefa-\/$>$id\-\_\-prerequisito = novo\-\_\-id\-\_\-tarefa; G-\/$>$T-\/$>$nome\-\_\-tarefa = nome\-\_\-tarefa; G-\/$>$T-\/$>$tarefa\-\_\-executada = tarefa\-\_\-executada; G-\/$>$T-\/$>$duracao\-\_\-tarefa = duracao\-\_\-tarefa; G-\/$>$T-\/$>$inicio\-\_\-min\-\_\-tarefa = inicio\-\_\-min\-\_\-tarefa; G-\/$>$T-\/$>$n\-\_\-prerequisitos = n\-\_\-prerequisitos; \hypertarget{code_2grafo_8h_ac7a63f8753e7dbbb4117e6d4ebaa5933}{\index{code/grafo.\-h@{code/grafo.\-h}!imprime\-\_\-grafo@{imprime\-\_\-grafo}}
 \index{imprime\-\_\-grafo@{imprime\-\_\-grafo}!code/grafo.h@{code/grafo.\-h}}
 \subsubsection[{imprime\-\_\-grafo}]{\setlength{\rightskip}{0pt plus 5cm}void imprime\-\_\-grafo (
 \begin{DoxyParamCaption}
@@ -211,17 +211,17 @@ Assertiva\-Saida \hypertarget{code_2grafo_8h_a3fe6389b74d0356a95800a3d29d7d664}{
 \item[{int}]{id\-\_\-prerequisito}
 \end{DoxyParamCaption}
 )}}\label{code_2grafo_8h_a3fe6389b74d0356a95800a3d29d7d664}
-Função\-: retornar \hyperlink{structGrafo}{Grafo} sem tarefas e pre requisitos.
+Função\-: Inserir Pre Requisitos.
 
-Descrição\-:
+Descrição\-: Percorre a lista de tarefas para achar a com o id onde sera inserido o pre requisito e o insere no final da lista de pre requisitos.
 
-Parâmetros\-:
+Parâmetros\-: Recebe o id da tarefa que possui o pre requisito e o id do pre requisito.
 
-Valor Retornado
+Valor Retornado\-: Retorna um ponteiro para a estrutura \hyperlink{structGrafo}{Grafo}.
 
-Assertiva\-Entrada
+Assertiva Entrada\-: G != N\-U\-L\-L; G-\/$>$T-\/$>$id\-\_\-tarefa != N\-U\-L\-L;
 
-Assertiva\-Saida \hypertarget{code_2grafo_8h_a563a8912631e461ec1d9a2bff50426d9}{\index{code/grafo.\-h@{code/grafo.\-h}!insere\-\_\-tarefa@{insere\-\_\-tarefa}}
+Assertiva Saida\-: G-\/$>$T-\/$>$prerequisitos\-\_\-tarefa != N\-U\-L\-L; G-\/$>$T-\/$>$prerequisitos\-\_\-tarefa-\/$>$id\-\_\-prerequisito = id\-\_\-prerequisito; \hypertarget{code_2grafo_8h_a563a8912631e461ec1d9a2bff50426d9}{\index{code/grafo.\-h@{code/grafo.\-h}!insere\-\_\-tarefa@{insere\-\_\-tarefa}}
 \index{insere\-\_\-tarefa@{insere\-\_\-tarefa}!code/grafo.h@{code/grafo.\-h}}
 \subsubsection[{insere\-\_\-tarefa}]{\setlength{\rightskip}{0pt plus 5cm}{\bf grafo}$\ast$ insere\-\_\-tarefa (
 \begin{DoxyParamCaption}
@@ -234,7 +234,17 @@ Assertiva\-Saida \hypertarget{code_2grafo_8h_a563a8912631e461ec1d9a2bff50426d9}{
 \item[{int}]{n\-\_\-prerequisitos}
 \end{DoxyParamCaption}
 )}}\label{code_2grafo_8h_a563a8912631e461ec1d9a2bff50426d9}
-Função\-: Inserir tarefas na lista de tarefas. Descrição\-: Testa se o id da tarefa é negativo, caso seja é invalidado e não insere na lista de tarefas. Caso o id seja válido, testa se a lista é vazia, seta cada parâmetro passado para a tarefa e insere na lista de tarefas. Parâmetros\-: Recebe todos os parâmetros que compoem uma tarefa. Retorno\-: Retorna a estrutura de dados \hyperlink{structGrafo}{Grafo}. Assertivas de Entrada\-: G!= N\-U\-L\-L; Assertivas de Saida\-: G != N\-U\-L\-L; G-\/$>$T != N\-U\-L\-L; \hypertarget{code_2grafo_8h_a0a4567a2f65956112b02ab39cbdeb152}{\index{code/grafo.\-h@{code/grafo.\-h}!le\-\_\-grafo@{le\-\_\-grafo}}
+Função\-: Inserir tarefas na lista de tarefas.
+
+Descrição\-: Testa se o id da tarefa é negativo, caso seja é invalidado e não insere na lista de tarefas. Caso o id seja válido, testa se a lista é vazia, seta cada parâmetro passado para a tarefa e insere na lista de tarefas.
+
+Parâmetros\-: Recebe todos os parâmetros que compoem uma tarefa.
+
+Retorno\-: Retorna a estrutura de dados \hyperlink{structGrafo}{Grafo}.
+
+Assertivas de Entrada\-: G!= N\-U\-L\-L;
+
+Assertivas de Saida\-: G != N\-U\-L\-L; G-\/$>$T != N\-U\-L\-L; G-\/$>$T-\/$>$id\-\_\-tarefa = id\-\_\-tarefa; G-\/$>$T-\/$>$nome\-\_\-tarefa = nome\-\_\-tarefa; G-\/$>$T-\/$>$tarefa\-\_\-executada = tarefa\-\_\-executada; G-\/$>$T-\/$>$duracao\-\_\-tarefa = duracao\-\_\-tarefa; G-\/$>$T-\/$>$inicio\-\_\-min\-\_\-tarefa = inicio\-\_\-min\-\_\-tarefa; G-\/$>$T-\/$>$n\-\_\-prerequisitos = n\-\_\-prerequisitos; \hypertarget{code_2grafo_8h_a0a4567a2f65956112b02ab39cbdeb152}{\index{code/grafo.\-h@{code/grafo.\-h}!le\-\_\-grafo@{le\-\_\-grafo}}
 \index{le\-\_\-grafo@{le\-\_\-grafo}!code/grafo.h@{code/grafo.\-h}}
 \subsubsection[{le\-\_\-grafo}]{\setlength{\rightskip}{0pt plus 5cm}{\bf grafo}$\ast$ le\-\_\-grafo (
 \begin{DoxyParamCaption}
@@ -371,7 +381,7 @@ Assertiva\-Saida \hypertarget{code_2grafo_8h_abab0a8730861a86fe9a0713b3dcc018b}{
 \item[{int}]{id\-\_\-tarefa}
 \end{DoxyParamCaption}
 )}}\label{code_2grafo_8h_abab0a8730861a86fe9a0713b3dcc018b}
-Função\-: retornar \hyperlink{structGrafo}{Grafo} sem tarefas e pre requisitos.
+Função\-: Remover \hyperlink{structTarefa}{Tarefa}.
 
 Descrição\-:
 

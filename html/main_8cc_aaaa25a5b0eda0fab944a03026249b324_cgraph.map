@@ -1,5 +1,4 @@
 <map id="mostrar_tarefas_filtradas" name="mostrar_tarefas_filtradas">
 <area shape="rect" id="node2" href="$main_8cc.html#ad2a06ffdf1033b3b1c11f337fa12553b" title="imprimirRotulo" alt="" coords="221,5,328,32"/>
-<area shape="rect" id="node3" href="$grafo_8cc.html#a0e6585acadedc05719f93fa778cf1dcb" title="procura_tarefa" alt="" coords="222,56,327,83"/>
-<area shape="rect" id="node4" href="$main_8cc.html#abe7109d6b800c7cd9f5c2097bc8df894" title="destruir_menu" alt="" coords="223,107,327,133"/>
+<area shape="rect" id="node3" href="$main_8cc.html#abe7109d6b800c7cd9f5c2097bc8df894" title="destruir_menu" alt="" coords="223,56,327,83"/>
 </map>

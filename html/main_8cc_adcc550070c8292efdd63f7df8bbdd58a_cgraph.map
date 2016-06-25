@@ -1,11 +1,10 @@
 <map id="filtrar_tarefas_completadas" name="filtrar_tarefas_completadas">
 <area shape="rect" id="node2" href="$main_8cc.html#ad2a06ffdf1033b3b1c11f337fa12553b" title="imprimirRotulo" alt="" coords="448,5,555,32"/>
-<area shape="rect" id="node3" href="$main_8cc.html#abe7109d6b800c7cd9f5c2097bc8df894" title="destruir_menu" alt="" coords="449,107,553,133"/>
-<area shape="rect" id="node4" href="$grafo_8cc.html#abce1552216c6841949c616cecd5a4c0b" title="tarefas_concluidas" alt="" coords="251,232,381,259"/>
+<area shape="rect" id="node3" href="$main_8cc.html#abe7109d6b800c7cd9f5c2097bc8df894" title="destruir_menu" alt="" coords="449,56,553,83"/>
+<area shape="rect" id="node4" href="$grafo_8cc.html#abce1552216c6841949c616cecd5a4c0b" title="tarefas_concluidas" alt="" coords="251,181,381,208"/>
 <area shape="rect" id="node9" href="$main_8cc.html#aaaa25a5b0eda0fab944a03026249b324" title="mostrar_tarefas_filtradas" alt="" coords="233,56,399,83"/>
-<area shape="rect" id="node5" href="$grafo_8cc.html#acbf9093cdf86cc258309a203729436b2" title="insere_lista" alt="" coords="457,333,545,360"/>
+<area shape="rect" id="node5" href="$grafo_8cc.html#acbf9093cdf86cc258309a203729436b2" title="insere_lista" alt="" coords="457,107,545,133"/>
 <area shape="rect" id="node6" href="$grafo_8cc.html#a6884bc1455bdfb3648b3e2514998e599" title="tempo_minimo" alt="" coords="448,181,555,208"/>
 <area shape="rect" id="node7" href="$grafo_8cc.html#ae12d615ab927bce766dcc94b9f1b404d" title="remove_lista" alt="" coords="453,232,549,259"/>
 <area shape="rect" id="node8" href="$grafo_8cc.html#a755ed9b778398a7614e61bdb3084717b" title="compara" alt="" coords="465,283,537,309"/>
-<area shape="rect" id="node10" href="$grafo_8cc.html#a0e6585acadedc05719f93fa778cf1dcb" title="procura_tarefa" alt="" coords="449,56,554,83"/>
 </map>

@@ -433,6 +433,9 @@ int* caminhos(grafo* G);
 ***********************************************************************************/
 int* tarefas_concluidas(grafo* G, int periodo);
 
+void inicializa_tempo_minimo(grafo* G);
+int tempo_minimo(grafo* G, int id_tarefa);
+
 #endif
 /* GRAFO_INCLUDED */
 

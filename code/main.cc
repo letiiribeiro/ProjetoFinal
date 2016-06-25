@@ -1034,7 +1034,10 @@ void mostrar_caminhos(grafo * G) {
         if(caminho[i] == -1)
             break;
         else
-            mvwprintw(janela,starty+3,startx+coluna,"%d -> ",caminho[i]);
+            if(caminho[i+1] != -1)
+                mvwprintw(janela,starty+3,startx+coluna," %d -> ",caminho[i]);
+            else
+                mvwprintw(janela,starty+3,startx+coluna," %d ",caminho[i]);
         i++;
         coluna += 6;
     }

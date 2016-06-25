@@ -422,9 +422,11 @@ lista* remove_lista(lista* a, int id, int* removeu){
     lista* l;
     int flg_ult = 0;
     int flg_prim = 0;
+    int encontrou = 0;
     lista* seg;
     for(l=a;l!=NULL;l=l->prox){
         if(l->t == id){
+            encontrou=1;
             lista* tmp = l->ant;
             if(tmp)
                 tmp->prox = l->prox;
@@ -441,7 +443,8 @@ lista* remove_lista(lista* a, int id, int* removeu){
             break;
         }
     }
-    *removeu = 0;
+    if(!encontrou)
+        *removeu = 0;
     if(flg_ult)
         return NULL;
     if(flg_prim)
@@ -454,18 +457,19 @@ int tempo_minimo_total(grafo* G){
     lista* l = NULL;
     for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
          l = insere_lista(l,tmp->id_tarefa);
-         tmp->tempo_min = -1;
     }
     int total = 0;
     while(l){
         int x = l->t;
         int removeu;
+        inicializa_tempo_minimo(G);
         tempo_minimo(G,x);
         for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
-            if(tmp->tempo_min != -1)
+            if(tmp->tempo_min != -1){
                 l = remove_lista(l,tmp->id_tarefa,&removeu);
-            if(removeu)
-                total += tmp->tempo_min;
+                if(removeu)
+                    total = max(total,tmp->tempo_min);
+            }
         }
     }
     return total;
@@ -479,8 +483,6 @@ struct vetor{
 int compara(const void* a, const void* b){
     struct vetor x = *((struct vetor*)a);
     struct vetor y = *((struct vetor*)b);
-    if(x.tempo_min == y.tempo_min)
-        return 0;
     if(x.tempo_min < y.tempo_min)
         return -1;
     if(x.tempo_min > y.tempo_min)
@@ -495,20 +497,21 @@ int* caminhos(grafo* G){
     lista* l = NULL;
     for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
          l = insere_lista(l,tmp->id_tarefa);
-         tmp->tempo_min = -1;
     }
     int total = 0;
     while(l){
         int x = l->t;
         int removeu;
+        inicializa_tempo_minimo(G);
         tempo_minimo(G,x);
         for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
-            if(tmp->tempo_min != -1)
+            if(tmp->tempo_min != -1){
                 l = remove_lista(l,tmp->id_tarefa,&removeu);
-            if(removeu){
-                total += tmp->tempo_min;
-                V[i].id_tarefa = tmp->id_tarefa;
-                V[i++].tempo_min = tmp->tempo_min;
+                if(removeu){
+                    total = max(total,tmp->tempo_min);
+                    V[i].id_tarefa = tmp->id_tarefa;
+                    V[i++].tempo_min = tmp->tempo_min;
+                }
             }
         }
     }
@@ -518,7 +521,7 @@ int* caminhos(grafo* G){
     for(j=0;j<i;j++)
         VetorOrdenado[j] = V[j].id_tarefa;
     for(;j<100;j++)
-        VetorOrdenado[j] = INT_MAX; 
+        VetorOrdenado[j] = -1; 
     return VetorOrdenado;
 } 
 
@@ -529,23 +532,24 @@ int* tarefas_concluidas(grafo* G, int periodo){
     lista* l = NULL;
     for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
          l = insere_lista(l,tmp->id_tarefa);
-         tmp->tempo_min = -1;
          tmp->tarefa_executada = 0;
     }
     int total = 0;
     while(l){
         int x = l->t;
         int removeu;
+        inicializa_tempo_minimo(G);
         tempo_minimo(G,x);
         for(tmp=G->T;tmp!=NULL;tmp=tmp->prox){
-            if(tmp->tempo_min != -1)
+            if(tmp->tempo_min != -1){
                 l = remove_lista(l,tmp->id_tarefa,&removeu);
-            if(removeu){
-                if(tmp->tempo_min <= periodo)
-                    tmp->tarefa_executada = 1;
-                total += tmp->tempo_min;
-                V[i].id_tarefa = tmp->id_tarefa;
-                V[i++].tempo_min = tmp->tempo_min;
+                if(removeu){
+                    if(tmp->tempo_min <= periodo)
+                        tmp->tarefa_executada = 1;
+                    total = max(total,tmp->tempo_min);
+                    V[i].id_tarefa = tmp->id_tarefa;
+                    V[i++].tempo_min = tmp->tempo_min;
+                }
             }
         }
     }
@@ -556,6 +560,6 @@ int* tarefas_concluidas(grafo* G, int periodo){
         if(V[j].tempo_min <= periodo)
             VetorOrdenado[k++] = V[j].id_tarefa;
     for(;k<100;k++)
-        VetorOrdenado[k] = INT_MAX; 
+        VetorOrdenado[k] = -1; 
     return VetorOrdenado;
 }

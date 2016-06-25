@@ -178,17 +178,17 @@ Este é o diagrama das funções que utilizam esta função\-:\nopagebreak
 \item[{int}]{flag}
 \end{DoxyParamCaption}
 )}}\label{grafo_8cc_adaeb2e2aa0bf8a2fbb149376a33bd443}
-Função\-: retornar \hyperlink{structGrafo}{Grafo} sem tarefas e pre requisitos.
+Função\-: Editar uma tarefa
 
-Descrição\-:
+Descrição\-: Percorre a lista de tarefas com o id da tarefa a ser editada e usa uma flag para testar quais campos o usuario quer editar, caso ele edite o numero de pre requisitos, o programa percorre a lista de pre requisitos da tarefa que esta sendo editada, apaga todos os pre requisitos da lista e insere os novos pre requisitos que o usuario digitar. Caso o usuario deseje modificar o id da tarefa, percorre a lista de pre requisitos modificando o campo id\-\_\-prerequisito para apontar para o novo id da tarefa.
 
-Parâmetros\-:
+Parâmetros\-: Recebe todos os parametros que compoem uma tarefa e seus pre requisitos alem de flag para a interface com o usuario.
 
-Valor Retornado
+Valor Retornado\-: Retorna um ponteiro para a estrutura \hyperlink{structGrafo}{Grafo}.
 
-Assertiva\-Entrada
+Assertiva Entrada\-: G!=N\-U\-L\-L; G-\/$>$T!=N\-U\-L\-L;
 
-Assertiva\-Saida 
+Assertiva Saida\-: G-\/$>$T-\/$>$id\-\_\-tarefa = novo\-\_\-id\-\_\-tarefa; G-\/$>$T-\/$>$prerequisitos\-\_\-tarefa-\/$>$id\-\_\-prerequisito = novo\-\_\-id\-\_\-tarefa; G-\/$>$T-\/$>$nome\-\_\-tarefa = nome\-\_\-tarefa; G-\/$>$T-\/$>$tarefa\-\_\-executada = tarefa\-\_\-executada; G-\/$>$T-\/$>$duracao\-\_\-tarefa = duracao\-\_\-tarefa; G-\/$>$T-\/$>$inicio\-\_\-min\-\_\-tarefa = inicio\-\_\-min\-\_\-tarefa; G-\/$>$T-\/$>$n\-\_\-prerequisitos = n\-\_\-prerequisitos; 
 
 Grafo de chamadas desta função\-:\nopagebreak
 \begin{figure}[H]
@@ -267,17 +267,17 @@ Este é o diagrama das funções que utilizam esta função\-:\nopagebreak
 \item[{int}]{id\-\_\-prerequisito}
 \end{DoxyParamCaption}
 )}}\label{grafo_8cc_a3fe6389b74d0356a95800a3d29d7d664}
-Função\-: retornar \hyperlink{structGrafo}{Grafo} sem tarefas e pre requisitos.
+Função\-: Inserir Pre Requisitos.
 
-Descrição\-:
+Descrição\-: Percorre a lista de tarefas para achar a com o id onde sera inserido o pre requisito e o insere no final da lista de pre requisitos.
 
-Parâmetros\-:
+Parâmetros\-: Recebe o id da tarefa que possui o pre requisito e o id do pre requisito.
 
-Valor Retornado
+Valor Retornado\-: Retorna um ponteiro para a estrutura \hyperlink{structGrafo}{Grafo}.
 
-Assertiva\-Entrada
+Assertiva Entrada\-: G != N\-U\-L\-L; G-\/$>$T-\/$>$id\-\_\-tarefa != N\-U\-L\-L;
 
-Assertiva\-Saida 
+Assertiva Saida\-: G-\/$>$T-\/$>$prerequisitos\-\_\-tarefa != N\-U\-L\-L; G-\/$>$T-\/$>$prerequisitos\-\_\-tarefa-\/$>$id\-\_\-prerequisito = id\-\_\-prerequisito; 
 
 Grafo de chamadas desta função\-:\nopagebreak
 \begin{figure}[H]
@@ -312,7 +312,17 @@ Este é o diagrama das funções que utilizam esta função\-:\nopagebreak
 \item[{int}]{n\-\_\-prerequisitos}
 \end{DoxyParamCaption}
 )}}\label{grafo_8cc_a563a8912631e461ec1d9a2bff50426d9}
-Função\-: Inserir tarefas na lista de tarefas. Descrição\-: Testa se o id da tarefa é negativo, caso seja é invalidado e não insere na lista de tarefas. Caso o id seja válido, testa se a lista é vazia, seta cada parâmetro passado para a tarefa e insere na lista de tarefas. Parâmetros\-: Recebe todos os parâmetros que compoem uma tarefa. Retorno\-: Retorna a estrutura de dados \hyperlink{structGrafo}{Grafo}. Assertivas de Entrada\-: G!= N\-U\-L\-L; Assertivas de Saida\-: G != N\-U\-L\-L; G-\/$>$T != N\-U\-L\-L; 
+Função\-: Inserir tarefas na lista de tarefas.
+
+Descrição\-: Testa se o id da tarefa é negativo, caso seja é invalidado e não insere na lista de tarefas. Caso o id seja válido, testa se a lista é vazia, seta cada parâmetro passado para a tarefa e insere na lista de tarefas.
+
+Parâmetros\-: Recebe todos os parâmetros que compoem uma tarefa.
+
+Retorno\-: Retorna a estrutura de dados \hyperlink{structGrafo}{Grafo}.
+
+Assertivas de Entrada\-: G!= N\-U\-L\-L;
+
+Assertivas de Saida\-: G != N\-U\-L\-L; G-\/$>$T != N\-U\-L\-L; G-\/$>$T-\/$>$id\-\_\-tarefa = id\-\_\-tarefa; G-\/$>$T-\/$>$nome\-\_\-tarefa = nome\-\_\-tarefa; G-\/$>$T-\/$>$tarefa\-\_\-executada = tarefa\-\_\-executada; G-\/$>$T-\/$>$duracao\-\_\-tarefa = duracao\-\_\-tarefa; G-\/$>$T-\/$>$inicio\-\_\-min\-\_\-tarefa = inicio\-\_\-min\-\_\-tarefa; G-\/$>$T-\/$>$n\-\_\-prerequisitos = n\-\_\-prerequisitos; 
 
 Este é o diagrama das funções que utilizam esta função\-:\nopagebreak
 \begin{figure}[H]
@@ -447,7 +457,8 @@ Assertiva\-Entrada
 
 Assertiva\-Saida 
 
-Este é o diagrama das funções que utilizam esta função\-:\nopagebreak
+Este é o diagrama das funções que utilizam esta função\-:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -513,7 +524,7 @@ Este é o diagrama das funções que utilizam esta função\-:\nopagebreak
 \item[{int}]{id\-\_\-tarefa}
 \end{DoxyParamCaption}
 )}}\label{grafo_8cc_abab0a8730861a86fe9a0713b3dcc018b}
-Função\-: retornar \hyperlink{structGrafo}{Grafo} sem tarefas e pre requisitos.
+Função\-: Remover \hyperlink{structTarefa}{Tarefa}.
 
 Descrição\-:
 
